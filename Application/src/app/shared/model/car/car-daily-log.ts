@@ -1,0 +1,46 @@
+
+export class DailyCarHistory{
+    CarLogId :number;
+    CarId :number;
+    RegistrationNo:string;
+    CarTypeId:number;
+    TypeName:string;
+    DriverId :number;
+    DriverName:string;
+    HelperName:string;
+    RootId:number;
+    RootName:string;
+    RootCost:string;
+    ExpectedCost:number;
+    StartPoint:string;
+    EndPoint:string;
+    Distance:number;
+    CheckInDate:string;
+    CheckInTime:string;
+    CheckOutDate:string;
+    CheckOutTime:string;
+    TripNo:number;
+    TotalDistance:number;
+    CheckInBy:number;
+    CheckInByName:string;
+    CheckOutBy:number;
+    CheckOutByName:string;
+    CreatedBy:number;
+    IsUnwantedReturn:boolean;
+    ReasonForReturn:string;
+    Status:string;
+    Creation:string;
+    CreatedByName:string;
+    Update:string;
+    CheckApprovalBtn?:string;
+    RouteStartPoint:string;
+    TripType:string;
+    ExceptioalAmount:number;
+    OnRouteIncome:number;
+    DifferentRouteIncome:number;
+    DifferentRouteDistance:number;
+    TotalIncome:number;
+    AdditionalIncomeType:string;
+    IsUnOfficialDay:boolean;
+    TargetTripStatus?:string;
+}

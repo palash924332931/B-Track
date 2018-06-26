@@ -1,0 +1,31 @@
+<div [@routerTransition]>
+    <h2 class="text-muted">{{LT=='bn'?'ড্যাশবোর্ড':'Dashboard'}} <small>{{LT=='bn'?'পরিসংখ্যান পর্যাবেক্ষন':'Statistics Overview'}}</small></h2>
+    <div class="row">
+        <div class="col-md-12">
+            <ngb-carousel>
+                <ng-template ngbSlide *ngFor="let slider of sliders; let i=index">
+                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
+                    <div class="carousel-caption">
+                        <h3>{{slider.label}}</h3>
+                        <p [style.color]="i==2?'rgb(6, 47, 208)':'white'">{{slider.text}}</p>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'primary'" [icon]="'fa fa-car'" [viewLink]="'#/report/dailycarlog'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="onRootCar" [label]="LT=='bn'?'রুটে চলমান বাস':'Bus on Route'"></app-stat>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'warning'" [icon]="'fa-tasks'" [viewLink]="'#/report/payment'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="onPaidAmount+'  ( '+onPaidCar+' )'" [label]="LT=='bn'?'লেনদেন':'Payment'"></app-stat>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'success'" [icon]="'fa-shopping-cart'" [viewLink]="'#/report/dailycarlog'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="todayReceivedAmount" [label]="LT=='bn'?'অ্যাকাউন্ট':'Accounts'"></app-stat>
+        </div>
+        <div class="col-xl-3 col-lg-6">
+            <app-stat [bgClass]="'danger'" [icon]="'fa-comments'" [viewLink]="'#/report/dailycarlog'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="13" [label]="LT=='bn'?'তথ্য আদান-প্রদান':'Communication'"></app-stat>
+        </div>
+    </div>
+</div>

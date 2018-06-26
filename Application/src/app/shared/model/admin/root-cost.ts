@@ -1,0 +1,21 @@
+export class RootCost{
+    RootCostId:number;
+    RootId:string;
+    RootName:string;
+    StartPoint:string;
+    EndPoint:string;
+    Distance:number;
+    Cost:number;
+    FirstTripIncome:number;
+    SecondTripIncome:number;
+    ThirdTripIncome:number;
+    UnFirstTripIncome:number;
+    UnSecondTripIncome:number;
+    UnThirdTripIncome:number;
+    Status:string;   
+    CarTypeId:number;
+    Type:string; 
+    CreatedBy:number;
+    CreatedByName:string;
+    Update:string;
+}

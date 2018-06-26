@@ -1,0 +1,43 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?'উপাধি নিবন্ধন':'Role Registration'" [icon]="'fas fa-bus'"></app-page-header>
+
+    <div class="row">
+        <div class="form-group col-xl-6">
+            <div class="row required">
+                <label for="roleId" class="col-sm-4 col-form-label font-weight-bold">{{ LT=='bn'?'উপাধির শিরোনাম':'Role Title'}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="roleId" [(ngModel)]="roleDetails.Name">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="IsEditItem">
+        <div class="form-group col-xl-6">
+            <div class="row">
+                <label for="roleId" class="col-sm-4 col-form-label font-weight-bold">{{ LT=='bn'?'প্রস্তুতকারী':'Created By'}}</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" disabled id="roleId" [(ngModel)]="roleDetails.CreatedByName">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-xl-6">
+            <div class="row">
+                <div class="col-sm-12" style="text-align:right">
+                    <button *ngIf="IsEditItem" type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnReadyForNewRecord()">{{ LT=='bn'?'নতুন উপাধি যোগ করুন':'New'}}</button>
+                    <button type="button" class="btn btn-outline-success btn-align" styel="margin-right:5px;" (click)="fnAddRole()">{{LT=='bn'?IsEditItem==true?'উপাধিটি হালনাগাদ করুন':'উপাধি যোগ করুন':IsEditItem==true?'Update Role':'Add Role'}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-6 zero-padding">
+            <app-p-table [pTableSetting]="employeeRoleTableBind" [pTableMasterData]="roleList" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+        </div>
+    </div>
+</div>

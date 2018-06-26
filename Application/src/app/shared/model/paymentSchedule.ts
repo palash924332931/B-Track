@@ -1,0 +1,19 @@
+export class paymentSchedule{
+    ID:number;
+    AgreementID:string;
+    InstallmentNo:number;
+    InstallmentDate:Date;
+    PBBOM:number;
+    Principal:number;
+    IRate:number;
+    Interest:number;
+    Installment:number;
+    PaidAmount:string;
+    PBEOM:number;
+    Paymentstatus:string;
+    PaymentDate:Date;
+    Remarks:string;
+    VoucherNo:string;
+    UserID:string;
+    LastUpdate:string;
+}

@@ -1,0 +1,234 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEditEmployee==true?'কর্মচারী হালনাগাদ':'কর্মচারী নিবন্ধন':IsEditEmployee==true?'Employee Update':'Employee Registration'" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'কর্মচারীর আইডি':'Employee Id'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="employeeDetails.EmployeeId">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নাম (ইং)':'Name (Eng)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userName" [(ngModel)]="employeeDetails.Name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নাম (বাংলায়)':'Name (Bangla)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userNamebangla" [(ngModel)]="employeeDetails.NameInBangla">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পিতার নাম':'Father\'s Name'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="employeeDetails.FatherName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="!IsEditEmployee">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পাসওয়ার্ড':'Password'}}</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="password" [(ngModel)]="employeeDetails.Password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" *ngIf="!IsEditEmployee">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পাসওয়ার্ড নিশ্চিত করুন':'Conformed Password'}}</label>
+                        <div class="col-sm-8">
+                            <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="employeeDetails.ConfirmPassword">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="role" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পদবী':'Role Name'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'user-list')"></i></label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" disabled id="RoleID" [(ngModel)]="employeeDetails.RoleId">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" disabled id="RoleName" disabled [(ngModel)]="employeeDetails.RoleName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মোবাইল নম্বর':'Mobile Number'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="contactNo" [(ngModel)]="employeeDetails.ContactNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'জন্ম তারিখ':'Date of Birth'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="onRootDate" ngbDatepicker #id4="ngbDatepicker" [(ngModel)]="dateOfBirth" (ngModelChange)="onSelectDateOfBirth($event)">
+                                <div class="input-group-addon" (click)="id4.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'কর্পোরেশনে যোগদানের তাং':'Corp. Join Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="onRootDate" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="corpJoinDate" (ngModelChange)="onSelectCorpJoinDate($event)">
+                                <div class="input-group-addon" (click)="id.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ডিপোতে যোগদানের তাং':'Depot Join Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id2="ngbDatepicker" [(ngModel)]="depotJoinDate" (ngModelChange)="onSelectDepotJoinDate($event)">
+                                <div class="input-group-addon" (click)="id2.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবসর গ্রহনের তাং':'Retirement Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id3="ngbDatepicker" [(ngModel)]="retirementDate" (ngModelChange)="onSelectRetirementDateDate($event)">
+                                <div class="input-group-addon" (click)="id3.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'কর্মকর্তা/কর্মচারীর গ্রেড':'Employee\'s Grade'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="employeeDetails.Grade">
+                            <option selected value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>     
+                            <option value="D">D</option>     
+                            <option value="E">E</option>                          
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বর্তমান ঠিকানা':'Present Address'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="employeeDetails.PresentAddress" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'স্থায়ী ঠিকানা':'Permanent Address'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="employeeDetails.PermanentAddress" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="employeeDetails.Status">
+                                    <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
+                                    <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
+                                </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="margin-bottom:0px">
+                <div class="form-group col-xl-6" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef">
+                        <button *ngIf="IsEditEmployee" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewProduct()">{{LT=='bn'?'নতুন কর্মচারী যোগ করুন':'Add New Employee'}}</button>
+                        <button type="button " class="btn btn-outline-success" (click)="fnSaveUser()">{{LT=='bn'?IsEditEmployee==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEditEmployee==true?'Update Information':'Save Information'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>

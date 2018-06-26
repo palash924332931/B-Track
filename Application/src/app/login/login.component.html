@@ -1,0 +1,36 @@
+<div class="login-page" [@routerTransition] [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}">
+    <alert></alert>
+    <div class="row justify-content-md-center">
+        <div class="col-md-4 custom-login-with">
+            <img src="assets/images/BRTC Logo.png" width="150px" class="user-avatar" />
+            <h1>বাংলাদেশ সড়ক পরিবহন কর্পোরেশন</h1>
+            <h5>(B-Track)</h5>
+            <div role="form">
+                <div class="form-content">
+                    <div class="form-group">
+                        <select class="form-control login-dropdown" [(ngModel)]="companyId">
+                                <option value="0" selected>Select Depot</option>
+                                <option value="1">Joarshahara Bus Depot</option>
+                                <option value="2">Kallyanpur Bus Depot</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="userName" class="form-control input-underline input-lg" placeholder="UserID">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="password" class="form-control input-underline input-lg" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <div class="alert alert-warning" role="alert" *ngIf="errorMessage!='' && errorMessage!=null">
+                            <strong><i class="fa fa-exclamation-triangle" style="font-size:28px;color:red"></i></strong> {{errorMessage}}
+                        </div>
+                    </div>
+
+                </div>
+                <a class="btn rounded-btn" (click)="onLoggedin()"> Log in </a> &nbsp;
+                <!-- <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a> -->
+            </div>
+        </div>
+    </div>
+</div>

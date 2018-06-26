@@ -1,0 +1,23 @@
+export class User{
+    Id:number;
+    EmployeeId:string;
+    Name:string;
+    NameInBangla:string;
+    Password:string;
+    ConfirmPassword:string;
+    PresentAddress:string;
+    PermanentAddress:string;
+    RoleId:number;
+    RoleName:string;
+    ContactNo:string;
+    CompanyId:number  
+    Status:string;
+    CreatedBy:number;
+    Update:string;
+    CorpJoinDate:string;
+    DepotJoinDate:string;
+    RetirementDate:string;
+    DateOfBirth:string;
+    Grade:string;
+    FatherName:string;
+}

@@ -1,0 +1,50 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?'দৈনিক আদায়ের বিস্তারিত':'Daily Collection Log'" [icon]="'fa-table'"></app-page-header>
+
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="row">
+                <div class="form-group col-sm-5">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'শুরুর তারিখ':'From Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="fromDateSelected" (ngModelChange)="onSelectFromDate($event)">
+                                <div class="input-group-addon" (click)="id.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-5">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'শেষ তারিখ':'To Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id2="ngbDatepicker" [(ngModel)]="toDateSelected" (ngModelChange)="onSelectToDate($event)">
+                                <div class="input-group-addon" (click)="id2.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-sm-2">
+                    <div class="row">
+                        <div class="col-sm-12" style="text-align:right">
+                            <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnGetDailyPaidLogList()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3" style="text-align:right">
+            <button type="button" class="btn btn-outline-success" (click)="fnNewBook()"><i class="fa fa-plus" style="font-size:18px"></i> {{LT=='bn'?' নতুন আদায় তৈরী করুন':' Create New Collection'}}</button>
+        </div>
+        <div class="col col-lg-12 zero-padding">
+            <app-p-table [pTableSetting]="dailyPaymentTableBind" [pTableMasterData]="dailyPaymentList" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+        </div>
+    </div>
+</div>

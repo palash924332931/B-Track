@@ -1,0 +1,37 @@
+export class DailyPayment{
+    PaymentId: number;
+    CarLogId:number;
+    RegistrationNo:string;
+    CheckIdDate:string;
+    CarType:string;
+    DriverName:string;
+    RootName:string;
+    RootCost:number;
+    ExpectedCost:number;
+    Distance:number;
+    TotalDistance:number;
+    CheckInDate:string;
+    TripNo:number;
+    IsUnwantedReturn:boolean;
+    ReasonForReturn:string;   
+    PaySlipId:number;
+    SlipNo:string;
+    BookNo:number;
+    PaySlipAmount:number;
+    PaymentAmount:number;
+    SystemAmount:number;
+    PaymentStatus:string;
+    ReceivedBy:number;
+    ReceivedByName:string;
+    ReceivedDate:string; 
+    Notes:string;
+    Status:string;
+    CreatedBy:number;
+    Creation:string;
+    Update:string;
+    OnRouteIncome:number;
+    DifferentRouteIncome:number;
+    TotalIncome:number;
+    TripType:string;
+    PaymentType?:string
+}

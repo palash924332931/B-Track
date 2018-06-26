@@ -1,0 +1,14 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn' ? 'রুটের তালিকা': 'Route Information'" [icon]="'fas fa-bus'"></app-page-header>
+
+    <div class="row">
+        <div class="col-sm-12" style="text-align:right">
+            <!-- <a [router-link]="['./product/0']">People</a> -->
+            <button type="button" class="btn btn-outline-success" (click)="fnNewRoot()"><i class="fa fa-plus" style="font-size:18px"></i>{{LT=='bn'?' নতুন রুট যোগ করুন':' Add New Route'}}</button>
+        </div>
+        <div class="col col-lg-12 zero-padding">
+            <app-p-table [pTableSetting]="rootListTableBind" [pTableMasterData]="rootList" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+        </div>
+    </div>
+</div>

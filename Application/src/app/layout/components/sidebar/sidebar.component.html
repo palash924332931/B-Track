@@ -1,0 +1,149 @@
+<alert></alert>
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+    <ul class="list-group">
+        <a routerLink="/dashboard" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ LT=='bn'?'ড্যাশবোর্ড':'Dashboard' }}
+        </a>
+        <!-- <a [routerLink]="['/tables']" class="list-group-item">
+            <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Tables' }}
+        </a>
+        <a [routerLink]="['/forms']" class="list-group-item">
+            <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Forms' }}
+        </a>
+        <a [routerLink]="['/bs-element']" class="list-group-item">
+            <i class="fa fa-fw fa-desktop"></i>&nbsp;{{ 'Bootstrap Element' }}
+        </a>
+        <a [routerLink]="['/grid']" class="list-group-item">
+            <i class="fa fa-fw fa-wrench"></i>&nbsp;{{ 'Bootstrap Grid' }}
+        </a>
+        <a [routerLink]="['/components']" class="list-group-item">
+            <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' }}
+        </a> -->
+        <!-- <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('car')">
+                <span><i class="fa fa-bus"></i>&nbsp; {{ LT=='bn'?'বাসের তথ্য':'Bus Information'  }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'car'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/car/car-type']" href="javascript:void(0)"><span>{{ LT=='bn'?'বাসের ধরন':'Bus Type'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/car/car-list']" href="javascript:void(0)"><span>{{ LT=='bn'?'বাসের তালিকা':'Bus List'  }}</span></a>
+                    </li>
+
+                    <li>
+                        <a [routerLink]="['/car/driver']" href="javascript:void(0)"><span>{{LT=='bn'?'চালকের তালিকা':'Driver List'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/car/car-log']" href="javascript:void(0)"><span>{{ LT=='bn'?'দৈনন্দিন বাসের তালিকা':'Daily Bus Log'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/car/car-log/0']" href="javascript:void(0)"><span>{{ 'Add Log'  }}</span></a>
+                    </li>
+
+                </ul>
+            </li>
+        </div> -->
+        <div class="nested-menu" *ngFor="let menu of menu">
+            <a class="list-group-item" (click)="addExpandClass(menu.MenuName)">
+                <span><i [ngClass]="menu.MenuIcon"></i>&nbsp; {{ LT=='bn'?menu.MenuTitleBangla:menu.MenuTitle}}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu == menu.MenuName">
+                <ul class="submenu">
+                    <li *ngFor="let subMenu of menu.SubMenues">
+                        <a [routerLink]="'/'+menu.MenuName+'/'+subMenu.SubMenuName" href="javascript:void(0)"><span>{{ LT=='bn'?subMenu.SubMenuTitleBangla:subMenu.SubMenuTitle  }}</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+
+
+        <!-- <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('admin')">
+                <span><i class="fa fa-user-circle-o"></i>&nbsp; {{ LT=='bn'?'অ্যাডমিন':'Admin'  }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'admin'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/admin/role']" href="javascript:void(0)"><span>{{ LT=='bn'?'উপাধির তালিকা':'Role List'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/admin/employee']" href="javascript:void(0)"><span>{{ LT=='bn'?'কর্মচারীর তালিকা':'Employee List'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/admin/root']" href="javascript:void(0)"><span>{{ LT=='bn'?'রুটের তালিকা':'Route List'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/admin/root-cost']" href="javascript:void(0)"><span>{{ LT=='bn'?'রুটের আয়':'Route Income'  }}</span></a>
+                    </li>
+
+                </ul>
+            </li>
+        </div> -->
+        <!-- <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('accounts')">
+                <span><i class="fa fa-credit-card"></i>&nbsp; {{ LT=='bn'?'অ্যাকাউন্ট':'Accounts'  }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'accounts'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/accounts/payslip-list']" href="javascript:void(0)"><span>{{ LT=='bn'?'রশিদের তালিকা': 'Pay Slip List'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/accounts/payslip-book']" href="javascript:void(0)"><span>{{ LT=='bn'?'রশিদ বইয়ের তালিকা':'Pay Slip Book'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/accounts/tripsheet']" href="javascript:void(0)"><span>{{ LT=='bn'?'ট্রিপ শিট':'Trip Sheet'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/accounts/daily-payment-log']" href="javascript:void(0)"><span>{{ LT=='bn'?'দৈনন্দিন আদায়করণ':'Daily Collection Log'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/accounts/daily-payment-log/0']" href="javascript:void(0)"><span>{{ LT=='bn'?'নতুন আদায়করণ': 'Add New Collection'  }}</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('manager')">
+                <span><i class="fa fa-user-circle-o"></i>&nbsp; {{LT=='bn'?'পরিচালক':'Manager'  }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'manager'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/manager/payslip']" href="javascript:void(0)"><span>{{ LT=='bn'?'রশিদের তথ্য':'Pay Slip'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/manager/dailycarlog']" href="javascript:void(0)"><span>{{LT=='bn'?'দৈনিক বাসের তথ্য':'Daily Bus Log'  }}</span></a>
+                    </li>                   
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('report')">
+                <span><i class="fa fa-file-archive-o" style="font-size:18px"></i>&nbsp; {{ LT=='bn'?'রিপোর্ট':'Report'  }}</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'report'">
+                <ul class="submenu">
+                    <li>
+                        <a [routerLink]="['/report/payslip']" href="javascript:void(0)"><span>{{  LT=='bn'?'রশিদের রিপোর্ট':'Pay Slip Report'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/report/dailycarlog']" href="javascript:void(0)"><span>{{ LT=='bn'?'দৈনিক বাসের রিপোর্ট':'Daily Bus Report'  }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/report/payment']" href="javascript:void(0)"><span>{{ LT=='bn'?'আদায়করনের রিপোর্ট':'Collection Report'   }}</span></a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/report/monthlyincomereport']" href="javascript:void(0)"><span>{{ LT=='bn'?'মাসিক আয়ের রিপোর্ট':'Monthly Income Report'   }}</span></a>
+                    </li>
+                </ul>
+            </li>
+        </div> -->
+
+        <a routerLink="/about" class="list-group-item">
+            <i class="fa fa-exclamation-circle" style="font-size:18px"></i>&nbsp;{{ LT=='bn'?'তথ্য':'About' }}
+        </a>
+    </ul>
+</nav>

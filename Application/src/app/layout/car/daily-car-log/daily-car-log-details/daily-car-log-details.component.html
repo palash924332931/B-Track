@@ -1,0 +1,297 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEditItem==true?'দৈনিক গাড়ীর লগ হালনাগাদ':'দৈনিক গাড়ীর লগ':IsEditItem==true?'Bus Daily Log':'Bus Daily Log'" [icon]="'fas fa-bus'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12" *ngIf="IsEditItem!=true" style="padding-bottom:5px">
+            <div class="pull-right">
+                <button type="button " class="btn btn-outline-success " (click)="fnGenerateModal(content,'Select Previous Bus Record') "><i class="fa fa-clone" style="font-size:24px"></i> {{LT=='bn'?'পুরাতন রেকড':'Previous Record'}}</button>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="row required">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ী':'Bus'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Bus')"></i></label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userId" [(ngModel)]="dailyLogDetails.RegistrationNo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ীর প্রকার':'Bus Type'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userName" [(ngModel)]="dailyLogDetails.TypeName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুট':'Route'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Root')"></i></label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyLogDetails.RootName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'যাত্রা শুরুর স্থান':'Route Start Point'}}<i *ngIf="selectedRoute!=null" (click)="fnChangeRouteStartPoint()" class="fa fa-fast-forward" style="font-size:20px" style="padding-left:5px; color:green; cursor:pointer"></i></label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="password" [(ngModel)]="dailyLogDetails.RouteStartPoint">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুটের দূরত্ব (কি,মি)':'Route Distance (km)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="" [(ngModel)]="dailyLogDetails.Distance">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বহির্গমনের তাং':'Date of departure'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="checkInDate" (ngModelChange)="onSelectCheckInDate($event)">
+                                <div class="input-group-addon" (click)="id.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালক':'Driver '}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Driver')"></i></label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyLogDetails.DriverName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সাহায্যকারীর নাম':'Helper Name'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="password" [(ngModel)]="dailyLogDetails.HelperName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বহির্গমনের সময়':'Departure Time'}}</label>
+                        <div class="card-body">
+                            <ngb-timepicker [(ngModel)]="checkInTime" (ngModelChange)="onSelectCheckInTime($event)"></ngb-timepicker>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রবেশের সময়':'Arrival Time'}}</label>
+                        <div class="card-body">
+                            <ngb-timepicker [(ngModel)]="checkOutTime" (ngModelChange)="onSelectCheckOutTime($event)"></ngb-timepicker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ট্রিপের সংখ্যা':'No. of Trip'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userNamebangla" (keyup)="fnChangeTotalDistance()" [(ngModel)]="dailyLogDetails.TripNo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মোট দূরত্ব (কি,মি)':'Total Distance (km)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="password" [(ngModel)]="dailyLogDetails.TotalDistance">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ট্রিপের ধরন':'Trip Type'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="dailyLogDetails.TripType">
+                                <option selected value="Normal Trip">{{LT=='bn'?'স্বাভাবিক ট্রিপ':'Normal Trip'}}</option>
+                                <option value="Reserve">{{LT=='bn'?'রিজার্ভ':'Reserve'}}</option>   
+                                <option value="Staff Bus">{{LT=='bn'?'স্টাফ বাস':'Staff Bus'}}</option>                      
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ভিন্ন রুটে আয় হয়েছে':'IS Additional Income?'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="dailyLogDetails.AdditionalIncomeType">
+                                <option selected value="">No</option>
+                                <option value="Income in Different Route">Yes</option>                           
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ভিন্ন রুটে আদায়কৃত টাকা':' Amount in Different Route'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" [disabled]="!(dailyLogDetails.AdditionalIncomeType=='Income in Different Route' ||dailyLogDetails.IsUnwantedReturn=='true' ||dailyLogDetails.IsUnwantedReturn==true) " class="form-control " id="text " [(ngModel)]="dailyLogDetails.DifferentRouteIncome ">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xl-6 ">
+                    <div class="row ">
+                        <label for="password " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'ভিন্ন রুটের কারনে দুরত্ব':'Distantce for Different Route'}}</label>
+                        <div class="col-sm-8 ">
+                            <input type="text " [disabled]="!(dailyLogDetails.AdditionalIncomeType=='Income in Different Route' ||dailyLogDetails.IsUnwantedReturn==true||dailyLogDetails.IsUnwantedReturn=='true') " class="form-control " id="text " (keyup)="fnChangeTotalDistance()"
+                                [(ngModel)]="dailyLogDetails.DifferentRouteDistance ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xl-6 ">
+                    <div class="row required ">
+                        <label for="userName " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'অযাচিত কারনে ফিরে আসছে':'Is Unwanted Back'}} </label>
+                        <div class="col-sm-8 ">
+                            <select class="form-control " name="status " [(ngModel)]="dailyLogDetails.IsUnwantedReturn">
+                            <option selected value="false">No</option>
+                            <option value="true">Yes</option>                           
+                        </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xl-6 ">
+                    <div class="row ">
+                        <label for="extent " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'ফিরে আসার কারন':'Reason for back'}}</label>
+                        <div class="col-sm-8 ">
+                            <textarea rows="4 " [disabled]="dailyLogDetails.IsUnwantedReturn==false||dailyLogDetails.IsUnwantedReturn=='false' " cols="40 " [(ngModel)]="dailyLogDetails.ReasonForReturn " style="width:100% ">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xl-6 ">
+                    <div class="row ">
+                        <label for="userId " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'প্রস্থানকারকের নাম':'Departure By'}} <i class="fa fa-pencil-square-o custom-icon-modal-call " aria-hidden="true " (click)="fnGenerateModal(content,
+                                'Select Employee checkedIn') "></i></label>
+                        <div class="col-sm-8 ">
+                            <input type="text " disabled class="form-control " id="userId " [(ngModel)]="dailyLogDetails.CheckInByName ">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6 ">
+                    <div class="row ">
+                        <label for="userName " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'প্রবেশকারকের নাম':'Arrival By'}}<i class="fa fa-pencil-square-o custom-icon-modal-call " aria-hidden="true " (click)="fnGenerateModal(content,
+                                'Select Employee checkedOut') "></i></label>
+                        <div class="col-sm-8 ">
+                            <input type="text " disabled class="form-control " id="userName " [(ngModel)]="dailyLogDetails.CheckOutByName ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="form-group col-xl-6 ">
+                    <div class="row ">
+                        <label for="status " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <div class="col-sm-8 ">
+                            <select class="form-control " name="status " [(ngModel)]="dailyLogDetails.Status ">
+                            <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
+                            <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                           
+                        </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xl-6 ">
+                    <div class="row required ">
+                        <label for="userName " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'ছুটির দিন':'Is Unofficial Day'}} </label>
+                        <div class="col-sm-8 ">
+                            <select class="form-control " name="status " [(ngModel)]="dailyLogDetails.IsUnOfficialDay">
+                            <option selected value="false">No</option>
+                            <option value="true">Yes</option>                           
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row " style="margin-bottom:0px ">
+                <div class="form-group col-xl-12 " style="margin-bottom:0px;background-color:#e9ecef; ">
+                    <div class="row pull-right " style="background-color:#e9ecef; padding-right:15px ">
+                        <button *ngIf="IsEditItem " type="button " class="btn btn-outline-success " style="margin-right:5px " (click)="fnCreateNewProduct() ">{{LT=='bn'?'নতুন লগ তৈরী করুন':'Create New Product'}}</button>
+                        <button *ngIf="!(dailyLogDetails.Status=='Approved' ||dailyLogDetails.Status=='Paid' ) " type="button " class="btn btn-outline-success " style="margin-right:5px " (click)="fnSaveDailyLog() ">{{LT=='bn'? IsEditItem==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন': IsEditItem==true?'Update Information':'Save Information'}}</button>
+                        <button type="button " class="btn btn-outline-success " (click)="fnPrintCarLog() " [disabled]="!(IsEditItem==true||isSavedNewRecord==true)"><i class="fa fa-print " style="font-size:24px "></i> {{LT=='bn'?'ছাপান':'Print'}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close " let-d="dismiss ">
+    <div class="modal-header " style="padding-bottom: 0px;padding-top:0px ">
+        <button type="button " class="close " aria-label="Close " (click)="d( 'Cross click') ">
+            <span aria-hidden="true ">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body " style="padding:0px ">
+        <div class="row" style="padding-left:15px;padding-right:15px;padding-top:5px;" *ngIf="modalType == 'Select Previous Bus Record'">
+            <div class="form-group col-xl-8">
+                <div class="row">
+                    <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বহির্গমনের তাং':'Date of departure'}}</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id3="ngbDatepicker" [(ngModel)]="previousDate" (ngModelChange)="onSelectPreviousDate($event)">
+                            <div class="input-group-addon" (click)="id3.toggle()">
+                                <span class="fa fa-calendar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" style="text-align:right">
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:right">
+                        <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnSearchOldRecord()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-p-table [pTableSetting]="configureableModalTable " [pTableMasterData]="configureableModalData " (radioButtonCallbackFn)="fnPtableModalCallBack($event) "></app-p-table>
+    </div>
+    <div class="modal-footer ">
+        <button type="button " class="btn btn-secondary " (click)="c( 'Close click') ">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>

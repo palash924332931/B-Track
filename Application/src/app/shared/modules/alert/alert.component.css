@@ -1,0 +1,71 @@
+.modal-content {
+    border: 2px solid #578483 !important;
+}
+
+.alert-modal {
+    padding-top: 170px;
+}
+
+.loading {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+}
+
+.loading .spinner {
+    z-index: 99999;
+}
+
+.btn-outline-danger {
+    color: #d9534f;
+    background-image: none;
+    background-color: transparent;
+    border-color: #d9534f;
+}
+
+.btn-outline-danger:hover {
+    color: white;
+    background-image: none;
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.btn-outline-primary {
+    color: #0275d8;
+    background-image: none;
+    background-color: transparent;
+    border-color: #0275d8;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-image: none;
+    background-color: #0275d8;
+    border-color: #0275d8;
+}
+
+.btn-outline-info {
+    color: #5bc0de;
+    background-image: none;
+    background-color: transparent;
+    border-color: #5bc0de;
+}
+
+.btn-outline-info:hover {
+    color: white;
+    background-image: none;
+    background-color: #5bc0de;
+    border-color: #5bc0de;
+}
+
+.confirm-yes-btn {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.modal-dialog {
+    max-width: 530px;
+}

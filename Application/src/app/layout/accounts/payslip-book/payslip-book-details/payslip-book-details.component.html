@@ -1,0 +1,82 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEditEmployee==true?'রশিদ বইয়ের হালনাগাদ':'নতুন রশিদ বই যোগ করুন':IsEditEmployee==true?'Update Pay Slip Book':'Add New Pay Slip Book'" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বই নং':'Book No'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="paySlipDetails.BookNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'টাকার পরিমাণ':'Amount'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userName" [(ngModel)]="paySlipDetails.Amount">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রারম্ভিক রশিদ নং':'Start Slip No'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userNamebangla" [(ngModel)]="paySlipDetails.SlipNo" (keyup)="fnUpdateNumberOfSlip()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'শেষ রশিদ নং':'End Slip No'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userNamebangla" [(ngModel)]="paySlipDetails.EndSlipNo" (keyup)="fnUpdateNumberOfSlip()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রশিদ সংখ্যা':'Number of Slip'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="paySlipDetails.NumberOfSlip" placeholder="Number do you want to generate">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="margin-bottom:0px">
+                <div class="form-group col-xl-6" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef">
+                        <button type="button " class="btn btn-outline-success" (click)="fnGeneratePaySlip()">{{LT=='bn'?'রশিদ তৈরি করুন':'Generate Pay Slip'}}</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col col-lg-12 zero-padding">
+                <app-p-table [pTableSetting]="paySlipTableBind" [pTableMasterData]="generatedPaySlipList" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+            </div>
+
+            <div class="row" style="margin-bottom:0px">
+                <div class="form-group col-xl-12" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef; padding-right:15px;">
+                        <button type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnBackToSlipList()">{{LT=='bn'?'রশিদ তালিকাতে ফিরে যান':'Back to Slip List'}}</button>
+                        <button *ngIf="!IsEditEmployee" type="button " class="btn btn-outline-success" (click)="fnSavePaySlip()">{{LT=='bn'?'রশিদ সংরক্ষণ করুন':'Save Pay Slip'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEditItem==true?'গাড়ীর তথ্য':'নতুন গাড়ী যোগ করুন':IsEditItem==true?'Bus Information':'Add New Bus'" [icon]="'fas fa-bus'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নিবন্ধন নম্বর':'Registration No'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="carDetails.RegistrationNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নিবন্ধনের তারিখ':'Registration Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="registrationDate" (ngModelChange)="onSelectRegistrationDate($event)">
+                                <div class="input-group-addon" (click)="id.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রথম রুটের তারিখ':'On Root Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="onRootDate" ngbDatepicker #id2="ngbDatepicker" [(ngModel)]="onRootDate" (ngModelChange)="onSelectOnRootDate($event)">
+                                <div class="input-group-addon" (click)="id2.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ির প্রকার':'Bus Type'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'car-type')"></i></label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="carDetails.Type">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সিটের সংখ্যা':'No. of Seat'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="carDetails.NoOfSeat">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="carDetails.Status">
+                              <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
+                              <option value="Repair">{{LT=='bn'?'মেরামত':'Repair'}}</option>  
+                              <option value="Heavy Repair">{{LT=='bn'?'ভারী মেরামত':'Heavy Repair'}}</option>  
+                              <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
+                          </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="carDetails.Status=='Inactive'">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নিষ্ক্রিয় হওয়ার কারণ':'Reason for Inactive'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="carDetails.ReasonForStop" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মন্তব্য':'Notes'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="carDetails.Notes" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row" style="margin-bottom:0px">
+                <div class="form-group col-xl-6" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef">
+                        <button *ngIf="IsEditItem" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewProduct()">{{LT=='bn'?'নতুন বাস যোগ করুন':'Add New Bus'}}</button>
+                        <button type="button " class="btn btn-outline-success" (click)="fnSaveBus()">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ করুন':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update Information':'Save Information'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>

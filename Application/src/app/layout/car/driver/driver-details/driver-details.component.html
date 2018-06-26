@@ -1,0 +1,251 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEditItem==true?'চালকের তথ্য':'নতুন চালক যোগ করুন':IsEditItem==true?'Driver Informatoin':'Add New Driver'" [icon]="'fas fa-bus'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'কর্মচারীর আইডি':'Employee ID'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="driverDetails.EmployeeId">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের নাম (ইং)':'Driver Name (Eng)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="Name" [(ngModel)]="driverDetails.Name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের নাম (বাংলা)':'Driver Name (Bng)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="driverDetails.NameInBangla">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পিতার নাম':'Father\'s Name'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="driverDetails.FatherName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ড্রাইভিং লাইসেন্স':'Driving License'}} </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userNamebangla" [(ngModel)]="driverDetails.DrivingLicense">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold"> {{LT=='bn'?'চালকের মোবাইল নম্বর':'Driver Contact No'}} </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="HelperName" [(ngModel)]="driverDetails.ContactNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'জন্ম তারিখ':'Date of Birth'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="onRootDate" ngbDatepicker #id4="ngbDatepicker" [(ngModel)]="dateOfBirth" (ngModelChange)="onSelectDateOfBirth($event)">
+                                <div class="input-group-addon" (click)="id4.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'কর্পোরেশনে যোগদানের তাং':'Corp. Join Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="onRootDate" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="corpJoinDate" (ngModelChange)="onSelectCorpJoinDate($event)">
+                                <div class="input-group-addon" (click)="id.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ডিপোতে যোগদানের তাং':'Depot Join Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id2="ngbDatepicker" [(ngModel)]="depotJoinDate" (ngModelChange)="onSelectDepotJoinDate($event)">
+                                <div class="input-group-addon" (click)="id2.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবসর গ্রহনের তাং':'Retirement Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id3="ngbDatepicker" [(ngModel)]="retirementDate" (ngModelChange)="onSelectRetirementDateDate($event)">
+                                <div class="input-group-addon" (click)="id3.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের গ্রেড':'Driver\'s Grade'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="driverDetails.Grade">
+                            <option selected value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>     
+                            <option value="D">D</option>     
+                            <option value="E">E</option>                          
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের বর্তমান ঠিকানা':'Present Address'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="3" cols="40" [(ngModel)]="driverDetails.PresentAddress" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের স্থায়ী ঠিকানা':'Permanent Address'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="3" cols="40" [(ngModel)]="driverDetails.PermanentAddress" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সাহায্যকারীর নাম':'Helper Name'}}  </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="HelperName" [(ngModel)]="driverDetails.HelperName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সাহায্যকারীর মোবাইল নম্বর':'Helper Contact No'}} </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="HelperName" [(ngModel)]="driverDetails.HelperContactNo">
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রেফারেন্স':'Reference'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="3" cols="40" [(ngModel)]="driverDetails.Reference" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="driverDetails.Status">
+                            <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
+                            <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>
+                            <option value="Transfer">{{LT=='bn'?'হস্তান্তরিত করা':'Transfer'}}</option>                          
+                        </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="driverDetails.Status=='Inactive'||driverDetails.Status=='Transfer'">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নিষ্ক্রিয়তার কারন':'Reason for Inactive'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="3" cols="40" [(ngModel)]="driverDetails.ReasonForInactive" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row" style="margin-bottom:0px">
+                <div class="form-group col-xl-6" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef">
+                        <button *ngIf="IsEditItem" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewItem()">{{LT=='bn'?'নতুন ড্রাইভার যোগ করুন':'Add New Driver'}}</button>
+                        <button type="button " class="btn btn-outline-success" (click)="fnSaveDriver()">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update Information':'Save Information'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>

@@ -1,0 +1,62 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?'প্রবেশাধিকার অনুমতি':'Menu Permission'" [icon]="'fa fa-low-vision'"></app-page-header>
+
+    <div class="row">
+        <div class="form-group col-xl-5">
+            <div class="row required">
+                <label for="roleId" class="col-sm-4 col-form-label font-weight-bold">{{ LT=='bn'?'উপাধির শিরোনাম':'Role Title'}}</label>
+                <div class="col-sm-8">
+                    <!-- <input type="text" class="form-control" id="roleId" [(ngModel)]="roleDetails.Name"> -->
+                    <select class='select-option form-control' required [(ngModel)]='selectedRoleId' (ngModelChange)='onRoleSelected($event)'>
+                        <option class='option' *ngFor='let role of roleList' [value]="role.RoleId">{{role.Name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xl-3">
+            <div class="row">
+                <div class="col-sm-12" style="text-align:left">
+                    <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnSearchRolePermission()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-xl-3">
+            <div class="row">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col col-lg-8 zero-padding">
+            <div class="card card-success border border-success">
+                <div class="card-header" style="background-color:#dff0d8; color:#3c763d">
+                    {{LT=='bn'?' প্রবেশাধিকার অনুমতি':' Menu Permission'}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><i>Menu permission details of Role <b>{{selectedRoleName}}</b></i></h5>
+                    <div style="padding-left:50px;">
+
+                        <ul class="tree">
+                            <li *ngFor="let menu of menu"><input type="checkbox" class="tree-checkbox" (click)="fnChangeParent($event,menu)" /> {{LT=='bn'?menu.MenuTitleBangla:menu.MenuTitle}}
+                                <ul>
+                                    <li *ngFor="let subMenu of menu.SubMenues"><input type="checkbox" class="tree-checkbox" [(ngModel)]="subMenu.IsPermit" />{{LT=='bn'?subMenu.SubMenuTitleBangla:subMenu.SubMenuTitle}}</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:0px; padding-top:5px;">
+        <div class="form-group col-xl-8" style="margin-bottom:0px;background-color:#e9ecef;">
+            <div class="row pull-right" style="background-color:#e9ecef; padding-right:10px;">
+                <button type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnSaveRolePermission()">{{LT=='bn'?'তথ্য সংরক্ষণ করুন':'Save Permission'}}</button>
+            </div>
+        </div>
+    </div>
+</div>
