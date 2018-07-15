@@ -1,3 +1,15 @@
-<p>
-  job-list works!
-</p>
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?'জবের তালিকা':'Job List'" [icon]="'fas fa-bus'"></app-page-header>
+    <div class="row" style="width:100%">
+        <div class="col-sm-12" style="text-align:right">
+            <!-- <a [router-link]="['./product/0']">People</a> -->
+
+            <!-- <button type="button" class="btn btn-outline-success" (click)="fnDownloadCarList()"><i class="fa fa-plus" style="font-size:18px"></i>PDF</button> -->
+            <button type="button" class="btn btn-outline-success" (click)="fnNewBus()"><i class="fa fa-plus" style="font-size:18px"></i>{{LT=='bn'?' নতুন জব যোগ করুন':' Add New Job'}}</button>
+        </div>
+        <div class="col col-lg-12">
+            <app-p-table [pTableSetting]="jobListTableBind" [pTableMasterData]="jobList" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+        </div>
+    </div>
+</div>

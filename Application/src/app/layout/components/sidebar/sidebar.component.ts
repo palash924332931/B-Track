@@ -36,6 +36,8 @@ export class SidebarComponent implements OnInit {
             this.showMenu = 'report';
         }else if (serviceName == 'manager') {
             this.showMenu = 'manager';
+        }else if (serviceName == 'store') {
+            this.showMenu = 'store';
         }else {
             this.showMenu=null;
         }

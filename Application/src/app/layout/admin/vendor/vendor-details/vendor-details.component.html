@@ -1,3 +1,113 @@
-<p>
-  vendor-details works!
-</p>
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEdit==true?'সরবরাহকারী প্রতিষ্ঠানের তথ্য হালনাগাদ':'সরবরাহকারী প্রতিষ্ঠানের নিবন্ধন':IsEdit==true?'Vendor Information Update':'Vendor Registration'" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নাম':' Name'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="vendorDetails.Name">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রতিনিধির নাম':'Contact Person'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="vendorDetails.ContactPerson">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="role" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রতিনিধির ফোন নং':'Contact No'}} </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="RoleName" [(ngModel)]="vendorDetails.ContactNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রতিষ্ঠানের টিন নং':'TIN No'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="RoleName" [(ngModel)]="vendorDetails.TINNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রতিষ্ঠানের ঠিকানা':'Address'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="vendorDetails.Address" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মন্তব্য':'Remark'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="vendorDetails.Remark" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সরবরাহকৃত মালের ধরন':'Supply Product Category '}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="vendorDetails.ActivityType">
+                                  <option selected value="Parts supply">{{LT=='bn'?'যন্ত্রাংশ সরবরাহ করে':'Parts supply'}}</option>
+                                  <option value="Lubricant supply">{{LT=='bn'?'তেল সরবরাহ করে':'Lubricant supply'}}</option>    
+                                  <option value="Battery Supply">{{LT=='bn'?'ব্যাটারি সরবরাহ করে':'Battery Supply'}}</option>      
+                                  <option value="Tire Supply">{{LT=='bn'?'টায়ার সরবরাহ করে':'Tire Supply'}}</option>   
+                                  <option value="Other">{{LT=='bn'?'অন্যান্য সরবরাহ করে':'Other'}}</option>                            
+                              </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="vendorDetails.Status">
+                                  <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
+                                  <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
+                              </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="margin-bottom:0px">
+                <div class="form-group col-xl-6" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef">
+                        <button *ngIf="IsEdit" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewRecord()">{{LT=='bn'?'নতুন পার্টি যোগ করুন':'Add New Vendor'}}</button>
+                        <button type="button " class="btn btn-outline-success" (click)="fnSaveVendor()">{{LT=='bn'?IsEdit==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEdit==true?'Update Information':'Save Information'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

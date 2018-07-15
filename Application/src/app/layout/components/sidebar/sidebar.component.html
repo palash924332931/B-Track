@@ -1,7 +1,7 @@
 <alert></alert>
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
-    <ul class="list-group">
-        <a routerLink="/dashboard" class="list-group-item">
+    <ul class="list-group menus">
+        <a routerLink="/dashboard" class="list-group-item" routerLinkActive="active" (click)="addExpandClass('dashboard')">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ LT=='bn'?'ড্যাশবোর্ড':'Dashboard' }}
         </a>
         <!-- <a [routerLink]="['/tables']" class="list-group-item">
@@ -46,13 +46,13 @@
             </li>
         </div> -->
         <div class="nested-menu" *ngFor="let menu of menu">
-            <a class="list-group-item" (click)="addExpandClass(menu.MenuName)">
+            <a class="list-group-item" (click)="addExpandClass(menu.MenuName)" routerLinkActive="active">
                 <span><i [ngClass]="menu.MenuIcon"></i>&nbsp; {{ LT=='bn'?menu.MenuTitleBangla:menu.MenuTitle}}</span>
             </a>
             <li class="nested" [class.expand]="showMenu == menu.MenuName">
                 <ul class="submenu">
                     <li *ngFor="let subMenu of menu.SubMenues">
-                        <a [routerLink]="'/'+menu.MenuName+'/'+subMenu.SubMenuName" href="javascript:void(0)"><span>{{ LT=='bn'?subMenu.SubMenuTitleBangla:subMenu.SubMenuTitle  }}</span></a>
+                        <a [routerLink]="'/'+menu.MenuName+'/'+subMenu.SubMenuName" href="javascript:void(0)" routerLinkActive="active"><span>{{ LT=='bn'?subMenu.SubMenuTitleBangla:subMenu.SubMenuTitle  }}</span></a>
                     </li>
                 </ul>
             </li>
@@ -142,7 +142,7 @@
             </li>
         </div> -->
 
-        <a routerLink="/about" class="list-group-item">
+        <a routerLink="/about" class="list-group-item" routerLinkActive="active" (click)="addExpandClass('about')">
             <i class="fa fa-exclamation-circle" style="font-size:18px"></i>&nbsp;{{ LT=='bn'?'তথ্য':'About' }}
         </a>
     </ul>

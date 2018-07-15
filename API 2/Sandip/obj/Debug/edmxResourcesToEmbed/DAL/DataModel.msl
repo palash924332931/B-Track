@@ -1,0 +1,966 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CarSystemModelStoreContainer" CdmEntityContainer="CarSystemEntities">
+    <EntitySetMapping Name="CarTypes">
+      <EntityTypeMapping TypeName="CarSystemModel.CarType">
+        <MappingFragment StoreEntitySet="CarTypes">
+          <ScalarProperty Name="Creation" ColumnName="Creation" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prSaveCarType" FunctionName="CarSystemModel.Store.prSaveCarType" />
+    <EntitySetMapping Name="CarDetails">
+      <EntityTypeMapping TypeName="CarSystemModel.CarDetail">
+        <MappingFragment StoreEntitySet="CarDetails">
+          <ScalarProperty Name="Creation" ColumnName="Creation" />
+          <ScalarProperty Name="NoOfSeat" ColumnName="NoOfSeat" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="OnRootDate" ColumnName="OnRootDate" />
+          <ScalarProperty Name="ReasonForStop" ColumnName="ReasonForStop" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prGetRoles" FunctionName="CarSystemModel.Store.prGetRoles">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetRoles_Result">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveRole" FunctionName="CarSystemModel.Store.prSaveRole" />
+    <FunctionImportMapping FunctionImportName="prSavePaySlip" FunctionName="CarSystemModel.Store.prSavePaySlip" />
+    <FunctionImportMapping FunctionImportName="prGetCarDetails" FunctionName="CarSystemModel.Store.prGetCarDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetCarDetails_Result">
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ReasonForStop" ColumnName="ReasonForStop" />
+          <ScalarProperty Name="NoOfSeat" ColumnName="NoOfSeat" />
+          <ScalarProperty Name="OnRootDate" ColumnName="OnRootDate" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveCarDetails" FunctionName="CarSystemModel.Store.prSaveCarDetails" />
+    <FunctionImportMapping FunctionImportName="prGetCarTypes" FunctionName="CarSystemModel.Store.prGetCarTypes">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetCarTypes_Result">
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NoOfCar" ColumnName="NoOfCar" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prDeletePaySlip" FunctionName="CarSystemModel.Store.prDeletePaySlip" />
+    <FunctionImportMapping FunctionImportName="prGetPaySlipBook" FunctionName="CarSystemModel.Store.prGetPaySlipBook">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetPaySlipBook_Result">
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="NoOfUsedSlip" ColumnName="NoOfUsedSlip" />
+          <ScalarProperty Name="NumberOfSlip" ColumnName="NumberOfSlip" />
+          <ScalarProperty Name="NoOfPayslipUsedOrApproved" ColumnName="NoOfPayslipUsedOrApproved" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prUpdatePaySlipDetails" FunctionName="CarSystemModel.Store.prUpdatePaySlipDetails" />
+    <FunctionImportMapping FunctionImportName="prUpdateDailyCarLog" FunctionName="CarSystemModel.Store.prUpdateDailyCarLog" />
+    <FunctionImportMapping FunctionImportName="prGetDriver" FunctionName="CarSystemModel.Store.prGetDriver">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDriver_Result">
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameInBangla" ColumnName="NameInBangla" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="DrivingLicense" ColumnName="DrivingLicense" />
+          <ScalarProperty Name="CorpJoinDate" ColumnName="CorpJoinDate" />
+          <ScalarProperty Name="DepotJoinDate" ColumnName="DepotJoinDate" />
+          <ScalarProperty Name="ReasonForInactive" ColumnName="ReasonForInactive" />
+          <ScalarProperty Name="RetirementDate" ColumnName="RetirementDate" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="HelperContactNo" ColumnName="HelperContactNo" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveDriverDetails" FunctionName="CarSystemModel.Store.prSaveDriverDetails" />
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CarSystemModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Creation" ColumnName="Creation" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="RetirementDate" ColumnName="RetirementDate" />
+          <ScalarProperty Name="DepotJoinDate" ColumnName="DepotJoinDate" />
+          <ScalarProperty Name="CorpJoinDate" ColumnName="CorpJoinDate" />
+          <ScalarProperty Name="Language" ColumnName="Language" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="NameInBangla" ColumnName="NameInBangla" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prSaveUser" FunctionName="CarSystemModel.Store.prSaveUser" />
+    <FunctionImportMapping FunctionImportName="prSaveDailyPayment" FunctionName="CarSystemModel.Store.prSaveDailyPayment" />
+    <FunctionImportMapping FunctionImportName="prGetPaySlipDetails" FunctionName="CarSystemModel.Store.prGetPaySlipDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetPaySlipDetails_Result">
+          <ScalarProperty Name="PaySlipId" ColumnName="PaySlipId" />
+          <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="UsedBy" ColumnName="UsedBy" />
+          <ScalarProperty Name="UsedDate" ColumnName="UsedDate" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="ApprovedByName" ColumnName="ApprovedByName" />
+          <ScalarProperty Name="UsedByName" ColumnName="UsedByName" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveDailyCarLog" FunctionName="CarSystemModel.Store.prSaveDailyCarLog" />
+    <FunctionImportMapping FunctionImportName="prGetDailyPaymentReportSection" FunctionName="CarSystemModel.Store.prGetDailyPaymentReportSection">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDailyPaymentReportSection_Result">
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="CheckInByName" ColumnName="CheckInByName" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckOutByName" ColumnName="CheckOutByName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="ReceivedByName" ColumnName="ReceivedByName" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetDailyCarLogReport" FunctionName="CarSystemModel.Store.prGetDailyCarLogReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDailyCarLogReport_Result">
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NoOfCar" ColumnName="NoOfCar" />
+          <ScalarProperty Name="NoOfRepairCar" ColumnName="NoOfRepairCar" />
+          <ScalarProperty Name="NoOfHeavyRepairCar" ColumnName="NoOfHeavyRepairCar" />
+          <ScalarProperty Name="NoOfOnRootCar" ColumnName="NoOfOnRootCar" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="NoOfPaidCar" ColumnName="NoOfPaidCar" />
+          <ScalarProperty Name="NoOfDueCar" ColumnName="NoOfDueCar" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetDailyCarTypesReport" FunctionName="CarSystemModel.Store.prGetDailyCarTypesReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDailyCarTypesReport_Result">
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NoOfCar" ColumnName="NoOfCar" />
+          <ScalarProperty Name="NoOfRepairCar" ColumnName="NoOfRepairCar" />
+          <ScalarProperty Name="NoOfHeavyRepairCar" ColumnName="NoOfHeavyRepairCar" />
+          <ScalarProperty Name="NoOfOnRootCar" ColumnName="NoOfOnRootCar" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetRootCost" FunctionName="CarSystemModel.Store.prGetRootCost">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetRootCost_Result">
+          <ScalarProperty Name="RootCostId" ColumnName="RootCostId" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Cost" ColumnName="Cost" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="FirstTripIncome" ColumnName="FirstTripIncome" />
+          <ScalarProperty Name="SecondTripIncome" ColumnName="SecondTripIncome" />
+          <ScalarProperty Name="ThirdTripIncome" ColumnName="ThirdTripIncome" />
+          <ScalarProperty Name="UnFirstTripIncome" ColumnName="UnFirstTripIncome" />
+          <ScalarProperty Name="UnSecondTripIncome" ColumnName="UnSecondTripIncome" />
+          <ScalarProperty Name="UnThirdTripIncome" ColumnName="UnThirdTripIncome" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveRootCost" FunctionName="CarSystemModel.Store.prSaveRootCost" />
+    <EntitySetMapping Name="DailyCarHistories">
+      <EntityTypeMapping TypeName="CarSystemModel.DailyCarHistory">
+        <MappingFragment StoreEntitySet="DailyCarHistories">
+          <ScalarProperty Name="IsUnOfficialDay" ColumnName="IsUnOfficialDay" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="Creation" ColumnName="Creation" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prGetDailyCarLog" FunctionName="CarSystemModel.Store.prGetDailyCarLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDailyCarLog_Result">
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="CheckInByName" ColumnName="CheckInByName" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckOutByName" ColumnName="CheckOutByName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="IsUnOfficialDay" ColumnName="IsUnOfficialDay" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetIncomeReportDateRange" FunctionName="CarSystemModel.Store.prGetIncomeReportDateRange">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetIncomeReportDateRange_Result">
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="CheckInByName" ColumnName="CheckInByName" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckOutByName" ColumnName="CheckOutByName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="ReceivedByName" ColumnName="ReceivedByName" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetMonthlyIncomeReportDateRange" FunctionName="CarSystemModel.Store.prGetMonthlyIncomeReportDateRange">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetMonthlyIncomeReportDateRange_Result">
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NoOfCar" ColumnName="NoOfCar" />
+          <ScalarProperty Name="NoOfRepairCar" ColumnName="NoOfRepairCar" />
+          <ScalarProperty Name="NoOfHeavyRepairCar" ColumnName="NoOfHeavyRepairCar" />
+          <ScalarProperty Name="NoOfOnRootCar" ColumnName="NoOfOnRootCar" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="TotalDue" ColumnName="TotalDue" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="NoOfPaidCar" ColumnName="NoOfPaidCar" />
+          <ScalarProperty Name="NoOfDueCar" ColumnName="NoOfDueCar" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetMonthlyIncomeReportRouteWise" FunctionName="CarSystemModel.Store.prGetMonthlyIncomeReportRouteWise">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetMonthlyIncomeReportRouteWise_Result">
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="RootDistance" ColumnName="RootDistance" />
+          <ScalarProperty Name="NoOfOnRootCar" ColumnName="NoOfOnRootCar" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="TotalDue" ColumnName="TotalDue" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="NoOfPaidCar" ColumnName="NoOfPaidCar" />
+          <ScalarProperty Name="NoOfDueCar" ColumnName="NoOfDueCar" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetIncomeReportDateRangeBusWiseSection" FunctionName="CarSystemModel.Store.prGetIncomeReportDateRangeBusWiseSection">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetIncomeReportDateRangeBusWiseSection_Result">
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="CheckInByName" ColumnName="CheckInByName" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckOutByName" ColumnName="CheckOutByName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="ReceivedByName" ColumnName="ReceivedByName" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetMenuList" FunctionName="CarSystemModel.Store.prGetMenuList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetMenuList_Result">
+          <ScalarProperty Name="MDetailsId" ColumnName="MDetailsId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="SubMenuTitle" ColumnName="SubMenuTitle" />
+          <ScalarProperty Name="SubMenuTitleBangla" ColumnName="SubMenuTitleBangla" />
+          <ScalarProperty Name="SubMenuName" ColumnName="SubMenuName" />
+          <ScalarProperty Name="SubMenuIcon" ColumnName="SubMenuIcon" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuTitle" ColumnName="MenuTitle" />
+          <ScalarProperty Name="MenuTitleBangla" ColumnName="MenuTitleBangla" />
+          <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+          <ScalarProperty Name="IsPermit" ColumnName="IsPermit" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetMenuListRoleWise" FunctionName="CarSystemModel.Store.prGetMenuListRoleWise">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetMenuListRoleWise_Result">
+          <ScalarProperty Name="MDetailsId" ColumnName="MDetailsId" />
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="SubMenuTitle" ColumnName="SubMenuTitle" />
+          <ScalarProperty Name="SubMenuTitleBangla" ColumnName="SubMenuTitleBangla" />
+          <ScalarProperty Name="SubMenuName" ColumnName="SubMenuName" />
+          <ScalarProperty Name="SubMenuIcon" ColumnName="SubMenuIcon" />
+          <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+          <ScalarProperty Name="MenuTitle" ColumnName="MenuTitle" />
+          <ScalarProperty Name="MenuTitleBangla" ColumnName="MenuTitleBangla" />
+          <ScalarProperty Name="MenuIcon" ColumnName="MenuIcon" />
+          <ScalarProperty Name="IsPermit" ColumnName="IsPermit" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSpecialActionOnCarLog" FunctionName="CarSystemModel.Store.prSpecialActionOnCarLog" />
+    <FunctionImportMapping FunctionImportName="prGetMonthlyBusReportRouteWise" FunctionName="CarSystemModel.Store.prGetMonthlyBusReportRouteWise">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetMonthlyBusReportRouteWise_Result">
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="RootDistance" ColumnName="RootDistance" />
+          <ScalarProperty Name="NoOfOnRootCar" ColumnName="NoOfOnRootCar" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="TotalDue" ColumnName="TotalDue" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="NoOfPaidCar" ColumnName="NoOfPaidCar" />
+          <ScalarProperty Name="NoOfDueCar" ColumnName="NoOfDueCar" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetReportSectionDateRange" FunctionName="CarSystemModel.Store.prGetReportSectionDateRange">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetReportSectionDateRange_Result">
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="CheckInByName" ColumnName="CheckInByName" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckOutByName" ColumnName="CheckOutByName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="ReceivedByName" ColumnName="ReceivedByName" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetRoots" FunctionName="CarSystemModel.Store.prGetRoots">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetRoots_Result">
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="UnofficialDistance" ColumnName="UnofficialDistance" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedByName" ColumnName="CreatedByName" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="TargetTrip" ColumnName="TargetTrip" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveRoot" FunctionName="CarSystemModel.Store.prSaveRoot" />
+    <FunctionImportMapping FunctionImportName="prGetDailyCarLogDateRange" FunctionName="CarSystemModel.Store.prGetDailyCarLogDateRange">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDailyCarLogDateRange_Result">
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="CheckInByName" ColumnName="CheckInByName" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckOutByName" ColumnName="CheckOutByName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="TargetTripStatus" ColumnName="TargetTripStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetDashboardReport" FunctionName="CarSystemModel.Store.prGetDashboardReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDashboardReport_Result">
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="UpdatedTime" ColumnName="UpdatedTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NoOfCar" ColumnName="NoOfCar" />
+          <ScalarProperty Name="NoOfRepairCar" ColumnName="NoOfRepairCar" />
+          <ScalarProperty Name="NoOfHeavyRepairCar" ColumnName="NoOfHeavyRepairCar" />
+          <ScalarProperty Name="NoOfOnRootCar" ColumnName="NoOfOnRootCar" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="NoOfPaidCar" ColumnName="NoOfPaidCar" />
+          <ScalarProperty Name="NoOfDueCar" ColumnName="NoOfDueCar" />
+          <ScalarProperty Name="TodayReceivedAmount" ColumnName="TodayReceivedAmount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetBusPaymentHistory" FunctionName="CarSystemModel.Store.prGetBusPaymentHistory">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetBusPaymentHistory_Result">
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="HelperName" ColumnName="HelperName" />
+          <ScalarProperty Name="RootId" ColumnName="RootId" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="StartPoint" ColumnName="StartPoint" />
+          <ScalarProperty Name="EndPoint" ColumnName="EndPoint" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="CheckOutDate" ColumnName="CheckOutDate" />
+          <ScalarProperty Name="CheckInTime" ColumnName="CheckInTime" />
+          <ScalarProperty Name="CheckOutTime" ColumnName="CheckOutTime" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CheckInBy" ColumnName="CheckInBy" />
+          <ScalarProperty Name="CheckInByName" ColumnName="CheckInByName" />
+          <ScalarProperty Name="CheckOutBy" ColumnName="CheckOutBy" />
+          <ScalarProperty Name="CheckOutByName" ColumnName="CheckOutByName" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="ExceptioalAmount" ColumnName="ExceptioalAmount" />
+          <ScalarProperty Name="RouteStartPoint" ColumnName="RouteStartPoint" />
+          <ScalarProperty Name="AdditionalIncomeType" ColumnName="AdditionalIncomeType" />
+          <ScalarProperty Name="DifferentRouteDistance" ColumnName="DifferentRouteDistance" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="PaymentNotes" ColumnName="PaymentNotes" />
+          <ScalarProperty Name="SystemAmount" ColumnName="SystemAmount" />
+          <ScalarProperty Name="ReceivedByName" ColumnName="ReceivedByName" />
+          <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="PaymentHistoryStatus" ColumnName="PaymentHistoryStatus" />
+          <ScalarProperty Name="PaySlipId" ColumnName="PaySlipId" />
+          <ScalarProperty Name="PaySlipAmount" ColumnName="PaySlipAmount" />
+          <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+          <ScalarProperty Name="PaySlipStatus" ColumnName="PaySlipStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetUsers" FunctionName="CarSystemModel.Store.prGetUsers">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetUsers_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NameInBangla" ColumnName="NameInBangla" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CorpJoinDate" ColumnName="CorpJoinDate" />
+          <ScalarProperty Name="DepotJoinDate" ColumnName="DepotJoinDate" />
+          <ScalarProperty Name="RetirementDate" ColumnName="RetirementDate" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Grade" ColumnName="Grade" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="CompnayNameBangla" ColumnName="CompnayNameBangla" />
+          <ScalarProperty Name="CompanyAddress" ColumnName="CompanyAddress" />
+          <ScalarProperty Name="CompanyAddressBangla" ColumnName="CompanyAddressBangla" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetDailyPaymentLog" FunctionName="CarSystemModel.Store.prGetDailyPaymentLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDailyPaymentLog_Result">
+          <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+          <ScalarProperty Name="CarLogId" ColumnName="CarLogId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarType" ColumnName="CarType" />
+          <ScalarProperty Name="RootName" ColumnName="RootName" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="RootCost" ColumnName="RootCost" />
+          <ScalarProperty Name="ExpectedCost" ColumnName="ExpectedCost" />
+          <ScalarProperty Name="TripNo" ColumnName="TripNo" />
+          <ScalarProperty Name="IsUnwantedReturn" ColumnName="IsUnwantedReturn" />
+          <ScalarProperty Name="ReasonForReturn" ColumnName="ReasonForReturn" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="TripType" ColumnName="TripType" />
+          <ScalarProperty Name="PaySlipId" ColumnName="PaySlipId" />
+          <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+          <ScalarProperty Name="BookNo" ColumnName="BookNo" />
+          <ScalarProperty Name="PaySlipAmount" ColumnName="PaySlipAmount" />
+          <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+          <ScalarProperty Name="SystemAmount" ColumnName="SystemAmount" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="PaymentStatus" ColumnName="PaymentStatus" />
+          <ScalarProperty Name="ReceivedBy" ColumnName="ReceivedBy" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Update" ColumnName="Update" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ReceivedByName" ColumnName="ReceivedByName" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="ReceivedOnRouteIncome" ColumnName="ReceivedOnRouteIncome" />
+          <ScalarProperty Name="ReceivedDifferentRouteIncome" ColumnName="ReceivedDifferentRouteIncome" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prDeleteVendor" FunctionName="CarSystemModel.Store.prDeleteVendor" />
+    <FunctionImportMapping FunctionImportName="prGetVendorDetails" FunctionName="CarSystemModel.Store.prGetVendorDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetVendorDetails_Result">
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ActivityType" ColumnName="ActivityType" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveVendorDetails" FunctionName="CarSystemModel.Store.prSaveVendorDetails" />
+    <FunctionImportMapping FunctionImportName="prGetJobList" FunctionName="CarSystemModel.Store.prGetJobList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetJobList_Result">
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="JobCreatedBy" ColumnName="JobCreatedBy" />
+          <ScalarProperty Name="JobCreatedByName" ColumnName="JobCreatedByName" />
+          <ScalarProperty Name="JobCreatedByNameBangla" ColumnName="JobCreatedByNameBangla" />
+          <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SMApprovedStatus" ColumnName="SMApprovedStatus" />
+          <ScalarProperty Name="ManagerApprovedStatus" ColumnName="ManagerApprovedStatus" />
+          <ScalarProperty Name="SMApprovedDate" ColumnName="SMApprovedDate" />
+          <ScalarProperty Name="ManagerApprovedDate" ColumnName="ManagerApprovedDate" />
+          <ScalarProperty Name="JobCompletedDate" ColumnName="JobCompletedDate" />
+          <ScalarProperty Name="JobCompletedStatus" ColumnName="JobCompletedStatus" />
+          <ScalarProperty Name="BusStatus" ColumnName="BusStatus" />
+          <ScalarProperty Name="FinalApprovalPerson" ColumnName="FinalApprovalPerson" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="AssignedMechanic" ColumnName="AssignedMechanic" />
+          <ScalarProperty Name="AssignedMechanicName" ColumnName="AssignedMechanicName" />
+          <ScalarProperty Name="AssignedMechanicNameBangla" ColumnName="AssignedMechanicNameBangla" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetPartsDetails" FunctionName="CarSystemModel.Store.prGetPartsDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetPartsDetails_Result">
+          <ScalarProperty Name="PartsId" ColumnName="PartsId" />
+          <ScalarProperty Name="PartsCode" ColumnName="PartsCode" />
+          <ScalarProperty Name="PartsName" ColumnName="PartsName" />
+          <ScalarProperty Name="PartsDescription" ColumnName="PartsDescription" />
+          <ScalarProperty Name="PartsSize" ColumnName="PartsSize" />
+          <ScalarProperty Name="Brand" ColumnName="Brand" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="CarTypeId" ColumnName="CarTypeId" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Units" ColumnName="Units" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetPol" FunctionName="CarSystemModel.Store.prGetPol">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetPol_Result">
+          <ScalarProperty Name="POLId" ColumnName="POLId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="GivenBy" ColumnName="GivenBy" />
+          <ScalarProperty Name="Gas" ColumnName="Gas" />
+          <ScalarProperty Name="Oil" ColumnName="Oil" />
+          <ScalarProperty Name="Lubricant" ColumnName="Lubricant" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

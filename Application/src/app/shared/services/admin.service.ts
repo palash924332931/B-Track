@@ -138,5 +138,27 @@ export class AdminService {
 
     //#endregion of Root Cost
 
+    
+    //#region Role
+    fnGetVendor(UserId,VendorId,Type) {
+        var url = ConfigService.baseWebApiUrl + '/GetVendorDetails?UserId='+UserId+'&VendorId='+VendorId+'&Type='+Type;
+        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        return this.http.get(url, "")
+            .map((response: any) => <any[]>JSON.parse(response._body||[]));
+    }
+   
+    fnPostVendor(data: any) {
+        var url = ConfigService.baseWebApiUrl + '/SaveVendorDetails';
+        return this.http.post(url, data, "")
+            .map((response: Response) => <any>(response));
+    }   
+
+    fnDeleteVendor(VendorId: number,UserId:number) {
+        var url = ConfigService.baseWebApiUrl + '/DeleteVendor?VendorId=' + VendorId+"&UserId="+UserId;
+        return this.http.get(url, "")
+            .map((response: Response) => <string>(response.json()));
+    }
+
+    // #endregion of Role
 
 }

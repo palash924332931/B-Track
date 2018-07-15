@@ -51,7 +51,7 @@ export class CarDetailsComponent implements OnInit {
       },
       (error: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT=='bn'?'নেটওয়ার্ক সমস্যার কারণে সিস্টেমটি বাসের তথ্য প্রদর্শন করতে ব্যর্থ হয়েছে। অনুগ্রহপূর্বক আবার চেষ্টা করুন.':'System has failed to show bus information because of network problem. Please try again.');
+        this.alertService.alert(this.LT=='bn'?'নেটওয়ার্ক সমস্যার কারণে সিস্টেমটি গাড়ির তথ্য প্রদর্শন করতে ব্যর্থ হয়েছে। অনুগ্রহপূর্বক আবার চেষ্টা করুন.':'System has failed to show car information because of network problem. Please try again.');
       }
     );
   }
@@ -62,10 +62,10 @@ export class CarDetailsComponent implements OnInit {
       this.alertService.alert(this.LT=='bn'?'নিবন্ধন নম্বর প্রয়োজন। দয়া করে আবার এই ক্ষেত্রটি পর্যালোচনা করুন।':'Registration no. is required. Please review this field again.');
       return false;
     }else if (this.carDetails.CarTypeId == null || this.carDetails.Type == "") {
-      this.alertService.alert(this.LT=='bn'?'গাড়ীর প্রকার পছন্দ করুন, তারপর তথ্য সংরক্ষণ করুন।':'Bus type is required. Please review this field again.');
+      this.alertService.alert(this.LT=='bn'?'গাড়ীর ধরন পছন্দ করুন, তারপর তথ্য সংরক্ষণ করুন।':'Car type is required. Please review this field again.');
       return false;
     }else if (this.carDetails.NoOfSeat == null) {
-      this.alertService.alert(this.LT=='bn'?'গাড়ীর সিটের সংখ্যা বসান, তারপর তথ্য সংরক্ষণ করুন।':'Number of seat is required for Bus. Please review this field again.');
+      this.alertService.alert(this.LT=='bn'?'গাড়ীর সিটের সংখ্যা বসান, তারপর তথ্য সংরক্ষণ করুন।':'Number of seat is required for Car. Please review this field again.');
       return false;
     }
 
@@ -82,7 +82,7 @@ export class CarDetailsComponent implements OnInit {
       this.carService.fnPostBus(this.carDetails).subscribe(
         (success: any) => {
           this.alertService.fnLoading(false);
-          this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি বাস তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in bus list?'
+          this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি গাড়ির তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in car list?'
             , () => {
               this.router.navigate(["./car/car-list"]);
             }
@@ -90,7 +90,7 @@ export class CarDetailsComponent implements OnInit {
         },
         (error: any) => {
           this.alertService.fnLoading(false);
-          this.alertService.alert(this.LT=='bn'?'নেটওয়ার্ক সমস্যাটির কারণে সিস্টেম কর্মচারী দেখাতে ব্যর্থ হয়েছে।':'System has failed to show employee because of network problem.');
+          this.alertService.alert(this.LT=='bn'?'নেটওয়ার্ক সমস্যাটির কারণে সিস্টেম গাড়ির দেখাতে ব্যর্থ হয়েছে।':'System has failed to show car because of network problem.');
         }
       );
   }
@@ -150,7 +150,7 @@ configureableModalData:any[]=[];
     tableName: this.LT=='bn'?'গাড়ির প্রকার নির্বাচন করুন':'Select Bus Type',
     tableRowIDInternalName: "ID",
     tableColDef: [
-      { headerName: this.LT=='bn'?'গাড়ির প্রকার':'Bus Type', width: '40%', internalName: 'Type', sort: true, type: "" },
+      { headerName: this.LT=='bn'?'গাড়ির ধরন':'Car Type', width: '40%', internalName: 'Type', sort: true, type: "" },
       { headerName: this.LT=='bn'?'বিবরণ':'Description', width: '45%', internalName: 'Description', sort: true, type: "" },
     ],
     enabledSearch: true,

@@ -1,0 +1,109 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEdit==true?'চাহিদা হালনাগাদ':'চাহিদা নিবন্ধন':IsEdit==true?'Demand Update':'Demand Registration'" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চাহিদা নং':' Demand No'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="vendorDetails.JobNo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বাস নং':'Bus No'}}  <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'bus-list')"></i></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" distabled id="userId" [(ngModel)]="vendorDetails.BusNo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="role" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চাহিদার তারিখ':'Job Date'}} </label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="onRootDate" ngbDatepicker #id4="ngbDatepicker" [(ngModel)]="jobBirth" (ngModelChange)="onSelectJobDate($event)">
+                                <div class="input-group-addon" (click)="id4.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সূচনাকারী':'Created By'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'user-list')"></i></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" disabled id="RoleName" [(ngModel)]="vendorDetails.JobedBy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="vendorDetails.Status">
+                                <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
+                                <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মন্তব্য':'Remark'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="vendorDetails.Remark" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="width:100%">
+                <div class="col col-lg-12">
+                    <div class="col-sm-12" style="text-align:right">
+                        <button type="button" class="btn btn-outline-success" (click)="fnNewVendor()"><i class="fa fa-plus" style="font-size:18px"></i>{{LT=='bn'?' নতুন পার্টস যোগ করুন':' Add New Parts'}}</button>
+                    </div>
+                    <app-p-table [pTableSetting]="jobItemListTableBind" [pTableMasterData]="jobItemList" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+                </div>
+            </div>
+
+            <div class="row" style="margin-bottom:0px">
+                <div class="form-group col-xl-12" style="margin-bottom:0px;background-color:#e9ecef; padding-right: 24px;">
+                    <div class="row pull-right" style="background-color:#e9ecef">
+                        <button *ngIf="IsEdit" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewProduct()">{{LT=='bn'?'নতুন পার্টি যোগ করুন':'Add New JOb'}}</button>
+                        <button type="button " class="btn btn-outline-success" (click)="fnSaveVendor()">{{LT=='bn'?IsEdit==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEdit==true?'Update Information':'Save Information'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>
