@@ -252,7 +252,7 @@ export class PolDetailsComponent implements OnInit {
     enabledRadioBtn: true,
     enabledAutoScrolled: true,
     enabledCellClick: true,
-    pTableStyle: {
+    pTableStyle: { 
       tableOverflowY: true,
       overflowContentHeight: '460px'
     }

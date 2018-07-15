@@ -1,0 +1,40 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?'অ্যাকাউন্টের চার্ট   ':'Chart of Accounts'" [icon]="'fa fa-low-vision'"></app-page-header>
+
+
+    <div class="row">
+        <div class="col-sm-12" style="text-align:right">
+            <button type="button" class="btn btn-outline-success" (click)="fnNewAccount()"><i class="fa fa-plus" style="font-size:18px"></i> {{LT=='bn'?' নতুন অ্যাকাউন্ট তৈরি করুন':' Create New Account Book'}}</button>
+        </div>
+        <div class="col col-lg-8 zero-padding">
+            <div class="card card-success border border-success">
+                <div class="card-header" style="background-color:#dff0d8; color:#3c763d">
+                    {{LT=='bn'?' অ্যাকাউন্টের চার্ট ':' Chart of Accounts'}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><i>Chart of Accounts details</i></h5>
+                    <div style="padding-left:50px;">
+
+                        <ul class="tree">
+                            <li *ngFor="let menu of menu"><input type="checkbox" class="tree-checkbox" (click)="fnChangeParent($event,menu)" /> {{LT=='bn'?menu.MenuTitleBangla:menu.MenuTitle}}
+                                <ul>
+                                    <li *ngFor="let subMenu of menu.SubMenues"><input type="checkbox" class="tree-checkbox" [(ngModel)]="subMenu.IsPermit" />{{LT=='bn'?subMenu.SubMenuTitleBangla:subMenu.SubMenuTitle}}</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:0px; padding-top:5px;">
+        <div class="form-group col-xl-8" style="margin-bottom:0px;background-color:#e9ecef;">
+            <div class="row pull-right" style="background-color:#e9ecef; padding-right:10px;">
+                <button type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnSaveRolePermission()">{{LT=='bn'?'তথ্য সংরক্ষণ করুন':'Save Permission'}}</button>
+            </div>
+        </div>
+    </div>
+</div>
