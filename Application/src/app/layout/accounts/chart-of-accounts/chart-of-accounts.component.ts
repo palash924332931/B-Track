@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { AlertService } from '../../../shared/modules/alert/alert.service'
-import { AdminService, CommonService, ConfigService } from '../../../shared/services'
+import { AdminService, CommonService, ConfigService,AccountsService } from '../../../shared/services'
 import { DatePipe } from '@angular/common';
 import { Role } from '../../../shared/model/admin/role'
+import { COA } from '../../../shared/model/accounts'
 import { Router, ActivatedRoute } from '@angular/router';
+import {  } from '../../../shared/model/accounts'
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -25,19 +27,18 @@ export class ChartOfAccountsComponent implements OnInit {
   public roleDetails = new Role();
   public menu = [];
   public CompanyId:number;
-  constructor(private adminService: AdminService, private alertService: AlertService, private configService: ConfigService, private commonService: CommonService, private router:Router) {
+  constructor(private adminService: AdminService, private accountsService:AccountsService, private alertService: AlertService, private configService: ConfigService, private commonService: CommonService, private router:Router) {
 
   }
 
   ngOnInit() {
     this.UserId = this.UserInfo[0].Id;
     this.CompanyId=this.UserInfo[0].CompanyId;
-    this
     this.fnGetRole();
   }
 
   fnNewAccount(){
-    this.router.navigate(["./accounts/coa"]);
+    this.router.navigate(["./accounts/coa/0"]);
   }
 
 

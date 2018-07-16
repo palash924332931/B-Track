@@ -247,10 +247,13 @@ export class JobDetailsComponent implements OnInit {
   public jobPartsList = [];
 
   fnAddNewParts() {
-    if (this.numberOfParts == 0 && this.numberOfParts == null) {
-      this.alertService.alert("Please select parts and number of part then try again");
+    if (this.partsId == 0 || this.partsId == null) {
+      this.alertService.alert("Please select the parts from the parts list.");
       return false;
-
+    }
+    if (this.numberOfParts == 0 || this.numberOfParts == null) {
+      this.alertService.alert("Please imput the number of parts which you want to take.");
+      return false;
     }
 
     this.currentPartsList.forEach(element => {
