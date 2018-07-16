@@ -179,6 +179,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\Report\ReportController.cs" />
+    <Compile Include="Controllers\Store\JobController.cs" />
+    <Compile Include="Controllers\Store\POLController.cs" />
     <Compile Include="Controllers\Store\StoreController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\CarDetail.cs">

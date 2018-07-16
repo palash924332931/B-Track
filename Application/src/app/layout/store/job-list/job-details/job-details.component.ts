@@ -16,7 +16,6 @@ import { NgbModal, NgbModalRef, ModalDismissReasons, NgbTimeStruct } from '@ng-b
   animations: [routerTransition()]
 })
 export class JobDetailsComponent implements OnInit {
-
   public LT: string = ConfigService.languageType;
   public jobId: number;
   public IsEdit: boolean = false;
@@ -57,7 +56,7 @@ export class JobDetailsComponent implements OnInit {
       },
       (error: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT == 'bn' ? 'নেটওয়ার্ক সমস্যার কারণে সিস্টেম কর্মচারী দেখাতে ব্যর্থ হয়েছে।' : 'System has failed to show employee because of network problem.');
+        this.alertService.alert(this.LT == 'bn' ? ' সিস্টেম কর্মচারী দেখাতে ব্যর্থ হয়েছে।' : 'System has failed to show employee because of network problem.');
       }
     );
   }
@@ -73,56 +72,24 @@ export class JobDetailsComponent implements OnInit {
     //   return false;
     // }
 
-    // //this.employeeDetails.Update = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    // this.employeeDetails.Update = this.configService.getCurrentDate();
-    // this.employeeDetails.CreatedBy=this.userId;
-
-    // if (this.IsEditEmployee) {
-    //   this.alertService.fnLoading(true);
-    //   this.adminService.fnPostEmployee(this.employeeDetails).subscribe(
-    //     (success: any) => {
-    //       this.alertService.fnLoading(false);
-    //       this.alertService.confirm(this.LT=='bn'?success.replace(/"/g,'')+' আপনি কর্মচারী তালিকায় ফিরে পেতে চান?':success.replace(/"/g,'')+' Do you want to back in employee list?'
-    //         , () => {
-    //           this.router.navigate(["./admin/employee"]);
-    //         }
-    //         , function () { });
-
-    //     },
-    //     (error: any) => {
-    //       this.alertService.fnLoading(false);
-    //       this.alertService.alert(this.LT=='bn'?'নেটওয়ার্ক সমস্যার কারণে সিস্টেম কর্মচারী দেখাতে ব্যর্থ হয়েছে।':'System has failed to show employee because of network problem.');
-    //     }
-    //   );
-    // } else {
-    //   if (this.employeeDetails.Password == null || this.employeeDetails.ConfirmPassword == null) {
-    //     this.alertService.alert(this.LT=='bn'?'পাসওয়ার্ড খালি রাখতে পারেন না।':'Password can not be left blank.');
-    //     return false;
-    //   }
-    //   if (this.employeeDetails.Password != this.employeeDetails.ConfirmPassword) {
-    //     this.alertService.alert(this.LT=='bn'?'পাসওয়ার্ড এবং নিশ্চিত পাসওয়ার্ড মিলছে না, দয়া করে পুনরায় টাইপ করুন।':'Password and conformed password can not match. Please type again');
-    //     return false;
-    //   }
-    //   this.alertService.fnLoading(true);
-    //   this.employeeDetails.Id=0;
-    //   this.adminService.fnPostEmployee(this.employeeDetails).subscribe(
-    //     (success: string) => {
-    //       this.alertService.fnLoading(false);
-    //       this.alertService.confirm(this.LT=='bn'?success.replace(/"/g,'')+' আপনি কর্মচারী তালিকায় ফিরে পেতে চান?':success.replace(/"/g,'')+' Do you want to back employee list'
-    //         , () => {
-    //           this.router.navigate(["./admin/employee"]);
-    //         }
-    //         , function () { });
-    //     },
-    //     (error: any) => {
-    //       this.alertService.fnLoading(false);
-    //       this.alertService.alert(this.LT=='bn'?'সিস্টেম নেটওয়ার্ক সমস্যা হওয়ার কারণে কর্মচারী দখানোর জন্য ব্যর্থ হয়েছে।':'System has failerd to connect due to internet problem');
-    //     }
-    //   );
-    // }
+    this.alertService.fnLoading(true);
+    this.storeService.fnPostJobInfo(this.jobDetails).subscribe(
+      (success: any) => {
+        this.alertService.fnLoading(false);
+        this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি পিওএল তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in POL list?'
+          , () => {
+            this.router.navigate(["./store/job"]);
+          }
+          , function () { });
+      },
+      (error: any) => {
+        this.alertService.fnLoading(false);
+        this.alertService.alert(this.LT=='bn'?' সিস্টেম পিওএল তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show POL list.');
+      }
+    );
   }
 
-  fnCreateNewProduct() {
+  fnCreateNewJob() {
     this.IsEdit = false;
     this.jobDetails = new Job();
     this.jobId = 0;
@@ -191,7 +158,29 @@ export class JobDetailsComponent implements OnInit {
         data = data.filter((rc: any) => { if (rc.Status == 'Active') { return true; } else { return false; } }) || [];
         this.configureableModalData = data || [];
 
-        this.modalRef = this.modalService.open(content);
+        this.modalRef = this.modalService.open(content, { size: 'lg' });
+        this.modalRef.result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.alertService.fnLoading(false);
+        });
+      });
+    }
+    else if (this.modalType == "Select Driver") {
+      this.configureableModalTable.tableName = this.LT == 'bn' ? 'চালক নির্বাচন করুন' : 'Select Driver from list.';
+      this.configureableModalTable.tableColDef = [
+        { headerName: this.LT == 'bn' ? 'কর্মচারীর আইডি' : 'Employee Id ', width: '25%', internalName: 'EmployeeId', sort: true, type: "" },
+        { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Name ', width: '25%', internalName: this.LT == 'bn' ? 'NameInBangla' : 'Name', sort: true, type: "" },
+        { headerName: this.LT == 'bn' ? 'মোবাইল নম্বর' : 'Phone Number', width: '25%', internalName: 'PhoneNo', sort: true, type: "" },
+        { headerName: this.LT == 'bn' ? 'ড্রাইভিং লাইসেন্স' : 'Driving LI', width: '25%', internalName: 'Status', sort: true, type: "" },
+      ]
+
+      this.carService.fnGetDrivers(this.userId).then((data: any) => {
+        console.log("data", data);
+        this.alertService.fnLoading(false)
+        this.configureableModalData = data || [];
+
+        this.modalRef = this.modalService.open(content,{size:'lg'});
         this.modalRef.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
@@ -199,28 +188,6 @@ export class JobDetailsComponent implements OnInit {
         });
       });
     }
-    // else if (this.modalType == "Select Driver") {
-    //   this.configureableModalTable.tableName = this.LT == 'bn' ? 'চালক নির্বাচন করুন' : 'Select Driver from list.';
-    //   this.configureableModalTable.tableColDef = [
-    //     { headerName: this.LT == 'bn' ? 'কর্মচারীর আইডি' : 'Employee Id ', width: '25%', internalName: 'EmployeeId', sort: true, type: "" },
-    //     { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Name ', width: '25%', internalName: this.LT=='bn'?'NameInBangla':'Name', sort: true, type: "" },
-    //     { headerName: this.LT == 'bn' ? 'মোবাইল নম্বর' : 'Phone Number', width: '25%', internalName: 'PhoneNo', sort: true, type: "" },
-    //     { headerName: this.LT == 'bn' ? 'ড্রাইভিং লাইসেন্স' : 'Driving LI', width: '25%', internalName: 'Status', sort: true, type: "" },
-    //   ]
-
-    //   this.carService.fnGetDrivers(this.userId).then((data: any) => {
-    //     console.log("data", data);
-    //     this.alertService.fnLoading(false)
-    //     this.configureableModalData = data || [];
-
-    //     this.modalRef = this.modalService.open(content);
-    //     this.modalRef.result.then((result) => {
-    //       this.closeResult = `Closed with: ${result}`;
-    //     }, (reason) => {
-    //       //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    //     });
-    //   });
-    // } 
     else if (this.modalType == "Select Parts") {
       this.configureableModalTable.tableName = this.LT == 'bn' ? 'যন্ত্রাংশের তালিকা' : 'Parts List.';
       this.configureableModalTable.tableColDef = [
@@ -274,21 +241,24 @@ export class JobDetailsComponent implements OnInit {
 
   public partsId: number;
   public partsName: string;
+  public availableParts: string;
   public numberOfParts: number;
   public currentPartsList = [];
-  public jobPartsList=[];
+  public jobPartsList = [];
 
-  fnAddNewParts(){
-    if(this.numberOfParts==0 && this.numberOfParts==null){
-        this.alertService.alert("Please select parts and number of part then try again");
-        return false;
+  fnAddNewParts() {
+    if (this.numberOfParts == 0 && this.numberOfParts == null) {
+      this.alertService.alert("Please select parts and number of part then try again");
+      return false;
 
     }
-   
+
     this.currentPartsList.forEach(element => {
-      if(element.PartsId==this.partsId){
-        this.jobPartsList.push({Id:0,JobId:this.jobId,PartsId:this.partsId,PartsName:element.PartsName,PartsSize:element.PartsSize,UnitPrice:element.UnitPrice,Quantity:this.numberOfParts
-        ,VendorId:0,VendorName:"",Status:'Availale',Balance:Number(element.Balance)-this.numberOfParts});
+      if (element.PartsId == this.partsId) {
+        this.jobPartsList.push({
+          Id: 0, JobId: this.jobId, PartsId: this.partsId, PartsName: element.PartsName, PartsSize: element.PartsSize, UnitPrice: element.UnitPrice, Quantity: this.numberOfParts
+          , VendorId: 0, VendorName: "", Status: 'Availale', Balance: Number(element.Balance) - this.numberOfParts
+        });
       }
     });
 
@@ -301,9 +271,9 @@ export class JobDetailsComponent implements OnInit {
     if (this.modalType == "bus-list") {
       this.jobDetails.CarId = event.record.CarId;
       this.jobDetails.RegistrationNo = event.record.RegistrationNo;
-    } else if (this.modalType == "Select Employee List") {
-      this.jobDetails.JobCreatedBy = event.record.Id;
-      this.jobDetails.JobCreatedByName = event.record.Name;
+    } else if (this.modalType == "Select Driver") {
+      this.jobDetails.DriverId = event.record.DriverId;
+      this.jobDetails.DriverName = event.record.Name;
     } else if (this.modalType == "Select Assigned Mechanic") {
       this.jobDetails.AssignedMacanic = event.record.Id;
       this.jobDetails.AssignedMacanicName = event.record.Name;

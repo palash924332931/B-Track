@@ -25,34 +25,14 @@ export class StoreService {
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));
     }
-
-    fnGetPaySlipAllOnDemand(UserId: number, PaySlipId: number, BookNo: string, Type: string) {
-        var url = ConfigService.baseWebApiUrl + '/GetPaySlipListOnDemand?UserId=' + UserId + '&PaySlipId=' + PaySlipId + '&BookNo=' + BookNo + '&Type=' + Type;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
-        return this.http.get(url, "")
-            .map((response: any) => <any[]>JSON.parse(response._body || []));
+        
+    fnPostJobInfo(data: any) {
+        var url = ConfigService.baseWebApiUrl + '/postJobInfo';
+        return this.http.post(url, data, "")
+            .map((response: Response) => <any>(response));
     }
+   
 
-    fnPostPaySlipAllOnDemand(UserId: number, PaySlipId: number, BookNo: string, Type: string) {
-        var url = ConfigService.baseWebApiUrl + '/GetPaySlipListOnDemandApproval?UserId=' + UserId + '&PaySlipId=' + PaySlipId + '&BookNo=' + BookNo + '&Type=' + Type;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
-        return this.http.get(url, "")
-            .map((response: any) => <any>response);
-    }
-
-    fnGetPaySlipBookWise(UserId: number, BookNo: string) {
-        var url = ConfigService.baseWebApiUrl + '/GetPaySlipBookWise?UserId=' + UserId + "&BookNo=" + BookNo;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
-        return this.http.get(url, "")
-            .map((response: any) => <any[]>JSON.parse(response._body || []));
-    }
-
-    fnGetPaySlip(UserId: number, RootId: number) {
-        var url = ConfigService.baseWebApiUrl + '/GetPayslip?UserId=' + UserId + '&Id=' + RootId;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
-        return this.http.get(url, "")
-            .map((response: any) => <any[]>JSON.parse(response._body || []));
-    }
     //#endregion of Job
 
     //#region Parts
@@ -62,9 +42,6 @@ export class StoreService {
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));
     }
-
-    
-    
     
 
     fnPostPayment(data: any) {
@@ -83,8 +60,8 @@ export class StoreService {
 
 
      //#region POL
-     fnGetPOLLogList(UserId: number) {
-        var url = ConfigService.baseWebApiUrl + '/GetPOLList?UserId=' + UserId;
+     fnGetPOLLogList(UserId: number,POLId:number,FromDate:string,ToDate:string,Type:string) {
+        var url = ConfigService.baseWebApiUrl + '/GetPOLList?UserId=' + UserId+'&POLId='+POLId+'&FromDate='+FromDate+'&ToDate='+ToDate+'&Type='+Type;
         //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));
@@ -97,10 +74,16 @@ export class StoreService {
     }
 
 
-    fnDeletePOLLog(PaymentId: number) {
-        var url = ConfigService.baseWebApiUrl + '/DeletePayment?Id=' + PaymentId;
+    fnDeletePOLLog(UserID:number,POLId: number) {
+        var url = ConfigService.baseWebApiUrl + '/DeletePOL?POLId=' + POLId+'&UserID='+UserID;
         return this.http.get(url, "")
             .map((response: Response) => <any>(response));
     }
-    //#endregion of Payment
+    fnPostPLO(data: any) {
+        var url = ConfigService.baseWebApiUrl + '/postPOL';
+        return this.http.post(url, data, "")
+            .map((response: Response) => <any>(response));
+    }
+
+    //#endregion of POL
 }

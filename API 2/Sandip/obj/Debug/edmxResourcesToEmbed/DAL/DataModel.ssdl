@@ -99,6 +99,10 @@
     <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="prDeletePOLRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="POLId" Type="int" Mode="In" />
+  </Function>
   <Function Name="prDeleteVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="VendorId" Type="int" Mode="In" />
     <Parameter Name="UserId" Type="int" Mode="In" />
@@ -174,7 +178,8 @@
   </Function>
   <Function Name="prGetJobList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
-    <Parameter Name="JobStartDate" Type="date" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
     <Parameter Name="JobId" Type="int" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
@@ -217,9 +222,9 @@
   </Function>
   <Function Name="prGetPol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
-    <Parameter Name="CarId" Type="int" Mode="In" />
-    <Parameter Name="StartDate" Type="date" Mode="In" />
-    <Parameter Name="EndDate" Type="date" Mode="In" />
+    <Parameter Name="POLId" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="prGetReportSectionDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -339,12 +344,43 @@
     <Parameter Name="DateOfBirth" Type="date" Mode="In" />
     <Parameter Name="FatherName" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="prSaveJobInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JobId" Type="int" Mode="In" />
+    <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="JobDate" Type="date" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="JobDescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="JobCompletedDate" Type="date" Mode="In" />
+    <Parameter Name="BusStatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="AssignedMechanic" Type="int" Mode="In" />
+    <Parameter Name="Remark" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Created" Type="date" Mode="In" />
+  </Function>
   <Function Name="prSavePaySlip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PaySlipId" Type="int" Mode="In" />
     <Parameter Name="SlipNo" Type="nvarchar" Mode="In" />
     <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
     <Parameter Name="Amount" Type="decimal" Mode="In" />
     <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSavePOLDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="POLId" Type="int" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="CheckInDate" Type="datetime" Mode="In" />
+    <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="IssuedById" Type="int" Mode="In" />
+    <Parameter Name="CNG" Type="decimal" Mode="In" />
+    <Parameter Name="Diesel" Type="decimal" Mode="In" />
+    <Parameter Name="EngineOil" Type="decimal" Mode="In" />
+    <Parameter Name="PowerOil" Type="decimal" Mode="In" />
+    <Parameter Name="GearOil" Type="decimal" Mode="In" />
+    <Parameter Name="Grease" Type="decimal" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Remark" Type="nvarchar" Mode="In" />
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
     <Parameter Name="Update" Type="datetime" Mode="In" />
   </Function>

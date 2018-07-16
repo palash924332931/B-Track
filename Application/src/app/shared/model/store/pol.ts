@@ -9,12 +9,19 @@ export class POL{
     Remark:string;
     IssuedById:number;
     IssuedByName:string;
-    CNG:number;
-    Diesel:number;
-    EngineOil:number;
-    PowerOil:number;
-    GearOil:number;
-    Grease:number;
+
+    // CNG:number;
+    // Diesel:number;
+    // EngineOil:number;
+    // PowerOil:number;
+    // GearOil:number;
+    // Grease:number;
+    CNG:string;
+    Diesel:string;
+    EngineOil:string;
+    PowerOil:string;
+    GearOil:string;
+    Grease:string;
     AprrovedBy:number;
     AprrovedByName:string;
     CompanyId:string;

@@ -1,7 +1,7 @@
 export class Job{
     JobId :number;
-    JobCreatedBy :number;
-    JobCreatedByName:string;
+    DriverId :number;
+    DriverName:string;
     JobedById:number;
     JobDate:string;
     SMApprovedStatus:string;

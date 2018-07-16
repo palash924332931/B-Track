@@ -340,21 +340,57 @@
       <Parameter Name="UserId" Mode="In" Type="Int32" />
       <Parameter Name="Address" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="prGetJobList" ReturnType="Collection(CarSystemModel.prGetJobList_Result)">
-      <Parameter Name="UserId" Mode="In" Type="Int32" />
-      <Parameter Name="JobStartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="JobId" Mode="In" Type="Int32" />
-      <Parameter Name="Type" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="prGetPartsDetails" ReturnType="Collection(CarSystemModel.prGetPartsDetails_Result)">
       <Parameter Name="UserId" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="prGetPol" ReturnType="Collection(CarSystemModel.prGetPol_Result)">
       <Parameter Name="UserId" Mode="In" Type="Int32" />
-      <Parameter Name="CarId" Mode="In" Type="Int32" />
-      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-      <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+      <Parameter Name="POLId" Mode="In" Type="Int32" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
       <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prSavePOLDetails" ReturnType="Collection(String)">
+      <Parameter Name="POLId" Mode="In" Type="Int32" />
+      <Parameter Name="CarId" Mode="In" Type="Int32" />
+      <Parameter Name="CheckInDate" Mode="In" Type="DateTime" />
+      <Parameter Name="DriverId" Mode="In" Type="Int32" />
+      <Parameter Name="IssuedById" Mode="In" Type="Int32" />
+      <Parameter Name="CNG" Mode="In" Type="Decimal" />
+      <Parameter Name="Diesel" Mode="In" Type="Decimal" />
+      <Parameter Name="EngineOil" Mode="In" Type="Decimal" />
+      <Parameter Name="PowerOil" Mode="In" Type="Decimal" />
+      <Parameter Name="GearOil" Mode="In" Type="Decimal" />
+      <Parameter Name="Grease" Mode="In" Type="Decimal" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="Remark" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="Update" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="prDeletePOLRecord">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="POLId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="prGetJobList" ReturnType="Collection(CarSystemModel.prGetJobList_Result)">
+      <Parameter Name="UserId" Mode="In" Type="Int32" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="JobId" Mode="In" Type="Int32" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prSaveJobInfo" ReturnType="Collection(Int32)">
+      <Parameter Name="JobId" Mode="In" Type="Int32" />
+      <Parameter Name="DriverId" Mode="In" Type="Int32" />
+      <Parameter Name="JobDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CarId" Mode="In" Type="Int32" />
+      <Parameter Name="JobDescription" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="JobCompletedDate" Mode="In" Type="DateTime" />
+      <Parameter Name="BusStatus" Mode="In" Type="String" />
+      <Parameter Name="AssignedMechanic" Mode="In" Type="Int32" />
+      <Parameter Name="Remark" Mode="In" Type="String" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="Created" Mode="In" Type="DateTime" />
     </FunctionImport>
   </EntityContainer>
   <EntityType Name="CarDetail">
@@ -1104,32 +1140,6 @@
     <Property Type="Int32" Name="CreatedBy" Nullable="true" />
     <Property Type="String" Name="Address" Nullable="true" MaxLength="500" />
   </ComplexType>
-  <ComplexType Name="prGetJobList_Result">
-    <Property Type="Int32" Name="JobId" Nullable="false" />
-    <Property Type="Int32" Name="JobCreatedBy" Nullable="true" />
-    <Property Type="String" Name="JobCreatedByName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="JobCreatedByNameBangla" Nullable="true" MaxLength="200" />
-    <Property Type="DateTime" Name="JobDate" Nullable="true" />
-    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
-    <Property Type="Int32" Name="CarId" Nullable="true" />
-    <Property Type="String" Name="JobDescription" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="SMApprovedStatus" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="ManagerApprovedStatus" Nullable="true" MaxLength="100" />
-    <Property Type="DateTime" Name="SMApprovedDate" Nullable="true" />
-    <Property Type="DateTime" Name="ManagerApprovedDate" Nullable="true" />
-    <Property Type="DateTime" Name="JobCompletedDate" Nullable="true" />
-    <Property Type="String" Name="JobCompletedStatus" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="BusStatus" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="FinalApprovalPerson" Nullable="true" MaxLength="100" />
-    <Property Type="Int32" Name="CompanyId" Nullable="true" />
-    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-    <Property Type="DateTime" Name="Created" Nullable="true" />
-    <Property Type="DateTime" Name="Updated" Nullable="true" />
-    <Property Type="Int32" Name="AssignedMechanic" Nullable="true" />
-    <Property Type="String" Name="AssignedMechanicName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="AssignedMechanicNameBangla" Nullable="true" MaxLength="200" />
-  </ComplexType>
   <ComplexType Name="prGetPartsDetails_Result">
     <Property Type="Int32" Name="PartsId" Nullable="false" />
     <Property Type="String" Name="PartsCode" Nullable="true" MaxLength="100" />
@@ -1153,20 +1163,52 @@
     <Property Type="Int32" Name="POLId" Nullable="false" />
     <Property Type="Int32" Name="CarId" Nullable="true" />
     <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
-    <Property Type="DateTime" Name="CheckInDate" Nullable="true" />
+    <Property Type="String" Name="CheckInDate" Nullable="true" MaxLength="10" />
     <Property Type="Int32" Name="DriverId" Nullable="true" />
     <Property Type="String" Name="DriverName" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="DriverNameBangla" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="Remark" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="GivenBy" Nullable="true" MaxLength="50" />
-    <Property Type="Decimal" Name="Gas" Nullable="false" Precision="18" Scale="2" />
-    <Property Type="Decimal" Name="Oil" Nullable="true" Precision="18" Scale="2" />
-    <Property Type="Decimal" Name="Lubricant" Nullable="true" Precision="18" Scale="2" />
-    <Property Type="String" Name="Note" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="Int32" Name="IssuedById" Nullable="true" />
+    <Property Type="String" Name="IssuedByName" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="CNG" Nullable="false" Precision="4" Scale="2" />
+    <Property Type="Decimal" Name="Diesel" Nullable="true" Precision="4" Scale="2" />
+    <Property Type="Decimal" Name="EngineOil" Nullable="true" Precision="4" Scale="2" />
+    <Property Type="Decimal" Name="PowerOil" Nullable="true" Precision="4" Scale="2" />
+    <Property Type="Decimal" Name="GearOil" Nullable="true" Precision="4" Scale="2" />
+    <Property Type="Decimal" Name="Grease" Nullable="true" Precision="4" Scale="2" />
     <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
     <Property Type="Int32" Name="Createdby" Nullable="true" />
     <Property Type="DateTime" Name="Created" Nullable="true" />
     <Property Type="DateTime" Name="Updated" Nullable="true" />
     <Property Type="Int32" Name="CompanyId" Nullable="true" />
+    <Property Type="Int32" Name="AprrovedBy" Nullable="true" />
+    <Property Type="String" Name="ApprovedByName" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="prGetJobList_Result">
+    <Property Type="Int32" Name="JobId" Nullable="false" />
+    <Property Type="Int32" Name="DriverId" Nullable="true" />
+    <Property Type="String" Name="DriverName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DriverNameBangla" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="JobDate" Nullable="true" />
+    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="CarId" Nullable="true" />
+    <Property Type="String" Name="JobDescription" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="SMApprovedStatus" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="ManagerApprovedStatus" Nullable="true" MaxLength="100" />
+    <Property Type="DateTime" Name="SMApprovedDate" Nullable="true" />
+    <Property Type="DateTime" Name="ManagerApprovedDate" Nullable="true" />
+    <Property Type="DateTime" Name="JobCompletedDate" Nullable="true" />
+    <Property Type="String" Name="JobCompletedStatus" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="BusStatus" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FinalApprovalPerson" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="CompanyId" Nullable="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="true" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" />
+    <Property Type="Int32" Name="AssignedMechanic" Nullable="true" />
+    <Property Type="String" Name="AssignedMechanicName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="AssignedMechanicNameBangla" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
   </ComplexType>
 </Schema>

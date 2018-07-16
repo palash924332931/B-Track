@@ -1194,27 +1194,6 @@ namespace Sandip.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveVendorDetails", vendorIdParameter, nameParameter, contactPersonParameter, contactNoParameter, remarkParameter, statusParameter, activityTypeParameter, userIdParameter, addressParameter);
         }
     
-        public virtual ObjectResult<prGetJobList_Result> prGetJobList(Nullable<int> userId, Nullable<System.DateTime> jobStartDate, Nullable<int> jobId, string type)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            var jobStartDateParameter = jobStartDate.HasValue ?
-                new ObjectParameter("JobStartDate", jobStartDate) :
-                new ObjectParameter("JobStartDate", typeof(System.DateTime));
-    
-            var jobIdParameter = jobId.HasValue ?
-                new ObjectParameter("JobId", jobId) :
-                new ObjectParameter("JobId", typeof(int));
-    
-            var typeParameter = type != null ?
-                new ObjectParameter("Type", type) :
-                new ObjectParameter("Type", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetJobList_Result>("prGetJobList", userIdParameter, jobStartDateParameter, jobIdParameter, typeParameter);
-        }
-    
         public virtual ObjectResult<prGetPartsDetails_Result> prGetPartsDetails(Nullable<int> userId)
         {
             var userIdParameter = userId.HasValue ?
@@ -1224,29 +1203,185 @@ namespace Sandip.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetPartsDetails_Result>("prGetPartsDetails", userIdParameter);
         }
     
-        public virtual ObjectResult<prGetPol_Result> prGetPol(Nullable<int> userId, Nullable<int> carId, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, string type)
+        public virtual ObjectResult<prGetPol_Result> prGetPol(Nullable<int> userId, Nullable<int> pOLId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string type)
         {
             var userIdParameter = userId.HasValue ?
                 new ObjectParameter("UserId", userId) :
                 new ObjectParameter("UserId", typeof(int));
     
-            var carIdParameter = carId.HasValue ?
-                new ObjectParameter("CarId", carId) :
-                new ObjectParameter("CarId", typeof(int));
+            var pOLIdParameter = pOLId.HasValue ?
+                new ObjectParameter("POLId", pOLId) :
+                new ObjectParameter("POLId", typeof(int));
     
-            var startDateParameter = startDate.HasValue ?
-                new ObjectParameter("StartDate", startDate) :
-                new ObjectParameter("StartDate", typeof(System.DateTime));
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
     
-            var endDateParameter = endDate.HasValue ?
-                new ObjectParameter("EndDate", endDate) :
-                new ObjectParameter("EndDate", typeof(System.DateTime));
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
     
             var typeParameter = type != null ?
                 new ObjectParameter("Type", type) :
                 new ObjectParameter("Type", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetPol_Result>("prGetPol", userIdParameter, carIdParameter, startDateParameter, endDateParameter, typeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetPol_Result>("prGetPol", userIdParameter, pOLIdParameter, fromDateParameter, toDateParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<string> prSavePOLDetails(Nullable<int> pOLId, Nullable<int> carId, Nullable<System.DateTime> checkInDate, Nullable<int> driverId, Nullable<int> issuedById, Nullable<decimal> cNG, Nullable<decimal> diesel, Nullable<decimal> engineOil, Nullable<decimal> powerOil, Nullable<decimal> gearOil, Nullable<decimal> grease, string status, string remark, Nullable<int> createdBy, Nullable<System.DateTime> update)
+        {
+            var pOLIdParameter = pOLId.HasValue ?
+                new ObjectParameter("POLId", pOLId) :
+                new ObjectParameter("POLId", typeof(int));
+    
+            var carIdParameter = carId.HasValue ?
+                new ObjectParameter("CarId", carId) :
+                new ObjectParameter("CarId", typeof(int));
+    
+            var checkInDateParameter = checkInDate.HasValue ?
+                new ObjectParameter("CheckInDate", checkInDate) :
+                new ObjectParameter("CheckInDate", typeof(System.DateTime));
+    
+            var driverIdParameter = driverId.HasValue ?
+                new ObjectParameter("DriverId", driverId) :
+                new ObjectParameter("DriverId", typeof(int));
+    
+            var issuedByIdParameter = issuedById.HasValue ?
+                new ObjectParameter("IssuedById", issuedById) :
+                new ObjectParameter("IssuedById", typeof(int));
+    
+            var cNGParameter = cNG.HasValue ?
+                new ObjectParameter("CNG", cNG) :
+                new ObjectParameter("CNG", typeof(decimal));
+    
+            var dieselParameter = diesel.HasValue ?
+                new ObjectParameter("Diesel", diesel) :
+                new ObjectParameter("Diesel", typeof(decimal));
+    
+            var engineOilParameter = engineOil.HasValue ?
+                new ObjectParameter("EngineOil", engineOil) :
+                new ObjectParameter("EngineOil", typeof(decimal));
+    
+            var powerOilParameter = powerOil.HasValue ?
+                new ObjectParameter("PowerOil", powerOil) :
+                new ObjectParameter("PowerOil", typeof(decimal));
+    
+            var gearOilParameter = gearOil.HasValue ?
+                new ObjectParameter("GearOil", gearOil) :
+                new ObjectParameter("GearOil", typeof(decimal));
+    
+            var greaseParameter = grease.HasValue ?
+                new ObjectParameter("Grease", grease) :
+                new ObjectParameter("Grease", typeof(decimal));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var remarkParameter = remark != null ?
+                new ObjectParameter("Remark", remark) :
+                new ObjectParameter("Remark", typeof(string));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updateParameter = update.HasValue ?
+                new ObjectParameter("Update", update) :
+                new ObjectParameter("Update", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSavePOLDetails", pOLIdParameter, carIdParameter, checkInDateParameter, driverIdParameter, issuedByIdParameter, cNGParameter, dieselParameter, engineOilParameter, powerOilParameter, gearOilParameter, greaseParameter, statusParameter, remarkParameter, createdByParameter, updateParameter);
+        }
+    
+        public virtual int prDeletePOLRecord(Nullable<int> userID, Nullable<int> pOLId)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var pOLIdParameter = pOLId.HasValue ?
+                new ObjectParameter("POLId", pOLId) :
+                new ObjectParameter("POLId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prDeletePOLRecord", userIDParameter, pOLIdParameter);
+        }
+    
+        public virtual ObjectResult<prGetJobList_Result> prGetJobList(Nullable<int> userId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> jobId, string type)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var jobIdParameter = jobId.HasValue ?
+                new ObjectParameter("JobId", jobId) :
+                new ObjectParameter("JobId", typeof(int));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetJobList_Result>("prGetJobList", userIdParameter, fromDateParameter, toDateParameter, jobIdParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> prSaveJobInfo(Nullable<int> jobId, Nullable<int> driverId, Nullable<System.DateTime> jobDate, Nullable<int> carId, string jobDescription, string status, Nullable<System.DateTime> jobCompletedDate, string busStatus, Nullable<int> assignedMechanic, string remark, Nullable<int> createdBy, Nullable<System.DateTime> created)
+        {
+            var jobIdParameter = jobId.HasValue ?
+                new ObjectParameter("JobId", jobId) :
+                new ObjectParameter("JobId", typeof(int));
+    
+            var driverIdParameter = driverId.HasValue ?
+                new ObjectParameter("DriverId", driverId) :
+                new ObjectParameter("DriverId", typeof(int));
+    
+            var jobDateParameter = jobDate.HasValue ?
+                new ObjectParameter("JobDate", jobDate) :
+                new ObjectParameter("JobDate", typeof(System.DateTime));
+    
+            var carIdParameter = carId.HasValue ?
+                new ObjectParameter("CarId", carId) :
+                new ObjectParameter("CarId", typeof(int));
+    
+            var jobDescriptionParameter = jobDescription != null ?
+                new ObjectParameter("JobDescription", jobDescription) :
+                new ObjectParameter("JobDescription", typeof(string));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var jobCompletedDateParameter = jobCompletedDate.HasValue ?
+                new ObjectParameter("JobCompletedDate", jobCompletedDate) :
+                new ObjectParameter("JobCompletedDate", typeof(System.DateTime));
+    
+            var busStatusParameter = busStatus != null ?
+                new ObjectParameter("BusStatus", busStatus) :
+                new ObjectParameter("BusStatus", typeof(string));
+    
+            var assignedMechanicParameter = assignedMechanic.HasValue ?
+                new ObjectParameter("AssignedMechanic", assignedMechanic) :
+                new ObjectParameter("AssignedMechanic", typeof(int));
+    
+            var remarkParameter = remark != null ?
+                new ObjectParameter("Remark", remark) :
+                new ObjectParameter("Remark", typeof(string));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var createdParameter = created.HasValue ?
+                new ObjectParameter("Created", created) :
+                new ObjectParameter("Created", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prSaveJobInfo", jobIdParameter, driverIdParameter, jobDateParameter, carIdParameter, jobDescriptionParameter, statusParameter, jobCompletedDateParameter, busStatusParameter, assignedMechanicParameter, remarkParameter, createdByParameter, createdParameter);
         }
     }
 }

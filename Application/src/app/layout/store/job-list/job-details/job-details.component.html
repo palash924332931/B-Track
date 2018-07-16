@@ -15,7 +15,7 @@
 
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বাস নং':'Bus Reg. No'}}  <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'bus-list')"></i></label>
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ির রেজিঃ নং':'Car Reg. No'}}  <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'bus-list')"></i></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" disabled id="userId" [(ngModel)]="jobDetails.RegistrationNo">
                         </div>
@@ -40,9 +40,9 @@
 
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সূচনাকারী':'Created By'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Employee List')"></i></label>
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের নাম':'Driver Name'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Driver')"></i></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" disabled id="RoleName" [(ngModel)]="jobDetails.JobCreatedByName">
+                            <input type="text" class="form-control" disabled id="RoleName" [(ngModel)]="jobDetails.DriverName">
                         </div>
                     </div>
                 </div>
@@ -50,13 +50,11 @@
             <div class="row">
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="role" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'বাসের অবস্থা':'Bus Status'}} </label>
+                        <label for="role" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ির অবস্থা':'Car Status'}} </label>
                         <div class="col-sm-8">
                             <select class="form-control" name="status" [(ngModel)]="jobDetails.BusStatus">
-                                <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
-                                <option value="Repair">{{LT=='bn'?'মেরামত':'Repair'}}</option>  
-                                <option value="Heavy Repair">{{LT=='bn'?'ভারী মেরামত':'Heavy Repair'}}</option>  
-                                <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
+                                <option value="Light Repair">{{LT=='bn'?'হালকা মেরামত':'Light Repair'}}</option>  
+                                <option value="Heavy Repair">{{LT=='bn'?'ভারী মেরামত':'Heavy Repair'}}</option>                        
                             </select>
                         </div>
                     </div>
@@ -64,7 +62,7 @@
 
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মেরামতকারীর নাম':'Assigned Mechanic'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Assigned Mechanic')"></i></label>
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'কারিগরের নাম':'Assigned Mechanic'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Assigned Mechanic')"></i></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" disabled id="RoleName" [(ngModel)]="jobDetails.AssignedMacanicName">
                         </div>
@@ -91,12 +89,13 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" *ngIf="IsEdit==true">
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'জবের অবস্থা':'Job Status'}}</label>
                         <div class="col-sm-8">
-                            <select class="form-control" name="status" [(ngModel)]="jobDetails.Status">
+                            <select class="form-control" disabled name="status" [(ngModel)]="jobDetails.Status">
+                                <option selected value="In Progress">{{LT=='bn'?'কাজ চলছে':'In Progress'}}</option>
                                 <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
                                 <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
                             </select>
@@ -130,7 +129,7 @@
                                 <input type="text" class="form-control" disabled id="userId" [(ngModel)]="partsName">
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" class="form-control" disabled id="userId" [(ngModel)]="PartsName">
+                                <input type="text" class="form-control" disabled id="userId" [(ngModel)]="availableParts">
                             </div>
                         </div>
                     </div>
@@ -143,7 +142,7 @@
                         </div>
                     </div>
                     <div class="col-sm-2" style="text-align:right">
-                        <button type="button" class="btn btn-outline-success" (click)="fnAddNewParts()"><i class="fa fa-plus" style="font-size:18px"></i>{{LT=='bn'?' পার্টস ':' Parts'}}</button>
+                        <button type="button" class="btn btn-outline-success" (click)="fnAddNewParts()"><i class="fa fa-plus" style="font-size:18px"></i>{{LT=='bn'?' যন্ত্রাংশ ':' Parts'}}</button>
                     </div>
                 </div>
                 <div class="col col-lg-12">

@@ -16,20 +16,25 @@ namespace Sandip.DAL
         public int POLId { get; set; }
         public Nullable<int> CarId { get; set; }
         public string RegistrationNo { get; set; }
-        public Nullable<System.DateTime> CheckInDate { get; set; }
+        public string CheckInDate { get; set; }
         public Nullable<int> DriverId { get; set; }
         public string DriverName { get; set; }
         public string DriverNameBangla { get; set; }
         public string Remark { get; set; }
-        public string GivenBy { get; set; }
-        public decimal Gas { get; set; }
-        public Nullable<decimal> Oil { get; set; }
-        public Nullable<decimal> Lubricant { get; set; }
-        public string Note { get; set; }
+        public Nullable<int> IssuedById { get; set; }
+        public string IssuedByName { get; set; }
+        public decimal CNG { get; set; }
+        public Nullable<decimal> Diesel { get; set; }
+        public Nullable<decimal> EngineOil { get; set; }
+        public Nullable<decimal> PowerOil { get; set; }
+        public Nullable<decimal> GearOil { get; set; }
+        public Nullable<decimal> Grease { get; set; }
         public string Status { get; set; }
         public Nullable<int> Createdby { get; set; }
         public Nullable<System.DateTime> Created { get; set; }
         public Nullable<System.DateTime> Updated { get; set; }
         public Nullable<int> CompanyId { get; set; }
+        public Nullable<int> AprrovedBy { get; set; }
+        public string ApprovedByName { get; set; }
     }
 }

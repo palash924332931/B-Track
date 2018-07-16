@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { AlertService } from '../../../shared/modules/alert/alert.service'
-import { CarService, CommonService, ConfigService,CustomNgbDateParserFormatter,StoreService } from '../../../shared/services'
+import { CommonService, ConfigService,CustomNgbDateParserFormatter,StoreService } from '../../../shared/services'
 import { DailyCarHistory } from '../../../shared/model/car'
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -24,7 +24,7 @@ export class PolComponent implements OnInit {
   public toDateSelected: any=null;
   public fromDate: string=null;
   public toDate: string=null;
-  constructor(private alertService: AlertService, private carService: CarService,private ngbDateParserFormatter:NgbDateParserFormatter, private router: Router,private configService:ConfigService,private customNgbDateParserFormatter:CustomNgbDateParserFormatter,private storeService:StoreService) { }
+  constructor(private alertService: AlertService,private ngbDateParserFormatter:NgbDateParserFormatter, private router: Router,private configService:ConfigService,private customNgbDateParserFormatter:CustomNgbDateParserFormatter,private storeService:StoreService) { }
 
 
   ngOnInit() {
@@ -33,12 +33,12 @@ export class PolComponent implements OnInit {
     this.toDate = this.configService.getCurrentDate();
     this.fromDateSelected = this.customNgbDateParserFormatter.parse(this.fromDate || null);
     this.toDateSelected = this.customNgbDateParserFormatter.parse(this.toDate || null);
-    this.fnGetDilyCarLogList();
+    this.fnGetPOLDetails();
   }
 
-  fnGetDilyCarLogList() {
+  fnGetPOLDetails() {
     this.alertService.fnLoading(true);
-    this.storeService.fnGetPOLLogList(this.userId).subscribe(      
+    this.storeService.fnGetPOLLogList(this.userId,0,this.fromDate,this.toDate,"All").subscribe(      
       (data: any[]) => {
         this.carLogTableBind.tableName= this.LT == 'bn' ? this.fromDate+ ' থেকে '+this.toDate+' তারিখের গাড়ীর লগের তালিকা' : 'Bus Log List from '+this.fromDate+' to '+this.toDate;
         this.carLogList = data || [];
@@ -54,7 +54,7 @@ export class PolComponent implements OnInit {
       },
       (error: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT == 'bn' ? 'নেটওয়ার্ক সমস্যার কারনে সিস্টেমটি গাড়ীর লগের তালিকা দেখাতে ব্যর্থ হয়েছে' : 'System has failed to show bus log list because of network problem.');
+        this.alertService.alert(this.LT == 'bn' ? 'সিস্টেম গাড়ীর লগের তালিকা দেখাতে ব্যর্থ হয়েছে' : 'System has failed to show bus log list because of network problem.');
       }
     );
   }
@@ -81,19 +81,19 @@ export class PolComponent implements OnInit {
       if (data.NoOfPayslipUsedOrApproved != 'false') {
         this.alertService.confirm(this.LT == 'bn' ? 'আপনি কি <b>' + data.RegistrationNo + '</b> গাড়ীটি অনুমোদনের জন্য পাঠাতে চান?' : 'Do you want to send  <b>' + data.RegistrationNo + ' </b>bus for approval?',
           () => {
-            this.carService.fnUpdateDilyCarLog(this.userId, data.CarLogId, 'Send for Approval').then(
-              (success: any) => {
-                this.alertService.fnLoading(false);
-                this.alertService.alert(success._body.replace(/"/g, ''),
-                  () => {
-                    this.fnGetDilyCarLogList();
-                  });
-              },
-              (error: any) => {
-                this.alertService.fnLoading(false);
-                this.alertService.alert("System has failed to execute your request. Please try again.");
-              }
-            );
+            // this.carService.fnUpdateDilyCarLog(this.userId, data.CarLogId, 'Send for Approval').then(
+            //   (success: any) => {
+            //     this.alertService.fnLoading(false);
+            //     this.alertService.alert(success._body.replace(/"/g, ''),
+            //       () => {
+            //         this.fnGetPOLDetails();
+            //       });
+            //   },
+            //   (error: any) => {
+            //     this.alertService.fnLoading(false);
+            //     this.alertService.alert("System has failed to execute your request. Please try again.");
+            //   }
+            // );
           },
           () => { });
       }
@@ -116,13 +116,13 @@ export class PolComponent implements OnInit {
     if (event.action == "delete-item") {
       this.alertService.confirm(this.LT == 'bn' ? 'আপনি কি <b> ' + data.RegistrationNo + '</b> গাড়ীর লগটি মুছে ফেলতে চান?' : 'Do you want to delete bus log <b>' + data.RegistrationNo + '</b>?',
         () => {
-          this.carService.fnDeleteCarLog(data.CarLogId).subscribe(
+          this.storeService.fnDeletePOLLog(this.userId,data.POLId).subscribe(
             (success: any) => {
               this.alertService.alert(success);
-              this.fnGetDilyCarLogList();
+              this.fnGetPOLDetails();
             },
             (error: any) => {
-              this.alertService.alert(this.LT == 'bn' ? 'সিস্টেমটি গাড়ীর তথ্যটি মুছে ফেলতে ব্যর্থ হয়েছে। আপনি পুনরায় চেষ্টা করুন।' : 'System has failed to delete employee information. Please try again.');
+              this.alertService.alert(this.LT == 'bn' ? 'সিস্টেম তথ্যটি মুছে ফেলতে ব্যর্থ হয়েছে। আপনি পুনরায় চেষ্টা করুন।' : 'System has failed to delete information. Please try again.');
             }
           );
         }
@@ -130,7 +130,7 @@ export class PolComponent implements OnInit {
     } else if (event.action == "edit-item") {
       this.alertService.confirm(this.LT == 'bn' ? 'আপনি কি <b>' + data.RegistrationNo + '</b> গাড়ীর লগটি সম্পাদনা করতে চান?' : 'Do you want to edit bus log' + data.RegistrationNo + '?',
         () => {
-          this.router.navigate(["./car/car-log/" + data.CarLogId]);
+          this.router.navigate(["./store/pol/" + data.POLId]);
         }
         , function () { })
     }
@@ -143,14 +143,14 @@ export class PolComponent implements OnInit {
     tableColDef: [
       { headerName: this.LT == 'bn' ? ' তাং' : 'POL Date', width: '10%', internalName: 'CheckInDate', sort: true, type: "" },
      { headerName: this.LT == 'bn' ? 'রেজিঃ নং' : 'Bus Reg. No', width: '10%', internalName: 'RegistrationNo', sort: true, type: "" },
-     { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Driver Name ', width: '20%', internalName: this.LT=='bn'?'DriverNameBangla':'DriverName', sort: true, type: "" },
-     { headerName: this.LT == 'bn' ? 'গ্যাস' : 'Gas', width: '10%', internalName: 'Gas', sort: true, type: "" },
-     { headerName: this.LT == 'bn' ? 'তেল' : 'Oil', width: '10%', internalName: 'Oil', sort: true, type: "" },
-     { headerName: this.LT == 'bn' ? 'লুব্রিকেন্ট' : 'Lubricant', width: '10%', internalName: 'Lubricant', sort: true, type: "" },
-     { headerName: this.LT == 'bn' ? 'নোট' : 'Note', width: '20%', internalName: 'Note', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'অনুমোদন' : 'Given By', width: '10%', internalName: 'GivenBy', sort: true, type: "custom-button", onClick: 'true', },
-      //{ headerName: this.LT=='bn'?'প্রস্থানকারকের নাম':'Departure By', width: '15%', internalName: 'CheckInByName', sort: true, type: "" },
-      //{ headerName: this.LT=='bn'?'প্রবেশকারকের নাম':'Arrival By', width: '15%', internalName: 'CheckOutByName', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Driver Name ', width: '10%', internalName: this.LT=='bn'?'DriverNameBangla':'DriverName', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? 'সিএনজি' : 'CNG', width: '8%', internalName: 'CNG', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? 'ডিজেল' : 'Diesel', width: '8%', internalName: 'Diesel', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? 'ইঞ্জিনের তেল' : 'Engine Oil', width: '10%', internalName: 'EngineOil', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? 'পাওয়ার তেল' : 'PowerOil', width: '10%', internalName: 'PowerOil', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? 'গিয়ার তেল' : 'GearOil', width: '10%', internalName: 'GearOil', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? 'গ্রীস' : 'Grease', width: '10%', internalName: 'Grease', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'অনুমোদন' : 'Given By', width: '14%', internalName: 'GivenBy', sort: true, type: "custom-button", onClick: 'true', },
 
     ],
     enabledSearch: true,

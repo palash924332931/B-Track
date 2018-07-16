@@ -14,9 +14,9 @@ namespace Sandip.DAL
     public partial class prGetJobList_Result
     {
         public int JobId { get; set; }
-        public Nullable<int> JobCreatedBy { get; set; }
-        public string JobCreatedByName { get; set; }
-        public string JobCreatedByNameBangla { get; set; }
+        public Nullable<int> DriverId { get; set; }
+        public string DriverName { get; set; }
+        public string DriverNameBangla { get; set; }
         public Nullable<System.DateTime> JobDate { get; set; }
         public string RegistrationNo { get; set; }
         public Nullable<int> CarId { get; set; }
@@ -37,5 +37,6 @@ namespace Sandip.DAL
         public Nullable<int> AssignedMechanic { get; set; }
         public string AssignedMechanicName { get; set; }
         public string AssignedMechanicNameBangla { get; set; }
+        public string Remark { get; set; }
     }
 }

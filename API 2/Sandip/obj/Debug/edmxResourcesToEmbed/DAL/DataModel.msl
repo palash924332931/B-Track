@@ -885,36 +885,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="prSaveVendorDetails" FunctionName="CarSystemModel.Store.prSaveVendorDetails" />
-    <FunctionImportMapping FunctionImportName="prGetJobList" FunctionName="CarSystemModel.Store.prGetJobList">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="CarSystemModel.prGetJobList_Result">
-          <ScalarProperty Name="JobId" ColumnName="JobId" />
-          <ScalarProperty Name="JobCreatedBy" ColumnName="JobCreatedBy" />
-          <ScalarProperty Name="JobCreatedByName" ColumnName="JobCreatedByName" />
-          <ScalarProperty Name="JobCreatedByNameBangla" ColumnName="JobCreatedByNameBangla" />
-          <ScalarProperty Name="JobDate" ColumnName="JobDate" />
-          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
-          <ScalarProperty Name="CarId" ColumnName="CarId" />
-          <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
-          <ScalarProperty Name="SMApprovedStatus" ColumnName="SMApprovedStatus" />
-          <ScalarProperty Name="ManagerApprovedStatus" ColumnName="ManagerApprovedStatus" />
-          <ScalarProperty Name="SMApprovedDate" ColumnName="SMApprovedDate" />
-          <ScalarProperty Name="ManagerApprovedDate" ColumnName="ManagerApprovedDate" />
-          <ScalarProperty Name="JobCompletedDate" ColumnName="JobCompletedDate" />
-          <ScalarProperty Name="JobCompletedStatus" ColumnName="JobCompletedStatus" />
-          <ScalarProperty Name="BusStatus" ColumnName="BusStatus" />
-          <ScalarProperty Name="FinalApprovalPerson" ColumnName="FinalApprovalPerson" />
-          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-          <ScalarProperty Name="Created" ColumnName="Created" />
-          <ScalarProperty Name="Updated" ColumnName="Updated" />
-          <ScalarProperty Name="AssignedMechanic" ColumnName="AssignedMechanic" />
-          <ScalarProperty Name="AssignedMechanicName" ColumnName="AssignedMechanicName" />
-          <ScalarProperty Name="AssignedMechanicNameBangla" ColumnName="AssignedMechanicNameBangla" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="prGetPartsDetails" FunctionName="CarSystemModel.Store.prGetPartsDetails">
       <ResultMapping>
         <ComplexTypeMapping TypeName="CarSystemModel.prGetPartsDetails_Result">
@@ -949,18 +919,57 @@
           <ScalarProperty Name="DriverName" ColumnName="DriverName" />
           <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
           <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="GivenBy" ColumnName="GivenBy" />
-          <ScalarProperty Name="Gas" ColumnName="Gas" />
-          <ScalarProperty Name="Oil" ColumnName="Oil" />
-          <ScalarProperty Name="Lubricant" ColumnName="Lubricant" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="IssuedById" ColumnName="IssuedById" />
+          <ScalarProperty Name="IssuedByName" ColumnName="IssuedByName" />
+          <ScalarProperty Name="CNG" ColumnName="CNG" />
+          <ScalarProperty Name="Diesel" ColumnName="Diesel" />
+          <ScalarProperty Name="EngineOil" ColumnName="EngineOil" />
+          <ScalarProperty Name="PowerOil" ColumnName="PowerOil" />
+          <ScalarProperty Name="GearOil" ColumnName="GearOil" />
+          <ScalarProperty Name="Grease" ColumnName="Grease" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Createdby" ColumnName="Createdby" />
           <ScalarProperty Name="Created" ColumnName="Created" />
           <ScalarProperty Name="Updated" ColumnName="Updated" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="AprrovedBy" ColumnName="AprrovedBy" />
+          <ScalarProperty Name="ApprovedByName" ColumnName="ApprovedByName" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSavePOLDetails" FunctionName="CarSystemModel.Store.prSavePOLDetails" />
+    <FunctionImportMapping FunctionImportName="prDeletePOLRecord" FunctionName="CarSystemModel.Store.prDeletePOLRecord" />
+    <FunctionImportMapping FunctionImportName="prGetJobList" FunctionName="CarSystemModel.Store.prGetJobList">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetJobList_Result">
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="SMApprovedStatus" ColumnName="SMApprovedStatus" />
+          <ScalarProperty Name="ManagerApprovedStatus" ColumnName="ManagerApprovedStatus" />
+          <ScalarProperty Name="SMApprovedDate" ColumnName="SMApprovedDate" />
+          <ScalarProperty Name="ManagerApprovedDate" ColumnName="ManagerApprovedDate" />
+          <ScalarProperty Name="JobCompletedDate" ColumnName="JobCompletedDate" />
+          <ScalarProperty Name="JobCompletedStatus" ColumnName="JobCompletedStatus" />
+          <ScalarProperty Name="BusStatus" ColumnName="BusStatus" />
+          <ScalarProperty Name="FinalApprovalPerson" ColumnName="FinalApprovalPerson" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="AssignedMechanic" ColumnName="AssignedMechanic" />
+          <ScalarProperty Name="AssignedMechanicName" ColumnName="AssignedMechanicName" />
+          <ScalarProperty Name="AssignedMechanicNameBangla" ColumnName="AssignedMechanicNameBangla" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prSaveJobInfo" FunctionName="CarSystemModel.Store.prSaveJobInfo" />
   </EntityContainerMapping>
 </Mapping>

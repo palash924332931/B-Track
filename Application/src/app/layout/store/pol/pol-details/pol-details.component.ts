@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../../router.animations';
 import { AlertService } from '../../../../shared/modules/alert/alert.service'
-import { CarService, AdminService, CommonService, CustomNgbDateParserFormatter, ConfigService } from '../../../../shared/services'
+import { CarService, AdminService, CommonService, CustomNgbDateParserFormatter, ConfigService,StoreService } from '../../../../shared/services'
 import { POL } from '../../../../shared/model/store'
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -28,7 +28,7 @@ export class PolDetailsComponent implements OnInit {
   public userId = 1;
   private modalRef: NgbModalRef;
   public closeResult: string;
-  constructor(private carService: CarService, private configService: ConfigService, private alertService: AlertService, private ngbDateParserFormatter: NgbDateParserFormatter, private customNgbDateParserFormatter: CustomNgbDateParserFormatter, private router: Router, private route: ActivatedRoute, private modalService: NgbModal, private adminService: AdminService) { }
+  constructor(private carService: CarService, private configService: ConfigService, private alertService: AlertService, private ngbDateParserFormatter: NgbDateParserFormatter, private customNgbDateParserFormatter: CustomNgbDateParserFormatter, private router: Router, private route: ActivatedRoute, private modalService: NgbModal, private adminService: AdminService, private storeService:StoreService) { }
 
   ngOnInit() {
     this.userId = this.UserInfo[0].Id;
@@ -48,7 +48,7 @@ export class PolDetailsComponent implements OnInit {
 
   fnGetPOLDetails() {
     this.alertService.fnLoading(true);
-    this.carService.fnGetBus(this.userId, this.polId).then(
+    this.storeService.fnGetPOLLogList(this.userId,this.polId,null,null,"Single").subscribe(
       (data: POL[]) => {
         this.polDetails = data[0];
         this.checkInDate = this.customNgbDateParserFormatter.parse(this.polDetails.CheckInDate || null);
@@ -63,11 +63,12 @@ export class PolDetailsComponent implements OnInit {
 
   fnSavePOLDetails() {
     //to check group name;
-    if (this.polDetails.RegistrationNo == null || this.polDetails.RegistrationNo == "") {
+    debugger
+    if (this.polDetails.CarId == null || this.polDetails.RegistrationNo == "") {
       this.alertService.alert(this.LT=='bn'?'নিবন্ধন নম্বর প্রয়োজন। দয়া করে আবার এই ক্ষেত্রটি পর্যালোচনা করুন।':'Registration no. is required. Please review this field again.');
       return false;
     }else if (this.polDetails.DriverId == null || this.polDetails.DriverName == "") {
-      this.alertService.alert(this.LT=='bn'?'গাড়ীর পছন্দ করুন, তারপর তথ্য সংরক্ষণ করুন।':'Car is required to save this information. Please review this field again.');
+      this.alertService.alert(this.LT=='bn'?'চালক পছন্দ করুন, তারপর তথ্য সংরক্ষণ করুন।':'Car is required to save this information. Please review this field again.');
       return false;
     }else if (this.polDetails.CheckInDate == null || this.polDetails.CheckInDate == "") {
       this.alertService.alert(this.LT=='bn'?'ইস্যুর তারিখ দিন, তারপর তথ্য সংরক্ষণ করুন।':'Issue Date is required to save this information. Please review this field again.');
@@ -80,11 +81,18 @@ export class PolDetailsComponent implements OnInit {
     if (this.IsEditItem) {
 
     } else {
-      this.polDetails.CarId=0;
+      this.polDetails.POLId=0;
     }
+    
+    this.polDetails.CNG=Number(this.polDetails.CNG||0).toFixed(2).toString();
+    this.polDetails.Diesel=Number(this.polDetails.Diesel||0).toFixed(2).toString();
+    this.polDetails.EngineOil=Number(this.polDetails.EngineOil||0).toFixed(2).toString();
+    this.polDetails.PowerOil=Number(this.polDetails.PowerOil||0).toFixed(2).toString();
+    this.polDetails.GearOil=Number(this.polDetails.GearOil||0).toFixed(2).toString();
+    this.polDetails.Grease=Number(this.polDetails.Grease||0).toFixed(2).toString();
 
     this.alertService.fnLoading(true);
-      this.carService.fnPostBus(this.polDetails).subscribe(
+      this.storeService.fnPostPLO(this.polDetails).subscribe(
         (success: any) => {
           this.alertService.fnLoading(false);
           this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি পিওএল তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in POL list?'
@@ -95,7 +103,7 @@ export class PolDetailsComponent implements OnInit {
         },
         (error: any) => {
           this.alertService.fnLoading(false);
-          this.alertService.alert(this.LT=='bn'?'নেটওয়ার্ক সমস্যাটির কারণে সিস্টেম পিওএল তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show POL list because of network problem.');
+          this.alertService.alert(this.LT=='bn'?' সিস্টেম পিওএল তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show POL list.');
         }
       );
   }
@@ -139,6 +147,7 @@ export class PolDetailsComponent implements OnInit {
         this.modalRef.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
+          this.alertService.fnLoading(false)
           //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
       });
@@ -160,11 +169,12 @@ export class PolDetailsComponent implements OnInit {
         this.modalRef.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
+          this.alertService.fnLoading(false)
           //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
       });
     } else if (this.modalType == "User selection") {
-      this.configureableModalTable.tableName = this.LT == 'bn' ? 'দস্তখত্কারী নির্বাচন করুন' : 'Select Authorized Person.';
+      this.configureableModalTable.tableName = this.LT == 'bn' ? 'ইস্যুকারী নির্বাচন করুন' : 'Select Authorized Person.';
       this.configureableModalTable.tableColDef = [
         { headerName: this.LT == 'bn' ? 'কর্মচারীর আইডি' : 'Employee Id ', width: '25%', internalName: 'EmployeeId', sort: true, type: "" },
         { headerName: this.LT == 'bn' ? 'নাম ' : 'Name ', width: '25%', internalName: 'Name', sort: true, type: "" },
@@ -180,6 +190,7 @@ export class PolDetailsComponent implements OnInit {
         this.modalRef.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
+          this.alertService.fnLoading(false)
           //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
       }, (error: any) => {
@@ -206,6 +217,7 @@ export class PolDetailsComponent implements OnInit {
         this.modalRef.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
+          this.alertService.fnLoading(false)
           //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
       }, (error: any) => {
@@ -223,7 +235,7 @@ export class PolDetailsComponent implements OnInit {
       this.polDetails.CarId = event.record.CarId;
       this.polDetails.RegistrationNo = event.record.RegistrationNo;
     } else if (this.modalType == "Driver selection") {
-      this.polDetails.DriverId = event.record.DrivarId;
+      this.polDetails.DriverId = event.record.DriverId;
       this.polDetails.DriverName = event.record.Name;
     } else if (this.modalType == "User selection") {
       this.polDetails.IssuedById = event.record.Id;
@@ -231,7 +243,7 @@ export class PolDetailsComponent implements OnInit {
     } else if (this.modalType == "Select Previous Bus Record") {
       this.polDetails.CarId = event.record.CarId;
       this.polDetails.RegistrationNo = event.record.RegistrationNo;
-      this.polDetails.DriverId = event.record.DrivarId;
+      this.polDetails.DriverId = event.record.DriverId;
       this.polDetails.DriverName = event.record.DriverName;
     }
     this.modalRef.close();

@@ -104,6 +104,10 @@
           <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
           <Parameter Name="Type" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="prDeletePOLRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="POLId" Type="int" Mode="In" />
+        </Function>
         <Function Name="prDeleteVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="VendorId" Type="int" Mode="In" />
           <Parameter Name="UserId" Type="int" Mode="In" />
@@ -179,7 +183,8 @@
         </Function>
         <Function Name="prGetJobList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
-          <Parameter Name="JobStartDate" Type="date" Mode="In" />
+          <Parameter Name="FromDate" Type="date" Mode="In" />
+          <Parameter Name="ToDate" Type="date" Mode="In" />
           <Parameter Name="JobId" Type="int" Mode="In" />
           <Parameter Name="Type" Type="nvarchar" Mode="In" />
         </Function>
@@ -222,9 +227,9 @@
         </Function>
         <Function Name="prGetPol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
-          <Parameter Name="CarId" Type="int" Mode="In" />
-          <Parameter Name="StartDate" Type="date" Mode="In" />
-          <Parameter Name="EndDate" Type="date" Mode="In" />
+          <Parameter Name="POLId" Type="int" Mode="In" />
+          <Parameter Name="FromDate" Type="date" Mode="In" />
+          <Parameter Name="ToDate" Type="date" Mode="In" />
           <Parameter Name="Type" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="prGetReportSectionDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -344,12 +349,43 @@
           <Parameter Name="DateOfBirth" Type="date" Mode="In" />
           <Parameter Name="FatherName" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="prSaveJobInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobId" Type="int" Mode="In" />
+          <Parameter Name="DriverId" Type="int" Mode="In" />
+          <Parameter Name="JobDate" Type="date" Mode="In" />
+          <Parameter Name="CarId" Type="int" Mode="In" />
+          <Parameter Name="JobDescription" Type="nvarchar" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="JobCompletedDate" Type="date" Mode="In" />
+          <Parameter Name="BusStatus" Type="nvarchar" Mode="In" />
+          <Parameter Name="AssignedMechanic" Type="int" Mode="In" />
+          <Parameter Name="Remark" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="Created" Type="date" Mode="In" />
+        </Function>
         <Function Name="prSavePaySlip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaySlipId" Type="int" Mode="In" />
           <Parameter Name="SlipNo" Type="nvarchar" Mode="In" />
           <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
           <Parameter Name="Amount" Type="decimal" Mode="In" />
           <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+          <Parameter Name="Update" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="prSavePOLDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="POLId" Type="int" Mode="In" />
+          <Parameter Name="CarId" Type="int" Mode="In" />
+          <Parameter Name="CheckInDate" Type="datetime" Mode="In" />
+          <Parameter Name="DriverId" Type="int" Mode="In" />
+          <Parameter Name="IssuedById" Type="int" Mode="In" />
+          <Parameter Name="CNG" Type="decimal" Mode="In" />
+          <Parameter Name="Diesel" Type="decimal" Mode="In" />
+          <Parameter Name="EngineOil" Type="decimal" Mode="In" />
+          <Parameter Name="PowerOil" Type="decimal" Mode="In" />
+          <Parameter Name="GearOil" Type="decimal" Mode="In" />
+          <Parameter Name="Grease" Type="decimal" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Remark" Type="nvarchar" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
           <Parameter Name="Update" Type="datetime" Mode="In" />
         </Function>
@@ -786,21 +822,57 @@
             <Parameter Name="UserId" Mode="In" Type="Int32" />
             <Parameter Name="Address" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="prGetJobList" ReturnType="Collection(CarSystemModel.prGetJobList_Result)">
-            <Parameter Name="UserId" Mode="In" Type="Int32" />
-            <Parameter Name="JobStartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="JobId" Mode="In" Type="Int32" />
-            <Parameter Name="Type" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="prGetPartsDetails" ReturnType="Collection(CarSystemModel.prGetPartsDetails_Result)">
           <Parameter Name="UserId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prGetPol" ReturnType="Collection(CarSystemModel.prGetPol_Result)">
             <Parameter Name="UserId" Mode="In" Type="Int32" />
-            <Parameter Name="CarId" Mode="In" Type="Int32" />
-            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
-            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="POLId" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
             <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prSavePOLDetails" ReturnType="Collection(String)">
+            <Parameter Name="POLId" Mode="In" Type="Int32" />
+            <Parameter Name="CarId" Mode="In" Type="Int32" />
+            <Parameter Name="CheckInDate" Mode="In" Type="DateTime" />
+            <Parameter Name="DriverId" Mode="In" Type="Int32" />
+            <Parameter Name="IssuedById" Mode="In" Type="Int32" />
+            <Parameter Name="CNG" Mode="In" Type="Decimal" />
+            <Parameter Name="Diesel" Mode="In" Type="Decimal" />
+            <Parameter Name="EngineOil" Mode="In" Type="Decimal" />
+            <Parameter Name="PowerOil" Mode="In" Type="Decimal" />
+            <Parameter Name="GearOil" Mode="In" Type="Decimal" />
+            <Parameter Name="Grease" Mode="In" Type="Decimal" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Remark" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="Update" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="prDeletePOLRecord">
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="POLId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prGetJobList" ReturnType="Collection(CarSystemModel.prGetJobList_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+            <Parameter Name="JobId" Mode="In" Type="Int32" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prSaveJobInfo" ReturnType="Collection(Int32)">
+            <Parameter Name="JobId" Mode="In" Type="Int32" />
+            <Parameter Name="DriverId" Mode="In" Type="Int32" />
+            <Parameter Name="JobDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CarId" Mode="In" Type="Int32" />
+            <Parameter Name="JobDescription" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="JobCompletedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="BusStatus" Mode="In" Type="String" />
+            <Parameter Name="AssignedMechanic" Mode="In" Type="Int32" />
+            <Parameter Name="Remark" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="Created" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="CarDetail">
@@ -1550,32 +1622,6 @@
           <Property Type="Int32" Name="CreatedBy" Nullable="true" />
           <Property Type="String" Name="Address" Nullable="true" MaxLength="500" />
         </ComplexType>
-        <ComplexType Name="prGetJobList_Result">
-          <Property Type="Int32" Name="JobId" Nullable="false" />
-          <Property Type="Int32" Name="JobCreatedBy" Nullable="true" />
-          <Property Type="String" Name="JobCreatedByName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="JobCreatedByNameBangla" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="JobDate" Nullable="true" />
-          <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
-          <Property Type="Int32" Name="CarId" Nullable="true" />
-          <Property Type="String" Name="JobDescription" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="SMApprovedStatus" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="ManagerApprovedStatus" Nullable="true" MaxLength="100" />
-          <Property Type="DateTime" Name="SMApprovedDate" Nullable="true" />
-          <Property Type="DateTime" Name="ManagerApprovedDate" Nullable="true" />
-          <Property Type="DateTime" Name="JobCompletedDate" Nullable="true" />
-          <Property Type="String" Name="JobCompletedStatus" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="BusStatus" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="FinalApprovalPerson" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="CompanyId" Nullable="true" />
-          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
-          <Property Type="DateTime" Name="Created" Nullable="true" />
-          <Property Type="DateTime" Name="Updated" Nullable="true" />
-          <Property Type="Int32" Name="AssignedMechanic" Nullable="true" />
-          <Property Type="String" Name="AssignedMechanicName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="AssignedMechanicNameBangla" Nullable="true" MaxLength="200" />
-        </ComplexType>
         <ComplexType Name="prGetPartsDetails_Result">
           <Property Type="Int32" Name="PartsId" Nullable="false" />
           <Property Type="String" Name="PartsCode" Nullable="true" MaxLength="100" />
@@ -1599,21 +1645,53 @@
           <Property Type="Int32" Name="POLId" Nullable="false" />
           <Property Type="Int32" Name="CarId" Nullable="true" />
           <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
-          <Property Type="DateTime" Name="CheckInDate" Nullable="true" />
+          <Property Type="String" Name="CheckInDate" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="DriverId" Nullable="true" />
           <Property Type="String" Name="DriverName" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="DriverNameBangla" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="Remark" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="GivenBy" Nullable="true" MaxLength="50" />
-          <Property Type="Decimal" Name="Gas" Nullable="false" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Oil" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Lubricant" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="Note" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="IssuedById" Nullable="true" />
+          <Property Type="String" Name="IssuedByName" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="CNG" Nullable="false" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Diesel" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="EngineOil" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="PowerOil" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="GearOil" Nullable="true" Precision="4" Scale="2" />
+          <Property Type="Decimal" Name="Grease" Nullable="true" Precision="4" Scale="2" />
           <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Createdby" Nullable="true" />
           <Property Type="DateTime" Name="Created" Nullable="true" />
           <Property Type="DateTime" Name="Updated" Nullable="true" />
           <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="AprrovedBy" Nullable="true" />
+          <Property Type="String" Name="ApprovedByName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="prGetJobList_Result">
+          <Property Type="Int32" Name="JobId" Nullable="false" />
+          <Property Type="Int32" Name="DriverId" Nullable="true" />
+          <Property Type="String" Name="DriverName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="DriverNameBangla" Nullable="true" MaxLength="200" />
+          <Property Type="DateTime" Name="JobDate" Nullable="true" />
+          <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="CarId" Nullable="true" />
+          <Property Type="String" Name="JobDescription" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SMApprovedStatus" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="ManagerApprovedStatus" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="SMApprovedDate" Nullable="true" />
+          <Property Type="DateTime" Name="ManagerApprovedDate" Nullable="true" />
+          <Property Type="DateTime" Name="JobCompletedDate" Nullable="true" />
+          <Property Type="String" Name="JobCompletedStatus" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BusStatus" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FinalApprovalPerson" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="CompanyId" Nullable="true" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTime" Name="Created" Nullable="true" />
+          <Property Type="DateTime" Name="Updated" Nullable="true" />
+          <Property Type="Int32" Name="AssignedMechanic" Nullable="true" />
+          <Property Type="String" Name="AssignedMechanicName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AssignedMechanicNameBangla" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2505,36 +2583,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prSaveVendorDetails" FunctionName="CarSystemModel.Store.prSaveVendorDetails" />
-          <FunctionImportMapping FunctionImportName="prGetJobList" FunctionName="CarSystemModel.Store.prGetJobList">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="CarSystemModel.prGetJobList_Result">
-                <ScalarProperty Name="JobId" ColumnName="JobId" />
-                <ScalarProperty Name="JobCreatedBy" ColumnName="JobCreatedBy" />
-                <ScalarProperty Name="JobCreatedByName" ColumnName="JobCreatedByName" />
-                <ScalarProperty Name="JobCreatedByNameBangla" ColumnName="JobCreatedByNameBangla" />
-                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
-                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
-                <ScalarProperty Name="CarId" ColumnName="CarId" />
-                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="SMApprovedStatus" ColumnName="SMApprovedStatus" />
-                <ScalarProperty Name="ManagerApprovedStatus" ColumnName="ManagerApprovedStatus" />
-                <ScalarProperty Name="SMApprovedDate" ColumnName="SMApprovedDate" />
-                <ScalarProperty Name="ManagerApprovedDate" ColumnName="ManagerApprovedDate" />
-                <ScalarProperty Name="JobCompletedDate" ColumnName="JobCompletedDate" />
-                <ScalarProperty Name="JobCompletedStatus" ColumnName="JobCompletedStatus" />
-                <ScalarProperty Name="BusStatus" ColumnName="BusStatus" />
-                <ScalarProperty Name="FinalApprovalPerson" ColumnName="FinalApprovalPerson" />
-                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="Updated" ColumnName="Updated" />
-                <ScalarProperty Name="AssignedMechanic" ColumnName="AssignedMechanic" />
-                <ScalarProperty Name="AssignedMechanicName" ColumnName="AssignedMechanicName" />
-                <ScalarProperty Name="AssignedMechanicNameBangla" ColumnName="AssignedMechanicNameBangla" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prGetPartsDetails" FunctionName="CarSystemModel.Store.prGetPartsDetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="CarSystemModel.prGetPartsDetails_Result">
@@ -2569,19 +2617,58 @@
                 <ScalarProperty Name="DriverName" ColumnName="DriverName" />
                 <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
-                <ScalarProperty Name="GivenBy" ColumnName="GivenBy" />
-                <ScalarProperty Name="Gas" ColumnName="Gas" />
-                <ScalarProperty Name="Oil" ColumnName="Oil" />
-                <ScalarProperty Name="Lubricant" ColumnName="Lubricant" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="IssuedById" ColumnName="IssuedById" />
+                <ScalarProperty Name="IssuedByName" ColumnName="IssuedByName" />
+                <ScalarProperty Name="CNG" ColumnName="CNG" />
+                <ScalarProperty Name="Diesel" ColumnName="Diesel" />
+                <ScalarProperty Name="EngineOil" ColumnName="EngineOil" />
+                <ScalarProperty Name="PowerOil" ColumnName="PowerOil" />
+                <ScalarProperty Name="GearOil" ColumnName="GearOil" />
+                <ScalarProperty Name="Grease" ColumnName="Grease" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Createdby" ColumnName="Createdby" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="Updated" ColumnName="Updated" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="AprrovedBy" ColumnName="AprrovedBy" />
+                <ScalarProperty Name="ApprovedByName" ColumnName="ApprovedByName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prSavePOLDetails" FunctionName="CarSystemModel.Store.prSavePOLDetails" />
+          <FunctionImportMapping FunctionImportName="prDeletePOLRecord" FunctionName="CarSystemModel.Store.prDeletePOLRecord" />
+          <FunctionImportMapping FunctionImportName="prGetJobList" FunctionName="CarSystemModel.Store.prGetJobList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CarSystemModel.prGetJobList_Result">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+                <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+                <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+                <ScalarProperty Name="JobDate" ColumnName="JobDate" />
+                <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+                <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SMApprovedStatus" ColumnName="SMApprovedStatus" />
+                <ScalarProperty Name="ManagerApprovedStatus" ColumnName="ManagerApprovedStatus" />
+                <ScalarProperty Name="SMApprovedDate" ColumnName="SMApprovedDate" />
+                <ScalarProperty Name="ManagerApprovedDate" ColumnName="ManagerApprovedDate" />
+                <ScalarProperty Name="JobCompletedDate" ColumnName="JobCompletedDate" />
+                <ScalarProperty Name="JobCompletedStatus" ColumnName="JobCompletedStatus" />
+                <ScalarProperty Name="BusStatus" ColumnName="BusStatus" />
+                <ScalarProperty Name="FinalApprovalPerson" ColumnName="FinalApprovalPerson" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="AssignedMechanic" ColumnName="AssignedMechanic" />
+                <ScalarProperty Name="AssignedMechanicName" ColumnName="AssignedMechanicName" />
+                <ScalarProperty Name="AssignedMechanicNameBangla" ColumnName="AssignedMechanicNameBangla" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prSaveJobInfo" FunctionName="CarSystemModel.Store.prSaveJobInfo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
