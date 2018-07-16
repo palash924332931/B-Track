@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../../router.animations';
 import { AlertService } from '../../../../shared/modules/alert/alert.service'
 import { CarService, AccountsService, CommonService, CustomNgbDateParserFormatter, ConfigService } from '../../../../shared/services'
-import { DailyPayment, PaySlip } from '../../../../shared/model/accounts'
+import { DailyPayment, PaySlip, COA } from '../../../../shared/model/accounts'
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -21,6 +21,7 @@ export class CoaDetailsComponent implements OnInit {
   public paymentId: number;
   public IsEditItem: boolean = false;
   public dailyPaymentDetails = new DailyPayment();
+  public coa = new COA();
   private modalRef: NgbModalRef;
   public closeResult: string;
   public UserInfo = JSON.parse(localStorage.getItem("car-system-user-info-option-b"));
@@ -50,7 +51,6 @@ export class CoaDetailsComponent implements OnInit {
 
     if (this.paymentId > 0) {
       this.IsEditItem = true;
-      this.fnGetDailyPaymentDetails();
     } else {
       this.IsEditItem = false;
       this.dailyPaymentDetails.Status = 'Approved';
@@ -63,157 +63,20 @@ export class CoaDetailsComponent implements OnInit {
     this.preReceivedOnRouteIncome = 0;
   }
 
-  fnGetDailyPaymentDetails() {
-    this.alertService.fnLoading(true);
-    this.accountsService.fnGetDailyPayment(this.userId, this.paymentId).subscribe(
-      (data: DailyPayment[]) => {
-        this.dailyPaymentDetails = data[0] || new DailyPayment();
-        this.receivedDate = this.customNgbDateParserFormatter.parse(this.dailyPaymentDetails.ReceivedDate || null);
-        this.alertService.fnLoading(false);
-      },
-      (error: any) => {
-        this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT == 'bn' ? 'নেটওয়ার্ক সমস্যার কারনে সিস্টেমটি কর্মচারী দেখাতে ব্যর্থ হয়েছে।' : 'System has failed to show employee because of network problem.');
-      }
-    );
-  }
 
-  fnSaveDailyPayment() {
-    //to check group name;
-    if (this.dailyPaymentDetails.CarLogId == null || this.dailyPaymentDetails.CarLogId == undefined) {
-      this.alertService.alert(this.LT == 'bn' ? 'তথ্য সংরক্ষণ করার পূর্বে অনুগ্রহপূর্বক গাড়ী নির্বাচন করুন।' : 'Please select bus before proced your task.');
-      return false;
-    } else if (this.dailyPaymentDetails.PaySlipId == null || this.dailyPaymentDetails.PaySlipId == undefined) {
-      this.alertService.alert(this.LT == 'bn' ? 'তথ্য সংরক্ষণ করার পূর্বে অনুগ্রহপূর্বক রশিদ নং নির্বাচন করুন।' : 'Please select pay slip number before proced your task.');
-      return false;
-    } else if (this.dailyPaymentDetails.PaymentAmount == 0 || this.dailyPaymentDetails.PaymentAmount == null || this.dailyPaymentDetails.PaymentAmount < 0) {
-      this.alertService.alert(this.LT == 'bn' ? 'রশিদে প্রদত্ত টাকার পরিমাণ সঠিক নয়। অনুগ্রহ করে তথ্য যাচাই করুন।' : 'Please varify again your pay slip amount and try to save again.');
-      return false;
-    } else if (this.dailyPaymentDetails.PaymentAmount > (Number(this.dailyPaymentDetails.TotalIncome) - Number(this.prevPaidAmount))) {
-      this.alertService.alert(this.LT == 'bn' ? 'রশিদে প্রদত্ত টাকার পরিমাণ সঠিক নয়। অনুগ্রহ করে তথ্য যাচাই করুন।' : 'Please varify again your pay slip amount and try to save again.');
-      return false;
-    }else if(this.dailyPaymentDetails.ReceivedDate==null){
-      this.alertService.alert(this.LT == 'bn' ? 'অনুগ্রহ করে টাকা গ্রহনের তারিখ প্রদান করুন এবং পুনরায় চেষ্টা করুন।' : 'Please varify again amount received date and try again.');
-      return false;
-    }
-
-    //this.dailyPaymentDetails.Update = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    this.dailyPaymentDetails.Update = this.configService.getCurrentDate();
-    this.alertService.fnLoading(true);
-    if (!this.IsEditItem) {
-      this.dailyPaymentDetails.PaymentId = 0;
-      this.dailyPaymentDetails.CreatedBy = this.userId;
-      this.dailyPaymentDetails.Status = 'Approved';
-      this.dailyPaymentDetails.PaymentStatus = 'Paid';
-    }
-    debugger
-    this.accountsService.fnPostPayment(this.dailyPaymentDetails).subscribe(
-      (success: any) => {
-        this.alertService.fnLoading(false);
-        this.alertService.confirm(this.LT == 'bn' ? success._body.replace(/"/g, "") + ' আপনি কি পেমেন্টের তালিকা ফিরে পেতে চান?' : success._body.replace(/"/g, "") + ' Do you want to back in payment list?'
-          , () => {
-            this.router.navigate(["./accounts/daily-payment-log"]);
-          }
-          , function () { });
-
-      },
-      (error: any) => {
-        this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT == 'bn' ? 'নেটওয়ার্ক সমস্যার কারনে সিস্টেমটি গাড়ীর লগ তালিকা দেখাতে ব্যর্থ হয়েছে।' : 'System has failed to show bus log list because of network problem.');
-      }
-    );
-  }
-
-  fnCreateNewItem() {
-    this.IsEditItem = false;
-    this.dailyPaymentDetails = new DailyPayment();
-    this.paymentId = 0;
-    this.prevPaidAmount = 0;
-    this.prevPaidStatus = 'Due';
-    this.preReceivedDifferentRouteIncome = 0;
-    this.preReceivedOnRouteIncome = 0;
-    this.router.navigate(["./accounts/daily-payment-log/0"]);
-  }
-
-  fnChangeTotalDistance() {
-    if (this.dailyPaymentDetails.TripNo) {
-      this.dailyPaymentDetails.TotalDistance = (this.dailyPaymentDetails.TripNo * (this.dailyPaymentDetails.Distance == null || undefined ? 0 : this.dailyPaymentDetails.Distance));
-    } else {
-      this.dailyPaymentDetails.TotalDistance = 0;
-    }
-  }
-
-  onSelectCheckInDate(date: any) {
-    if (date != null) {
-      // this.dailyPaymentDetails.CheckInDate = this.ngbDateParserFormatter.format(date);
-    }
-  }
-
-  onSelectReceivedByDate(date: any) {
-    if (date != null) {
-      this.dailyPaymentDetails.ReceivedDate = this.ngbDateParserFormatter.format(date);
-    }
-  }
-
-  onSelectFromDate(date: any) {
-    if (date != null) {
-      this.fromDate = this.ngbDateParserFormatter.format(date);
-    }
-  }
-  onSelectToDate(date: any) {
-    if (date != null) {
-      this.toDate = this.ngbDateParserFormatter.format(date);
-    }
-  }
-
-  public fnSearchApprovedRecord() {
-    this.alertService.fnLoading(true)
-    this.accountsService.fnGetApprovedRecordForCollection(this.userId, this.fromDate, this.toDate, 'Approved Record For Collection').subscribe((data: any) => {
-      console.log("data", data);
-      this.alertService.fnLoading(false)
-      this.configureableModalData = data || [];
-    },
-      (error: any) => { this.alertService.fnLoading(false) });
-  }
+fnSaveCOADetails() {
+    console.log(this.coa)
+}
 
 
-  public modalType: string;
+
+public modalType: string;
   configureableModalData: any[] = [];
   fnGenerateModal(content, actionName: string) {
     this.alertService.fnLoading(true)
     this.modalType = actionName;
     //generate modal
-    if (this.modalType == "Select Bus Log") {
-      this.configureableModalTable.tableName = this.LT == 'bn' ? 'তালিকা থেকে গাড়ী নির্বাচন করুন' : 'Select Bus Information';
-      //this.configureableModalTable.enabledColumnFilter=true;
-      this.configureableModalTable.tableColDef = [
-        { headerName: this.LT == 'bn' ? 'বহির্গমনের তাং' : 'Check In Date', width: '10%', internalName: 'CheckInDate', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'রেজি: নং' : 'Reg. Number ', width: '12%', internalName: 'RegistrationNo', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'গাড়ীর ধরন' : 'Bus Type', width: '10%', internalName: 'TypeName', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Driver Name', width: '15%', internalName: this.LT == 'bn' ? 'DriverNameBangla' : 'DriverName', sort: true, type: "" },
-        //{ headerName: this.LT == 'bn' ? 'বহির্গমনের সময়' : 'Check In Type', width: '15%', internalName: 'CheckInTime', sort: true, type: "" },
-        // { headerName: this.LT == 'bn' ? 'প্রবেশের সময়' : 'Check Out', width: '15%', internalName: 'CheckOutTime', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'রুটের নাম' : 'Route Name', width: '15%', internalName: 'RootName', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'ট্রিপ সংখ্যা' : 'No. of Trip', width: '8%', internalName: 'TripNo', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'মোট আয়' : 'Total Income', width: '8%', internalName: 'TotalIncome', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'অবস্থা' : 'Status', width: '10%', internalName: 'Status', sort: true, type: "" },
-      ]
-
-      //this.carService.fnGetDilyCarLogOnDemand(this.userId, 0, 'Approved Record').then((data: any) => {
-      this.accountsService.fnGetApprovedRecordForCollection(this.userId, this.fromDate, this.toDate, 'Approved Record For Collection').subscribe((data: any) => {
-        console.log("data", data);
-        this.alertService.fnLoading(false)
-        this.configureableModalData = data || [];
-
-        this.modalRef = this.modalService.open(content, { size: 'lg', windowClass: 'modal-xxl', backdrop: 'static' });
-        this.modalRef.result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-          //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-      });
-    }
-    else if (this.modalType == "Select Pay Slip") {
+    if (this.modalType == "Select Pay Slip") {
       this.configureableModalTable.tableName = this.LT == 'bn' ? 'রশিদ নির্বাচন করুন' : 'Select pay slip from the list.';
       this.configureableModalTable.tableColDef = [
         { headerName: this.LT == 'bn' ? 'রশিদ নং' : 'Slip No ', width: '25%', internalName: 'SlipNo', sort: true, type: "" },
@@ -236,17 +99,31 @@ export class CoaDetailsComponent implements OnInit {
       });
     }
   }
-  fnChagePaymentType() {
-    if (this.dailyPaymentDetails.PaymentType == 'Paid') {
-      this.dailyPaymentDetails.PaymentAmount = Number(this.dailyPaymentDetails.TotalIncome) - Number(this.prevPaidAmount);
-    } else if (this.dailyPaymentDetails.PaymentType == 'Paid Route Income') {
-      this.dailyPaymentDetails.PaymentAmount = Number(this.dailyPaymentDetails.OnRouteIncome) - Number(this.preReceivedOnRouteIncome);
-    } else if (this.dailyPaymentDetails.PaymentType == 'Paid Diff Route Income') {
-      this.dailyPaymentDetails.PaymentAmount = Number(this.dailyPaymentDetails.DifferentRouteIncome) - Number(this.preReceivedDifferentRouteIncome);
-    } else if (this.dailyPaymentDetails.PaymentType == 'Partially') {
-      this.dailyPaymentDetails.PaymentAmount = Number(this.dailyPaymentDetails.TotalIncome) - Number(this.prevPaidAmount);
+
+
+
+
+  onSelectFromDate(date: any) {
+    if (date != null) {
+      this.fromDate = this.ngbDateParserFormatter.format(date);
     }
   }
+  onSelectToDate(date: any) {
+    if (date != null) {
+      this.toDate = this.ngbDateParserFormatter.format(date);
+    }
+  }
+
+  public fnSearchApprovedRecord() {
+    this.alertService.fnLoading(true)
+    this.accountsService.fnGetApprovedRecordForCollection(this.userId, this.fromDate, this.toDate, 'Approved Record For Collection').subscribe((data: any) => {
+      console.log("data", data);
+      this.alertService.fnLoading(false)
+      this.configureableModalData = data || [];
+    },
+      (error: any) => { this.alertService.fnLoading(false) });
+  }
+
 
   public prevPaidAmount: number = 0;
   public prevPaidStatus: string = "";
@@ -289,20 +166,9 @@ export class CoaDetailsComponent implements OnInit {
         }
       });
 
-      // if (!IsSelectedPaySlit) {
-      //   this.modalRef.close();
-      //   this.alertService.alert(this.LT == 'bn' ? 'আপনাকে <b>'+event.record.BookNo+' </b> রশিদ বইয়ের প্রথম রশিদটি পছন্দ করতে হবে। দয়া করে আবার চেষ্টা করুন।' : 'Please seletect first pay slip number of book <b>'+event.record.BookNo+'</b>');
-      //   return false;
-      // } else {
-      //   this.dailyPaymentDetails.PaySlipId = event.record.PaySlipId;
-      //   //this.dailyPaymentDetails.PaySlipAmount = event.record.Amount;
-      //   this.dailyPaymentDetails.SlipNo = event.record.SlipNo;
-      //   this.dailyPaymentDetails.BookNo = event.record.BookNo;
-      // }
-
       if (!IsSelectedPaySlit) {
         this.modalRef.close();
-        this.alertService.alert(this.LT == 'bn' ? 'আপনাকে <b>' + event.record.BookNo + ' </b> রশিদ বইয়ের প্রথম রশিদটি পছন্দ করতে হবে। কিন্তু সিস্টেম ত্বরান্নিত করার জন্য এখন আপনি পছন্দ করতে পারবেন।' : 'You should select first pay slip number of book <b>' + event.record.BookNo + '</b> but now you can select any of them for back data insert.');
+        this.coa.ParentID = event.record.SlipNo;
 
       }
       this.dailyPaymentDetails.PaySlipId = event.record.PaySlipId;
@@ -313,60 +179,7 @@ export class CoaDetailsComponent implements OnInit {
     }
     this.modalRef.close();
   }
-
-  fnPrintCarLog() {
-    let printContents, popupWin;
-    printContents = ` <div class="container totaldivform">
-    <div class="row">
-    <div style=" padding-left:40px;padding-right:40px;">
-    <table border="0" style="width:100%;">
-    <tr align="center" >
-      <td colspan="3"  align="center"> <h4>বাংলাদেশ সড়ক পরিবহণ কর্পোরেশন </h4></td>
-      <tr> <td colspan="3" align="center">${this.UserInfo[0].CompnayNameBangla}</td> </tr>
-      <tr> <td colspan="3" align="center">${this.UserInfo[0].CompanyAddressBangla}<br/></td> </tr>
-    </tr>
-    <tr align="center" >
-      <td  align="left">  শাখা: ${this.UserInfo[0].CompnayNameBangla}</td>
-      <td  align="left"> </td>
-      <td  align="left">    রশিদ নং : <b>`+ this.commonService.fnConvertEngToBangDigit(this.dailyPaymentDetails.SlipNo) + ` </b> </td>
-    </tr>
-    <tr align="center" style="padding-top:5px;" >
-      <td  align="left"  style="padding-top:5px;">    বাস নং : <b>`+ this.dailyPaymentDetails.RegistrationNo + ` </b></td>
-      <td  align="left">     বাসের ধরণ : <b>`+ this.dailyPaymentDetails.CarType + ` </b></td>
-      <td  align="left">    তারিখ : <b>`+ this.commonService.fnConvertEngToBangDigit(this.dailyPaymentDetails.ReceivedDate == null ? "" : this.dailyPaymentDetails.ReceivedDate.split("T")[0]) + ` </b></td>
-    </tr>
-    <tr align="center" >
-      <td colspan="3"  ><br/><p>  জনাব  <b>`+ this.dailyPaymentDetails.DriverName + ` </b>
-    এর নিকট হইতে  <b>`+ this.dailyPaymentDetails.TripType + ` </b> বাবদ
-    <b>`+ this.commonService.fnConvertEngToBangDigit(this.dailyPaymentDetails.PaymentAmount.toString()) + `</b> টাকা ধন্যবাদের সহিত গ্রহণ করিলাম </p> <br/><br/>
-    </td>
-    </tr>
-    <tr align="center" >
-      <td  align="center">     টাকার পরিমাণঃ <b>৳ `+ this.commonService.fnConvertEngToBangDigit(this.dailyPaymentDetails.PaymentAmount.toString()) + ` </td>
-      <td  align="center">     স্বাক্ষর <br/>
-      একাউন্টস অফিসার</td>
-      <td  align="center">   স্বাক্ষর<br/>
-    আদায়কারী ক্যাশিয়ার</td>
-    </tr>
-    </table
-    </div>
-    </div>
-</div>
-      `;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-    popupWin.document.open();
-    popupWin.document.write(`
-        <html>
-          <head>
-            <title>Pay Slip (system generated: B-Track)</title>
-            <style>
-            //........Customized style.......
-            </style>
-          </head>
-      <body onload="window.print();window.close()">${printContents}</body>
-        </html>`);
-    popupWin.document.close();
-  }
+  
 
   public configureableModalTable = {
     tableID: "messtage-history-table",
