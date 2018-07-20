@@ -22,7 +22,7 @@
             <app-stat [bgClass]="'warning'" [icon]="'fa-tasks'" [viewLink]="'#/report/payment'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="onPaidAmount+'  ( '+onPaidCar+' )'" [label]="LT=='bn'?'লেনদেন':'Payment'"></app-stat>
         </div>
         <div class="col-xl-3 col-lg-6">
-            <app-stat [bgClass]="'success'" [icon]="'fa-shopping-cart'" [viewLink]="'#/report/dailycarlog'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="todayReceivedAmount" [label]="LT=='bn'?'অ্যাকাউন্ট':'Accounts'"></app-stat>
+            <app-stat [bgClass]="'success'" [icon]="'fa fa-money'" [viewLink]="'#/report/dailycarlog'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="todayReceivedAmount" [label]="LT=='bn'?'অ্যাকাউন্ট':'Accounts'"></app-stat>
         </div>
         <div class="col-xl-3 col-lg-6">
             <app-stat [bgClass]="'danger'" [icon]="'fa-comments'" [viewLink]="'#/report/dailycarlog'" [title]="LT=='bn'?'বিস্তারিত দেখুন':'View Details'" [count]="13" [label]="LT=='bn'?'তথ্য আদান-প্রদান':'Communication'"></app-stat>

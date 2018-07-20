@@ -6,11 +6,14 @@ import {HttpModule} from '@angular/http'
 import { ManagerComponent } from './manager.component';
 import { PageHeaderModule } from './../../shared';
 import { PTableModule,AlertModule } from './../../shared';
-import { ConfigService, AccountsService,CarService } from './../../shared/services';
+import { ConfigService, AccountsService,CarService,StoreService } from './../../shared/services';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PayslipManagerComponent } from './payslip-manager/payslip-manager.component';
 import { DailycarlogManagerComponent } from './dailycarlog-manager/dailycarlog-manager.component';
+import { PolManagerComponent } from './pol-manager/pol-manager.component';
+import { JobManagerComponent } from './job-manager/job-manager.component';
+import { VoucherManagerComponent } from './voucher-manager/voucher-manager.component';
 
 const routes:Routes=[   
     {        
@@ -19,9 +22,9 @@ const routes:Routes=[
             {path:'',component:ManagerComponent},
             { path: 'payslip', component: PayslipManagerComponent},
              { path: 'dailycarlog', component: DailycarlogManagerComponent},
-            // { path: 'daily-payment-log', component: DailyPaymentLogComponent},
-            // { path: 'daily-payment-log/:paymentId', component: DailyPaymentDetailsComponent},
-            // { path: 'payslip-book', component: PayslipBookComponent},
+             { path: 'pol-manager', component: PolManagerComponent},
+             { path: 'job-manager', component: JobManagerComponent},
+             { path: 'voucher-manager', component: VoucherManagerComponent},
             // { path: 'payslip-book/:bookId', component: PayslipBookDetailsComponent},
            // { path: 'installment', component: InstallmentComponent},
         ]
@@ -30,8 +33,8 @@ const routes:Routes=[
 
 @NgModule({
     imports: [CommonModule,FormsModule,ReactiveFormsModule,PTableModule,AlertModule,HttpModule,NgbModule.forRoot(), PageHeaderModule,RouterModule.forChild(routes)],
-    declarations: [ManagerComponent, PayslipManagerComponent, DailycarlogManagerComponent],
-    providers:[ConfigService,AccountsService,CarService],
+    declarations: [ManagerComponent, PayslipManagerComponent, DailycarlogManagerComponent, PolManagerComponent, JobManagerComponent, VoucherManagerComponent],
+    providers:[ConfigService,AccountsService,CarService,StoreService],
     exports: [RouterModule]
 })
 export class  ManagerModule {}

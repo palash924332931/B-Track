@@ -1,3 +1,153 @@
-<p>
-  voucher-details works!
-</p>
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEditItem==true?'ভাউচারের হালনাগাদ করুন':'ভাউচার প্রস্তুত করুন ':IsEditItem==true?'New Voucher':'Add Voucher '" [icon]="'fa-table'"></app-page-header>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row required">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ভাউচার নং':'Voucher No'}} </label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userId" [(ngModel)]="dailyPaymentDetails.VoucherNo">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ভাউচারের ধরন':'Voucher Type'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="dailyPaymentDetails.PaymentType" (change)="fnChagePaymentType()">
+                                <option selected value="Paid">Auto Voucher</option> 
+                                <option selected value="Paid">Manual Voucher</option>                                                     
+                           </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ভাউচারের ইভেন্ট':'Voucher Event'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Bus Log')"></i> </label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyPaymentDetails.RootName">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ভাউচারের তারিখে':'Voucher Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="receivedDate" (ngModelChange)="onSelectReceivedByDate($event)">
+                                <div class="input-group-addon" (click)="id.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'এন্ট্রি তারিখে':'Entry Date'}}</label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="receivedDate" (ngModelChange)="onSelectReceivedByDate($event)">
+                                <div class="input-group-addon" (click)="id.toggle()">
+                                    <span class="fa fa-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মোট টাকা':'Total Amount'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Bus Log')"></i> </label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyPaymentDetails.RootName">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মন্তব্য':'Notes'}}</label>
+                        <div class="col-sm-8">
+                            <textarea rows="4" cols="40" [(ngModel)]="dailyPaymentDetails.Notes" style="width:100%">   </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row" style="margin-bottom:30px">
+                <div class="form-group col-xl-12" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef; padding-right:15px">
+                        <button *ngIf="IsEditItem" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewItem()">{{LT=='bn'?'নতুন আদায় তৈরী করুন':'Create New Product'}}</button>
+                        <button *ngIf="!((dailyPaymentDetails.PaymentStatus=='Paid'||dailyPaymentDetails.PaymentStatus=='Partially Paid') && IsEditItem==true)" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnSaveDailyPayment()">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update Information':'Save Information'}}</button>
+                        <button type="button " class="btn btn-outline-success" [disabled]="IsEditItem!=true" (click)="fnPrintCarLog()"><i class="fa fa-print" style="font-size:18px"></i>{{LT=='bn'?' ছাপান':' Print'}}</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <div class="row" style="padding-left:15px;padding-right:15px;padding-top:5px;" *ngIf="modalType == 'Select Bus Log'">
+            <div class="form-group col-xl-4">
+                <div class="row">
+                    <!-- <label for="userName" class="col-sm-3 col-form-label font-weight-bold">{{LT=='bn'?'বহি তাং':'Dep. Date'}}</label> -->
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id3="ngbDatepicker" [(ngModel)]="fromDateSelected" (ngModelChange)="onSelectFromDate($event)">
+                            <div class="input-group-addon" (click)="id3.toggle()">
+                                <span class="fa fa-calendar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xl-5">
+                <div class="row">
+                    <label for="userName" class="col-sm-3 col-form-label font-weight-bold">{{LT=='bn'?'হইতে':'To'}}</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id9="ngbDatepicker" [(ngModel)]="toDateSelected" (ngModelChange)="onSelectToDate($event)">
+                            <div class="input-group-addon" (click)="id9.toggle()">
+                                <span class="fa fa-calendar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3" style="text-align:right">
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:right">
+                        <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnSearchApprovedRecord()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>
