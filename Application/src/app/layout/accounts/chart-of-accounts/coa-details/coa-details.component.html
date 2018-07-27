@@ -1,7 +1,6 @@
 <div [@routerTransition]>
     <alert></alert>
-    <app-page-header [heading]="LT=='bn'?IsEditItem==true?'অ্যাকাউন্ট বিবরণ চার্ট হালনাগাদ করুন':'অ্যাকাউন্ট বিবরণ চার্ট যুক্ত করুন':IsEditItem==true?'Update Chart Of Accounts Details':'Add Chart Of Accounts Details'"
-        [icon]="'fa-table'"></app-page-header>
+    <app-page-header [heading]="LT=='bn'?IsEditItem==true?'অ্যাকাউন্ট বিবরণ চার্ট হালনাগাদ করুন':'অ্যাকাউন্ট বিবরণ চার্ট যুক্ত করুন':IsEditItem==true?'Update Chart Of Accounts Details':'Add Chart Of Accounts Details'" [icon]="'fa-table'"></app-page-header>
     <div class="row">
         <div class="col-sm-12">
             <div class="row required">
@@ -23,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="form-group col-xl-6">
                     <div class="row">
@@ -52,7 +51,7 @@
             <div class="row">
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="IsGroup" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রুপ কিনা':'Is Group'}}</label>
+                        <label for="IsGroup" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রুপ অ্যাকাউন্ট':'Is Group'}}</label>
                         <div class="col-sm-8">
                             <input type="checkbox" [(ngModel)]="coa.IsGroup" />
                         </div>
@@ -61,7 +60,7 @@
 
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="ParentID" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্যারেন্ট আইডি':'Parent ID'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Pay Slip')"></i></label>
+                        <label for="ParentID" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্যারেন্ট অ্যাকাউন্ট আইডি':'Parent ID'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Pay Slip')"></i></label>
                         <div class="col-sm-8">
                             <input disabled type="text" class="form-control" id="ParentID" [(ngModel)]="coa.ParentID">
                         </div>
@@ -129,65 +128,63 @@
 
 
             <div class="row" style="margin-bottom:30px">
-<div class="form-group col-xl-12" style="margin-bottom:0px;background-color:#e9ecef;">
-<div class="row pull-right" style="background-color:#e9ecef; padding-right:15px">
-<button type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnSaveCOADetails()">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update
+                <div class="form-group col-xl-12" style="margin-bottom:0px;background-color:#e9ecef;">
+                    <div class="row pull-right" style="background-color:#e9ecef; padding-right:15px">
+                        <button type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnSaveCOADetails()">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update
 Information':'Save Information'}}</button>
-</div>
-</div>
-</div>
+                    </div>
+                </div>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
-<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
     </button>
-</div>
-<div class="modal-body" style="padding:0px">
-<div class="row" style="padding-left:15px;padding-right:15px;padding-top:5px;" *ngIf="modalType == 'Select Bus Log'">
-<div class="form-group col-xl-4">
-    <div class="row">
-        <!-- <label for="userName" class="col-sm-3 col-form-label font-weight-bold">{{LT=='bn'?'বহি তাং':'Dep. Date'}}</label> -->
-        <div class="col-sm-12">
-            <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id3="ngbDatepicker" [(ngModel)]="fromDateSelected"
-                    (ngModelChange)="onSelectFromDate($event)">
-                <div class="input-group-addon" (click)="id3.toggle()">
-                    <span class="fa fa-calendar"></span>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <div class="row" style="padding-left:15px;padding-right:15px;padding-top:5px;" *ngIf="modalType == 'Select Bus Log'">
+            <div class="form-group col-xl-4">
+                <div class="row">
+                    <!-- <label for="userName" class="col-sm-3 col-form-label font-weight-bold">{{LT=='bn'?'বহি তাং':'Dep. Date'}}</label> -->
+                    <div class="col-sm-12">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id3="ngbDatepicker" [(ngModel)]="fromDateSelected" (ngModelChange)="onSelectFromDate($event)">
+                            <div class="input-group-addon" (click)="id3.toggle()">
+                                <span class="fa fa-calendar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xl-5">
+                <div class="row">
+                    <label for="userName" class="col-sm-3 col-form-label font-weight-bold">{{LT=='bn'?'হইতে':'To'}}</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id9="ngbDatepicker" [(ngModel)]="toDateSelected" (ngModelChange)="onSelectToDate($event)">
+                            <div class="input-group-addon" (click)="id9.toggle()">
+                                <span class="fa fa-calendar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3" style="text-align:right">
+                <div class="row">
+                    <div class="col-sm-12" style="text-align:right">
+                        <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnSearchApprovedRecord()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
+                    </div>
                 </div>
             </div>
         </div>
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
     </div>
-</div>
-<div class="form-group col-xl-5">
-    <div class="row">
-        <label for="userName" class="col-sm-3 col-form-label font-weight-bold">{{LT=='bn'?'হইতে':'To'}}</label>
-        <div class="col-sm-9">
-            <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id9="ngbDatepicker" [(ngModel)]="toDateSelected"
-                    (ngModelChange)="onSelectToDate($event)">
-                <div class="input-group-addon" (click)="id9.toggle()">
-                    <span class="fa fa-calendar"></span>
-                </div>
-            </div>
-        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
     </div>
-</div>
-<div class="col-sm-3" style="text-align:right">
-<div class="row">
-    <div class="col-sm-12" style="text-align:right">
-<button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnSearchApprovedRecord()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
-</div>
-</div>
-</div>
-</div>
-<app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
-</div>
 </ng-template>

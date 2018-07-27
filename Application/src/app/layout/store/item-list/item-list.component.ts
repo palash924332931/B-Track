@@ -87,7 +87,7 @@ export class ItemListComponent implements OnInit {
       { headerName: this.LT == 'bn' ? 'ব্র্যান্ড ' : 'Brand ', width: '10%', internalName: 'Brand', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'একক মূল্য' : 'Unit Price', width: '20%', internalName: 'UnitPrice', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'একক' : 'Units', width: '20%', internalName: 'Units', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'অবস্থা' : 'Status', width: '15%', internalName: 'Balance', sort: true, type: "" },      
+      { headerName: this.LT == 'bn' ? 'ব্যবহারযোগ্য' : 'Balance', width: '15%', internalName: 'Balance', sort: true, type: "" },      
     ],
     enabledSearch: true,
     enabledSerialNo: true,

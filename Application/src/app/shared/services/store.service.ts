@@ -13,8 +13,8 @@ export class StoreService {
     constructor(private http: Http, private config: ConfigService) { }
 
     //#region Job
-    fnGetJobList(UserId: number,JobStartDate:string,JobId:number,Type:string) {
-        var url = ConfigService.baseWebApiUrl + '/GetJobList?UserId=' + UserId+'&JobStartDate='+JobStartDate+'&JobId='+JobId+"&Type="+Type;
+    fnGetJobList(UserId: number,FromDate:string,ToDate:string,JobId:number,Type:string) {
+        var url = ConfigService.baseWebApiUrl + '/GetJobList?UserId=' + UserId+'&FromDate='+FromDate+'&ToDate='+ToDate+'&JobId='+JobId+"&Type="+Type;
         //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));

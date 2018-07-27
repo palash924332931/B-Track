@@ -141,7 +141,7 @@ export class PolComponent implements OnInit {
     tableName: this.LT == 'bn' ? 'গাড়ীর লগের তালিকা' : 'Bus Log List',
     tableRowIDInternalName: "ID",
     tableColDef: [
-      { headerName: this.LT == 'bn' ? ' তাং' : 'POL Date', width: '10%', internalName: 'CheckInDate', sort: true, type: "" },
+     { headerName: this.LT == 'bn' ? ' তাং' : 'POL Date', width: '10%', internalName: 'CheckInDate', sort: true, type: "" },
      { headerName: this.LT == 'bn' ? 'রেজিঃ নং' : 'Bus Reg. No', width: '10%', internalName: 'RegistrationNo', sort: true, type: "" },
      { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Driver Name ', width: '10%', internalName: this.LT=='bn'?'DriverNameBangla':'DriverName', sort: true, type: "" },
      { headerName: this.LT == 'bn' ? 'সিএনজি' : 'CNG', width: '8%', internalName: 'CNG', sort: true, type: "" },
@@ -150,7 +150,7 @@ export class PolComponent implements OnInit {
      { headerName: this.LT == 'bn' ? 'পাওয়ার তেল' : 'PowerOil', width: '10%', internalName: 'PowerOil', sort: true, type: "" },
      { headerName: this.LT == 'bn' ? 'গিয়ার তেল' : 'GearOil', width: '10%', internalName: 'GearOil', sort: true, type: "" },
      { headerName: this.LT == 'bn' ? 'গ্রীস' : 'Grease', width: '10%', internalName: 'Grease', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'অনুমোদন' : 'Given By', width: '14%', internalName: 'GivenBy', sort: true, type: "custom-button", onClick: 'true', },
+     { headerName: this.LT == 'bn' ? 'অনুমোদন' : 'Given By', width: '14%', internalName: 'GivenBy', sort: true, type: "custom-button", onClick: 'true', },
 
     ],
     enabledSearch: true,

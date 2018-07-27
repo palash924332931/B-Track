@@ -26,7 +26,7 @@ export class JobListComponent implements OnInit {
 
   fnGetJobList() {
     this.alertService.fnLoading(true);
-    this.storeService.fnGetJobList(this.UserId,'10-10-1990',0,'All').subscribe(
+    this.storeService.fnGetJobList(this.UserId,'10-10-1990','10-10-2020',0,'All').subscribe(
       (data: Job[]) => {
         this.jobList = data || [];
         data.forEach((rec: any) => {
@@ -89,14 +89,15 @@ export class JobListComponent implements OnInit {
     tableColDef: [
       { headerName: this.LT == 'bn' ? 'জব নম্বর' : 'Job No ', width: '10%', internalName: 'JobId', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'জবের তারিখ' : 'Job Date ', width: '10%', internalName: 'JobDate', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'বাস নং' : 'Bus No', width: '10%', internalName: 'RegistrationNo', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'মেরামতকারীর নাম' : 'Assigned Mechanic', width: '10%', internalName: 'AssignedMechanicName', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'গাড়ির নং' : 'Car No', width: '10%', internalName: 'RegistrationNo', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'গাড়ির অবস্থা' : 'Car Condition', width: '10%', internalName: 'BusStatus', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'জবের বিবরন' : 'Job Description', width: '20%', internalName: 'JobDescription', sort: false, type: "" },
+      { headerName: this.LT == 'bn' ? 'কারিগরের  নাম' : 'Assigned Mechanic', width: '10%', internalName: 'AssignedMechanicName', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'মন্তব্য' : 'Remark', width: '10%', internalName: 'Remark', sort: false, type: "" },
-      { headerName: this.LT == 'bn' ? 'জব সম্পূর্নের তারিখ' : 'Completed Date ', width: '10%', internalName: 'JobCompletedDate', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'সম্পূর্নের তারিখ' : 'Completed Date ', width: '10%', internalName: 'JobCompletedDate', sort: true, type: "" },
      // { headerName: this.LT == 'bn' ? 'নিষ্ক্রিয় হওয়ার কারণ' : 'Jobed By', width: '20%', internalName: 'JobedBy', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'অবস্থা' : 'Status', width: '15%', internalName: 'Status', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'অনুমোদন' : 'Task', width: '10%', internalName: 'CheckApprovalBtn', sort: true, type: "custom-button", onClick: 'true', btnTitle: "Send for Approval" },
+      { headerName: this.LT == 'bn' ? 'জবের অবস্থা' : 'Status', width: '15%', internalName: 'Status', sort: true, type: "" },
+      //{ headerName: this.LT == 'bn' ? 'অনুমোদন' : 'Task', width: '10%', internalName: 'CheckApprovalBtn', sort: true, type: "custom-button", onClick: 'true', btnTitle: "Send for Approval" },
     ],
     enabledSearch: true,
     enabledSerialNo: true,

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { AlertService } from '../../../shared/modules/alert/alert.service'
-import { AdminService, CommonService, ConfigService,AccountsService } from '../../../shared/services'
+import { AdminService, CommonService, ConfigService, AccountsService } from '../../../shared/services'
 import { DatePipe } from '@angular/common';
 import { Role } from '../../../shared/model/admin/role'
 import { COA } from '../../../shared/model/accounts'
 import { Router, ActivatedRoute } from '@angular/router';
-import {  } from '../../../shared/model/accounts'
+import { } from '../../../shared/model/accounts'
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -26,18 +26,18 @@ export class ChartOfAccountsComponent implements OnInit {
   public selectedRoleName: string = "";
   public roleDetails = new Role();
   public menu = [];
-  public CompanyId:number;
-  constructor(private adminService: AdminService, private accountsService:AccountsService, private alertService: AlertService, private configService: ConfigService, private commonService: CommonService, private router:Router) {
+  public CompanyId: number;
+  constructor(private adminService: AdminService, private accountsService: AccountsService, private alertService: AlertService, private configService: ConfigService, private commonService: CommonService, private router: Router) {
 
   }
 
   ngOnInit() {
     this.UserId = this.UserInfo[0].Id;
-    this.CompanyId=this.UserInfo[0].CompanyId;
+    this.CompanyId = this.UserInfo[0].CompanyId;
     this.fnGetRole();
   }
 
-  fnNewAccount(){
+  fnNewAccount() {
     this.router.navigate(["./accounts/coa/0"]);
   }
 
@@ -105,7 +105,7 @@ export class ChartOfAccountsComponent implements OnInit {
     this.menu.forEach((rec: any) => {
       rec.SubMenues.forEach((rc: any) => {
         if (rc.IsPermit == 1 || rc.IsPermit) {
-          rc.IsPermit=1;
+          rc.IsPermit = 1;
           permittedList.push(rc);
         }
       });
@@ -117,7 +117,7 @@ export class ChartOfAccountsComponent implements OnInit {
     }
 
     this.alertService.fnLoading(true);
-    this.commonService.fnPostRolePermission(permittedList, this.selectedRoleId,this.UserId,this.CompanyId).subscribe(
+    this.commonService.fnPostRolePermission(permittedList, this.selectedRoleId, this.UserId, this.CompanyId).subscribe(
       (success: any) => {
         this.alertService.fnLoading(false);
         this.alertService.alert(success._body.replace(/"/g, ""));
@@ -131,34 +131,193 @@ export class ChartOfAccountsComponent implements OnInit {
   }
 
   fnGetMenus() {
-    this.menu=[];
-    this.alertService.fnLoading(true);
-    this.commonService.fnGetPermittedMenuRoleWise(this.selectedRoleId).subscribe(
-      (data: any[]) => {
-        data = data || [];
-        let menuId = 0;
-        data.forEach((rec: any) => {
-          if (menuId != rec.MenuId) {
-            menuId = rec.MenuId;
-            this.menu.push({
-              MenuId: rec.MenuId, MenuName: rec.MenuName, MenuTitle: rec.MenuTitle, MenuTitleBangla: rec.MenuTitleBangla, MenuIcon: rec.MenuIcon, SubMenues: data.filter((record: any) => {
-                if (record.MenuId == rec.MenuId) {
-                  return true;
-                } else {
-                  return false;
-                }
-              }) || []
-            });
-          }
-        });
-        this.alertService.fnLoading(false);
+    this.menu = [];
+    // this.alertService.fnLoading(true);
+    // this.commonService.fnGetPermittedMenuRoleWise(this.selectedRoleId).subscribe(
+    //   (data: any[]) => {
+    //     data = data || [];
+    //     let menuId = 0;
+    //     data.forEach((rec: any) => {
+    //       if (menuId != rec.MenuId) {
+    //         menuId = rec.MenuId;
+    //         this.menu.push({
+    //           MenuId: rec.MenuId, MenuName: rec.MenuName, MenuTitle: rec.MenuTitle, MenuTitleBangla: rec.MenuTitleBangla, MenuIcon: rec.MenuIcon, SubMenues: data.filter((record: any) => {
+    //             if (record.MenuId == rec.MenuId) {
+    //               return true;
+    //             } else {
+    //               return false;
+    //             }
+    //           }) || []
+    //         });
+    //       }
+    //     });
+    //     this.alertService.fnLoading(false);
 
-        console.log("d menu", this.menu);
+    //     console.log("d menu", JSON.stringify(this.menu));
+    //   },
+    //   (err: any) => {
+    //     this.alertService.fnLoading(true);
+    //   }
+    // )
+
+
+    this.menu = [
+      {
+        "MenuId": 1,
+        "MenuName": "car",
+        "MenuTitle": "Asset",
+        "MenuTitleBangla": "Asset",
+        "MenuIcon": "fa fa-bus",
+        "SubMenues": [
+          {
+            "MDetailsId": 1,
+            "MenuId": 1,
+            "SubMenuTitle": "Office Equipment",
+            "SubMenuTitleBangla": "Office Equipment",
+            "SubMenuName": "car-type",
+            "SubMenuIcon": null,
+            "MenuName": "car",            
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 2,
+            "MenuId": 1,
+            "SubMenuTitle": "Office Decoration",
+            "SubMenuTitleBangla": "Office Decoration",
+            "SubMenuName": "car-list",
+            "SubMenuIcon": null,
+            "MenuName": "car",           
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 3,
+            "MenuId": 1,
+            "SubMenuTitle": "Employee Loan",
+            "SubMenuTitleBangla": "Employee Loan",
+            "SubMenuName": "driver",
+            "SubMenuIcon": null,
+            "MenuName": "car",            
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          }
+        ]
       },
-      (err: any) => {
-        this.alertService.fnLoading(true);
+      {
+        "MenuId": 1,
+        "MenuName": "Income", 
+        "MenuTitle": "Income", 
+        "MenuTitleBangla": "Income",     
+        "MenuIcon": "fa fa-bus",
+        "SubMenues": [
+          {
+            "MDetailsId": 1,
+            "MenuId": 1,
+            "SubMenuTitle": "Revenue",
+            "SubMenuTitleBangla": "Revenue",
+            "SubMenuName": "car-type",
+            "SubMenuIcon": null,
+            "MenuName": "car",           
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 2,
+            "MenuId": 1,
+            "SubMenuTitle": "Bank Account",
+            "SubMenuTitleBangla": "Bank Account",
+            "SubMenuName": "car-list",
+            "SubMenuIcon": null,           
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+            
+          },
+          {
+            "MDetailsId": 3,
+            "MenuId": 1,
+            "SubMenuTitle": "Chairman Account",
+            "SubMenuTitleBangla": "Chairman Account",
+            "SubMenuName": "driver",
+            "SubMenuIcon": null,            
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 3,
+            "MenuId": 1,
+            "SubMenuTitle": "General Account",
+            "SubMenuTitleBangla": "General Account",
+            "SubMenuName": "driver",
+            "SubMenuIcon": null,            
+            "IsPermit": 1
+          }
+        ]
+      },
+      {
+        "MenuId": 1,
+        "MenuName": "Expenditure",
+        "MenuTitle": "Expenditure",
+        "MenuTitleBangla": "Expenditure",
+        "MenuIcon": "fa fa-bus",
+        "SubMenues": [
+          {
+            "MDetailsId": 1,
+            "MenuId": 1,
+            "SubMenuTitle": "Employee Salary",
+            "SubMenuTitleBangla": "Employee Salary",
+            "SubMenuName": "car-type",
+            "SubMenuIcon": null,
+            "MenuName": "car",            
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 2,
+            "MenuId": 1,
+            "SubMenuTitle": "Festival Bonus",
+            "SubMenuTitleBangla": "Festival Bonus",
+            "SubMenuName": "car-list",
+            "SubMenuIcon": null,
+            "MenuName": "car",           
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 3,
+            "MenuId": 1,
+            "SubMenuTitle": "Telephone - Office",
+            "SubMenuTitleBangla": "Telephone - Office",
+            "SubMenuName": "driver",
+            "SubMenuIcon": null,
+            "MenuName": "car",            
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 3,
+            "MenuId": 1,
+            "SubMenuTitle": "Telephone - Chairman",
+            "SubMenuTitleBangla": "Telephone - Chairman",
+            "SubMenuName": "driver",
+            "SubMenuIcon": null,
+            "MenuName": "car",            
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          },
+          {
+            "MDetailsId": 3,
+            "MenuId": 1,
+            "SubMenuTitle": "Stationeries",
+            "SubMenuTitleBangla": "Stationeries",
+            "SubMenuName": "driver",
+            "SubMenuIcon": null,
+            "MenuName": "car",            
+            "MenuIcon": "fa fa-bus",
+            "IsPermit": 1
+          }
+        ]
       }
-    )
+    ]
   }
 
 
