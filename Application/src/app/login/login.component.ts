@@ -26,18 +26,18 @@ export class LoginComponent implements OnInit {
     }
 
     private startTimer() {
-        // let timer = Observable.timer(1, 15000);
-        // let sub = timer.subscribe(
-        //     t => {
-        //         if (this.imageFile < 4) {
-        //             this.imageFile = this.imageFile + 1;
-        //             this.backgroundImageUrl = "../assets/images/" + this.imageFile + ".jpg";
-        //         } else {
-        //             this.imageFile = 1;
-        //             this.backgroundImageUrl = '../assets/images/1.jpg';
-        //         }
-        //     }
-        // );
+        let timer = Observable.timer(1, 15000);
+        let sub = timer.subscribe(
+            t => {
+                if (this.imageFile < 4) {
+                    this.imageFile = this.imageFile + 1;
+                    this.backgroundImageUrl = "../assets/images/" + this.imageFile + ".jpg";
+                } else {
+                    this.imageFile = 1;
+                    this.backgroundImageUrl = '../assets/images/1.jpg';
+                }
+            }
+        );
     }
 
     onLoggedin() {
