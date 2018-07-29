@@ -147,3 +147,10 @@ $switch-transition: .2s all !default;
         margin-left: 1rem;
     }
 }
+
+@media (max-width: 425px) {
+    app-sidebar{
+        display: block;
+        height: 50px;
+    }
+}

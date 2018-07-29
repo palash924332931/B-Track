@@ -1,45 +1,55 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <alert></alert>
-    <a class="navbar-brand" href="#">{{this.UserInfo[0].Language=='bn'?'বাংলাদেশ সড়ক পরিবহন কর্পোরেশন':'Bangladesh Road Transport Corporation.'}} </a>
-    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
-        <!-- <span class="navbar-toggler-icon"></span> -->
-        <i class="fa fa-bars text-muted" aria-hidden="true"></i>
-    </button>
-
-    <div class="form-group pull-right" style="margin-bottom:0px; padding-left:80px">
-        <span class="switch">
-          <input type="checkbox" (click)="fnChangeSystemLanguage($event)" [(ngModel)]="IsSelectedLanguageBangla" class="switch" id="switch-normal">
-          <label for="switch-normal" style="color: white;" >{{IsSelectedLanguageBangla==true?'বাংলা':'English'}}</label>
-        </span>
+    <div>
+        <a class="navbar-brand" href="#">{{this.UserInfo[0].Language=='bn'?'বাংলাদেশ সড়ক পরিবহন কর্পোরেশন':'Bangladesh Road Transport Corporation.'}} </a>
+        <span class="compName" style="color:white">({{this.UserInfo[0].Language=='bn'? this.UserInfo[0].CompnayNameBangla:this.UserInfo[0].CompanyName}})</span>
     </div>
+    <div>
+        <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+            <!-- <span class="navbar-toggler-icon"></span> -->
+            <i class="fa fa-bars text-muted" aria-hidden="true"></i>
+        </button>
 
+        <div class="form-group pull-right" style="margin-bottom:0px; padding-left:80px">
+            <span class="switch">
+                <input type="checkbox" (click)="fnChangeSystemLanguage($event)" [(ngModel)]="IsSelectedLanguageBangla" class="switch" id="switch-normal">
+                <label for="switch-normal" style="color: white;">{{IsSelectedLanguageBangla==true?'বাংলা':'English'}}</label>
+            </span>
+        </div>
+    </div>
 
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                    <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
+                    <i class="fa fa-bell"></i>
+                    <b class="caret"></b>
+                    <span class="sr-only">(current)</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:void(0)" class="dropdown-item">
-                        {{ 'Receiable Loan'}} <span class="badge badge-info">6</span>
+                        {{ 'Receiable Loan'}}
+                        <span class="badge badge-info">6</span>
                     </a>
                     <a href="javascript:void(0)" class="dropdown-item">
-                        {{ 'In queue'  }} <span class="badge badge-info"> 13</span>
+                        {{ 'In queue' }}
+                        <span class="badge badge-info"> 13</span>
                     </a>
                     <a href="javascript:void(0)" class="dropdown-item">
-                        {{ 'Mail'  }} <span class="badge badge-info"> 45</span>
+                        {{ 'Mail' }}
+                        <span class="badge badge-info"> 45</span>
                     </a>
                     <li class="dropdown-divider"></li>
                     <a href="javascript:void(0)" class="dropdown-item">
-                        {{ 'View All'  }}
+                        {{ 'View All' }}
                     </a>
                 </ul>
             </li>
 
             <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                    <i class="fa fa-user"></i> {{this.UserInfo[0].Language=='en'?this.UserInfo[0].Name:this.UserInfo[0].NameInBangla}} <b class="caret"></b>
+                    <i class="fa fa-user"></i> {{this.UserInfo[0].Language=='en'?this.UserInfo[0].Name:this.UserInfo[0].NameInBangla}}
+                    <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="javascript:void(0)">

@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal, NgbModalRef, ModalDismissReasons, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 
+declare var jQuery: any;
 
 @Component({
   selector: 'app-voucher-details',
@@ -32,6 +33,9 @@ export class VoucherDetailsComponent implements OnInit {
   public toDate: string = null;
   public fromDateSelected: any = null;
   public toDateSelected: any = null;
+  public accountData:any={};
+  public accountDataList:any=[];
+  
   constructor(private carService: CarService, private accountsService: AccountsService, private configService: ConfigService, private alertService: AlertService, private ngbDateParserFormatter: NgbDateParserFormatter, private customNgbDateParserFormatter: CustomNgbDateParserFormatter, private router: Router, private route: ActivatedRoute, private modalService: NgbModal, private commonService: CommonService) { }
 
   ngOnInit() {
@@ -63,6 +67,16 @@ export class VoucherDetailsComponent implements OnInit {
     this.preReceivedDifferentRouteIncome = 0;
     this.preReceivedOnRouteIncome = 0;
   }
+
+
+  private addNew(){
+    if(Object.keys(this.accountData).length === 0 && this.accountData.constructor === Object){return;}
+    this.accountDataList.push(jQuery.extend(true, {}, this.accountData));
+    this.accountData={};
+  }
+
+
+
 
   fnGetDailyPaymentDetails() {
     this.alertService.fnLoading(true);
