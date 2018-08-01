@@ -25,6 +25,12 @@ export class LoginComponent implements OnInit {
         this.startTimer();
     }
 
+    private onKeyPress(event:any){
+        if (event.which == 13 || event.keyCode == 13) { //Check if "Enter" key pressed
+            this.onLoggedin();
+        }
+    }
+
     private startTimer() {
         let timer = Observable.timer(1, 15000);
         let sub = timer.subscribe(

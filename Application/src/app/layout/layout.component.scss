@@ -13,3 +13,9 @@
         margin-left: 0px !important;
     }
 }
+@media (max-width: 425px) {
+    app-sidebar{
+        display: block;
+        height: 50px;
+    }
+}

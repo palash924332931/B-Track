@@ -45,6 +45,10 @@ export class SidebarComponent implements OnInit {
         
     }
 
+    onLoggedout() {
+        localStorage.removeItem('isLoggedin');
+    }
+
     addExpandClass(element: any) {
         if (element === this.showMenu) {
             this.showMenu = '0';
