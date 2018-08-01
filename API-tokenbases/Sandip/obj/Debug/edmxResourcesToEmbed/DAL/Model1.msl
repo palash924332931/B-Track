@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="palasaho_sandhiModelStoreContainer" CdmEntityContainer="LoanEntities2">
+    <EntitySetMapping Name="ChartOfAccounts">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.ChartOfAccount">
+        <MappingFragment StoreEntitySet="ChartOfAccounts">
+          <ScalarProperty Name="AccountCode" ColumnName="AccountCode" />
+          <ScalarProperty Name="IsGroup" ColumnName="IsGroup" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+          <ScalarProperty Name="AccountDescription" ColumnName="AccountDescription" />
+          <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+          <ScalarProperty Name="DefaultCurrency" ColumnName="DefaultCurrency" />
+          <ScalarProperty Name="TrackAgreement" ColumnName="TrackAgreement" />
+          <ScalarProperty Name="TrackInstallmentNo" ColumnName="TrackInstallmentNo" />
+          <ScalarProperty Name="TrackCustomer" ColumnName="TrackCustomer" />
+          <ScalarProperty Name="TrackCostCenter" ColumnName="TrackCostCenter" />
+          <ScalarProperty Name="TrackParty" ColumnName="TrackParty" />
+          <ScalarProperty Name="TrackParticipant" ColumnName="TrackParticipant" />
+          <ScalarProperty Name="TrackBank" ColumnName="TrackBank" />
+          <ScalarProperty Name="TrackBill" ColumnName="TrackBill" />
+          <ScalarProperty Name="TrackEmployee" ColumnName="TrackEmployee" />
+          <ScalarProperty Name="TrackTeller" ColumnName="TrackTeller" />
+          <ScalarProperty Name="TrackAssetItem" ColumnName="TrackAssetItem" />
+          <ScalarProperty Name="TrackInventoryItem" ColumnName="TrackInventoryItem" />
+          <ScalarProperty Name="TrackBranch" ColumnName="TrackBranch" />
+          <ScalarProperty Name="IsCash" ColumnName="IsCash" />
+          <ScalarProperty Name="PLBSGroup" ColumnName="PLBSGroup" />
+          <ScalarProperty Name="NetAssetGroup" ColumnName="NetAssetGroup" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerCoBorrowers">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.CustomerCoBorrower">
+        <MappingFragment StoreEntitySet="CustomerCoBorrower">
+          <ScalarProperty Name="CoBorrowerID" ColumnName="CoBorrowerID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Relation" ColumnName="Relation" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="DocumentTypeID" ColumnName="DocumentTypeID" />
+          <ScalarProperty Name="FatherOrHusbandName" ColumnName="FatherOrHusbandName" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="AadharCardNo" ColumnName="AadharCardNo" />
+          <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerInsuredPersons">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.CustomerInsuredPerson">
+        <MappingFragment StoreEntitySet="CustomerInsuredPerson">
+          <ScalarProperty Name="InsuredID" ColumnName="InsuredID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Relation" ColumnName="Relation" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.Role">
+        <MappingFragment StoreEntitySet="Role">
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Agreements">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.Agreement">
+        <MappingFragment StoreEntitySet="Agreement">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AgreementNo" ColumnName="AgreementNo" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="CsrID" ColumnName="CsrID" />
+          <ScalarProperty Name="UnitNo" ColumnName="UnitNo" />
+          <ScalarProperty Name="ApplyDate" ColumnName="ApplyDate" />
+          <ScalarProperty Name="SanctionDate" ColumnName="SanctionDate" />
+          <ScalarProperty Name="expaireDate" ColumnName="expaireDate" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="LoanPurpose" ColumnName="LoanPurpose" />
+          <ScalarProperty Name="DisburseAccountID" ColumnName="DisburseAccountID" />
+          <ScalarProperty Name="NominalRate" ColumnName="NominalRate" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Weeks" ColumnName="Weeks" />
+          <ScalarProperty Name="Installment" ColumnName="Installment" />
+          <ScalarProperty Name="RecoveryAmount" ColumnName="RecoveryAmount" />
+          <ScalarProperty Name="ActualLoanAmount" ColumnName="ActualLoanAmount" />
+          <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+          <ScalarProperty Name="ProcessingFeeRate" ColumnName="ProcessingFeeRate" />
+          <ScalarProperty Name="ActualProcessingFee" ColumnName="ActualProcessingFee" />
+          <ScalarProperty Name="ProcessingFee" ColumnName="ProcessingFee" />
+          <ScalarProperty Name="RiskFundRate" ColumnName="RiskFundRate" />
+          <ScalarProperty Name="ActualRiskFund" ColumnName="ActualRiskFund" />
+          <ScalarProperty Name="RiskFund" ColumnName="RiskFund" />
+          <ScalarProperty Name="SavingsRate" ColumnName="SavingsRate" />
+          <ScalarProperty Name="ActualSavingsAmount" ColumnName="ActualSavingsAmount" />
+          <ScalarProperty Name="SavingsAmount" ColumnName="SavingsAmount" />
+          <ScalarProperty Name="DisburseAmount" ColumnName="DisburseAmount" />
+          <ScalarProperty Name="ExecutionDate" ColumnName="ExecutionDate" />
+          <ScalarProperty Name="PaymentDuration" ColumnName="PaymentDuration" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwGroups">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.vwGroup">
+        <MappingFragment StoreEntitySet="vwGroup">
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="CsrID" ColumnName="CsrID" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+          <ScalarProperty Name="GroupPrevNo" ColumnName="GroupPrevNo" />
+          <ScalarProperty Name="VillageWardNo" ColumnName="VillageWardNo" />
+          <ScalarProperty Name="LandMark" ColumnName="LandMark" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="MeetingPlace" ColumnName="MeetingPlace" />
+          <ScalarProperty Name="UnitNo" ColumnName="UnitNo" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="CSRName" ColumnName="CSRName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vwUsers">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.vwUser">
+        <MappingFragment StoreEntitySet="vwUsers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prGetAgreements" FunctionName="palasaho_sandhiModel.Store.prGetAgreements">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="palasaho_sandhiModel.prGetAgreements_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AgreementNo" ColumnName="AgreementNo" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="CsrID" ColumnName="CsrID" />
+          <ScalarProperty Name="UnitNo" ColumnName="UnitNo" />
+          <ScalarProperty Name="ApplyDate" ColumnName="ApplyDate" />
+          <ScalarProperty Name="SanctionDate" ColumnName="SanctionDate" />
+          <ScalarProperty Name="expaireDate" ColumnName="expaireDate" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="LoanPurpose" ColumnName="LoanPurpose" />
+          <ScalarProperty Name="DisburseAccountID" ColumnName="DisburseAccountID" />
+          <ScalarProperty Name="NominalRate" ColumnName="NominalRate" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Weeks" ColumnName="Weeks" />
+          <ScalarProperty Name="Installment" ColumnName="Installment" />
+          <ScalarProperty Name="RecoveryAmount" ColumnName="RecoveryAmount" />
+          <ScalarProperty Name="ActualLoanAmount" ColumnName="ActualLoanAmount" />
+          <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+          <ScalarProperty Name="ProcessingFeeRate" ColumnName="ProcessingFeeRate" />
+          <ScalarProperty Name="ActualProcessingFee" ColumnName="ActualProcessingFee" />
+          <ScalarProperty Name="ProcessingFee" ColumnName="ProcessingFee" />
+          <ScalarProperty Name="RiskFundRate" ColumnName="RiskFundRate" />
+          <ScalarProperty Name="ActualRiskFund" ColumnName="ActualRiskFund" />
+          <ScalarProperty Name="RiskFund" ColumnName="RiskFund" />
+          <ScalarProperty Name="SavingsRate" ColumnName="SavingsRate" />
+          <ScalarProperty Name="ActualSavingsAmount" ColumnName="ActualSavingsAmount" />
+          <ScalarProperty Name="SavingsAmount" ColumnName="SavingsAmount" />
+          <ScalarProperty Name="DisburseAmount" ColumnName="DisburseAmount" />
+          <ScalarProperty Name="ExecutionDate" ColumnName="ExecutionDate" />
+          <ScalarProperty Name="PaymentDuration" ColumnName="PaymentDuration" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="CSRName" ColumnName="CSRName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prGetCustomertLis" FunctionName="palasaho_sandhiModel.Store.prGetCustomertLis" />
+    <FunctionImportMapping FunctionImportName="prGetEmployee" FunctionName="palasaho_sandhiModel.Store.prGetEmployee" />
+    <FunctionImportMapping FunctionImportName="prGetGroupDetails" FunctionName="palasaho_sandhiModel.Store.prGetGroupDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="palasaho_sandhiModel.prGetGroupDetails_Result">
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="CsrID" ColumnName="CsrID" />
+          <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+          <ScalarProperty Name="GroupPrevNo" ColumnName="GroupPrevNo" />
+          <ScalarProperty Name="VillageWardNo" ColumnName="VillageWardNo" />
+          <ScalarProperty Name="LandMark" ColumnName="LandMark" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+          <ScalarProperty Name="MeetingPlace" ColumnName="MeetingPlace" />
+          <ScalarProperty Name="UnitNo" ColumnName="UnitNo" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="IsEmployee" ColumnName="IsEmployee" />
+          <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="PAN" ColumnName="PAN" />
+          <ScalarProperty Name="NationalIDNo" ColumnName="NationalIDNo" />
+          <ScalarProperty Name="AadharCardNo" ColumnName="AadharCardNo" />
+          <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="OccupationID" ColumnName="OccupationID" />
+          <ScalarProperty Name="QualificationID" ColumnName="QualificationID" />
+          <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+          <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+          <ScalarProperty Name="DocumentTypeID" ColumnName="DocumentTypeID" />
+          <ScalarProperty Name="AgeProofCertificateNo" ColumnName="AgeProofCertificateNo" />
+          <ScalarProperty Name="AgeProofCertificate" ColumnName="AgeProofCertificate" />
+          <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Caste" ColumnName="Caste" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="AlliasName" ColumnName="AlliasName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="FormNo" ColumnName="FormNo" />
+          <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerContacts">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.CustomerContact">
+        <MappingFragment StoreEntitySet="CustomerContact">
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="LandLineNo" ColumnName="LandLineNo" />
+          <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="WardNo" ColumnName="WardNo" />
+          <ScalarProperty Name="Block" ColumnName="Block" />
+          <ScalarProperty Name="PoliceStation" ColumnName="PoliceStation" />
+          <ScalarProperty Name="PostOffice" ColumnName="PostOffice" />
+          <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="PresentAddress" ColumnName="PresentAddress" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CustomerContactID" ColumnName="CustomerContactID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CustomerHouses">
+      <EntityTypeMapping TypeName="palasaho_sandhiModel.CustomerHouse">
+        <MappingFragment StoreEntitySet="CustomerHouse">
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ElectricBillDetails" ColumnName="ElectricBillDetails" />
+          <ScalarProperty Name="ConsumerID" ColumnName="ConsumerID" />
+          <ScalarProperty Name="DeleteStatus" ColumnName="DeleteStatus" />
+          <ScalarProperty Name="ActiveStatus" ColumnName="ActiveStatus" />
+          <ScalarProperty Name="YearlyFestiveExpense" ColumnName="YearlyFestiveExpense" />
+          <ScalarProperty Name="MonthlyExpense" ColumnName="MonthlyExpense" />
+          <ScalarProperty Name="FamilyMembers" ColumnName="FamilyMembers" />
+          <ScalarProperty Name="Valuation" ColumnName="Valuation" />
+          <ScalarProperty Name="Rooms" ColumnName="Rooms" />
+          <ScalarProperty Name="RoomType" ColumnName="RoomType" />
+          <ScalarProperty Name="PlotNo" ColumnName="PlotNo" />
+          <ScalarProperty Name="Extent" ColumnName="Extent" />
+          <ScalarProperty Name="HouseNo" ColumnName="HouseNo" />
+          <ScalarProperty Name="HouseType" ColumnName="HouseType" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="CustomerHouseID" ColumnName="CustomerHouseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,476 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CarSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CarDetails">
+    <Key>
+      <PropertyRef Name="CarId" />
+    </Key>
+    <Property Name="CarId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RegistrationNo" Type="nvarchar" MaxLength="200" />
+    <Property Name="RegistrationDate" Type="datetime" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="CarTypeId" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="200" />
+    <Property Name="ReasonForStop" Type="nvarchar" MaxLength="500" />
+    <Property Name="OnRootDate" Type="datetime" />
+    <Property Name="TotalDistance" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="Update" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+    <Property Name="NoOfSeat" Type="nvarchar" MaxLength="100" />
+    <Property Name="Creation" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CarTypes">
+    <Key>
+      <PropertyRef Name="CarTypeId" />
+    </Key>
+    <Property Name="CarTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="UpdatedTime" Type="datetime" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="Creation" Type="datetime" />
+  </EntityType>
+  <EntityType Name="DailyCarHistories">
+    <Key>
+      <PropertyRef Name="CarLogId" />
+    </Key>
+    <Property Name="CarLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CarId" Type="int" />
+    <Property Name="DriverId" Type="int" />
+    <Property Name="RootId" Type="int" />
+    <Property Name="CheckInDate" Type="datetime" />
+    <Property Name="CheckInTime" Type="nvarchar" MaxLength="100" />
+    <Property Name="CheckOutDate" Type="datetime" />
+    <Property Name="CheckOutTime" Type="nvarchar" MaxLength="100" />
+    <Property Name="TripNo" Type="decimal" Precision="4" Scale="1" />
+    <Property Name="TotalDistance" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CheckInBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="CheckOutBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsUnwantedReturn" Type="bit" />
+    <Property Name="ReasonForReturn" Type="nvarchar" MaxLength="500" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="Creation" Type="datetime" />
+    <Property Name="Update" Type="datetime" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="RouteStartPoint" Type="nvarchar" MaxLength="200" />
+    <Property Name="ExceptioalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TripType" Type="nvarchar" MaxLength="200" />
+    <Property Name="OnRouteIncome" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="DifferentRouteIncome" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="DifferentRouteDistance" Type="int" />
+    <Property Name="AdditionalIncomeType" Type="nvarchar" MaxLength="200" />
+    <Property Name="TotalIncome" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="IsUnOfficialDay" Type="bit" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="EmployeeId" Type="nvarchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="NameInBangla" Type="nvarchar" MaxLength="200" />
+    <Property Name="PresentAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="PermanentAddress" Type="nvarchar" MaxLength="500" />
+    <Property Name="RoleId" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="100" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="CreatedBy" Type="nvarchar" MaxLength="100" />
+    <Property Name="Update" Type="datetime" />
+    <Property Name="Language" Type="nvarchar" MaxLength="50" />
+    <Property Name="CorpJoinDate" Type="datetime" />
+    <Property Name="FatherName" Type="nvarchar" MaxLength="200" />
+    <Property Name="DepotJoinDate" Type="datetime" />
+    <Property Name="RetirementDate" Type="datetime" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Grade" Type="nvarchar" MaxLength="200" />
+    <Property Name="Creation" Type="datetime" />
+  </EntityType>
+  <Function Name="prDeletePaySlip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PaySlipId" Type="int" Mode="In" />
+    <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prDeletePOLRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="POLId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prDeleteVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VendorId" Type="int" Mode="In" />
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prGetBusPaymentHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="CarTypeId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetCarDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetCarTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prGetDailyCarLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="CarLogId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetDailyCarLogDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="CarLogId" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetDailyCarLogReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prGetDailyCarTypesReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prGetDailyPaymentLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PaymentId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetDailyPaymentReportSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="SelectedDate" Type="datetime" Mode="In" />
+    <Parameter Name="CarTypeId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetDashboardReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="date" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prGetDriver" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetIncomeReportDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="CarTypeId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetIncomeReportDateRangeBusWiseSection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="RouteId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetJobList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="JobId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetMenuList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prGetMenuListRoleWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prGetMonthlyBusReportRouteWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetMonthlyIncomeReportDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetMonthlyIncomeReportRouteWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetPartsDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prGetPaySlipBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prGetPaySlipDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PaySlipId" Type="int" Mode="In" />
+    <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetPol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="POLId" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetReportSectionDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="RouteId" Type="int" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="prGetRootCost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="RootCostId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetRoots" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="RootId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetVendorDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="VendorId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prSaveCarDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="RegistrationNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RegistrationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CarTypeId" Type="int" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="ReasonForStop" Type="nvarchar" Mode="In" />
+    <Parameter Name="NoOfSeat" Type="nvarchar" Mode="In" />
+    <Parameter Name="OnRootDate" Type="datetime" Mode="In" />
+    <Parameter Name="TotalDistance" Type="decimal" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSaveCarType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CarTypeId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="Description" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="UpdateTime" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSaveDailyCarLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CarLogId" Type="int" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="RootId" Type="int" Mode="In" />
+    <Parameter Name="CheckInDate" Type="datetime" Mode="In" />
+    <Parameter Name="CheckOutDate" Type="datetime" Mode="In" />
+    <Parameter Name="CheckInTime" Type="nvarchar" Mode="In" />
+    <Parameter Name="CheckOutTime" Type="nvarchar" Mode="In" />
+    <Parameter Name="TripNo" Type="decimal" Mode="In" />
+    <Parameter Name="TotalDistance" Type="decimal" Mode="In" />
+    <Parameter Name="CheckInBy" Type="int" Mode="In" />
+    <Parameter Name="CheckOutBy" Type="int" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="IsUnwantedReturn" Type="bit" Mode="In" />
+    <Parameter Name="ReasonForReturn" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+    <Parameter Name="RouteStartPoint" Type="nvarchar" Mode="In" />
+    <Parameter Name="ExceptioalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="TripType" Type="nvarchar" Mode="In" />
+    <Parameter Name="DifferentRouteIncome" Type="decimal" Mode="In" />
+    <Parameter Name="DifferentRouteDistance" Type="int" Mode="In" />
+    <Parameter Name="AdditionalIncomeType" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsUnOfficialDay" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="prSaveDailyPayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentId" Type="int" Mode="In" />
+    <Parameter Name="CarLogId" Type="int" Mode="In" />
+    <Parameter Name="PaymentAmount" Type="decimal" Mode="In" />
+    <Parameter Name="SystemAmount" Type="decimal" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+    <Parameter Name="PaySlipId" Type="int" Mode="In" />
+    <Parameter Name="PaymentStatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="ReceivedBy" Type="int" Mode="In" />
+    <Parameter Name="ReceivedByName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ReceivedDate" Type="datetime" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+    <Parameter Name="PaymentType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prSaveDriverDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameInBangla" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="DrivingLicense" Type="nvarchar" Mode="In" />
+    <Parameter Name="PresentAddress" Type="nvarchar" Mode="In" />
+    <Parameter Name="PermanentAddress" Type="nvarchar" Mode="In" />
+    <Parameter Name="HelperName" Type="nvarchar" Mode="In" />
+    <Parameter Name="HelperContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Reference" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+    <Parameter Name="CorpJoinDate" Type="date" Mode="In" />
+    <Parameter Name="DepotJoinDate" Type="date" Mode="In" />
+    <Parameter Name="RetirementDate" Type="date" Mode="In" />
+    <Parameter Name="ReasonForInactive" Type="nvarchar" Mode="In" />
+    <Parameter Name="Grade" Type="nvarchar" Mode="In" />
+    <Parameter Name="DateOfBirth" Type="date" Mode="In" />
+    <Parameter Name="FatherName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prSaveJobInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="JobId" Type="int" Mode="In" />
+    <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="JobDate" Type="date" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="JobDescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="JobCompletedDate" Type="date" Mode="In" />
+    <Parameter Name="BusStatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="AssignedMechanic" Type="int" Mode="In" />
+    <Parameter Name="Remark" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Created" Type="date" Mode="In" />
+  </Function>
+  <Function Name="prSavePaySlip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaySlipId" Type="int" Mode="In" />
+    <Parameter Name="SlipNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSavePOLDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="POLId" Type="int" Mode="In" />
+    <Parameter Name="CarId" Type="int" Mode="In" />
+    <Parameter Name="CheckInDate" Type="datetime" Mode="In" />
+    <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="IssuedById" Type="int" Mode="In" />
+    <Parameter Name="CNG" Type="decimal" Mode="In" />
+    <Parameter Name="Diesel" Type="decimal" Mode="In" />
+    <Parameter Name="EngineOil" Type="decimal" Mode="In" />
+    <Parameter Name="PowerOil" Type="decimal" Mode="In" />
+    <Parameter Name="GearOil" Type="decimal" Mode="In" />
+    <Parameter Name="Grease" Type="decimal" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Remark" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSaveRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RoleId" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSaveRoot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RootId" Type="int" Mode="In" />
+    <Parameter Name="RootName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="StartPoint" Type="nvarchar" Mode="In" />
+    <Parameter Name="EndPoint" Type="nvarchar" Mode="In" />
+    <Parameter Name="Distance" Type="decimal" Mode="In" />
+    <Parameter Name="UnofficialDistance" Type="decimal" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+    <Parameter Name="TargetTrip" Type="decimal" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSaveRootCost" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RootCostId" Type="int" Mode="In" />
+    <Parameter Name="RootId" Type="int" Mode="In" />
+    <Parameter Name="CarTypeId" Type="int" Mode="In" />
+    <Parameter Name="FirstTripIncome" Type="decimal" Mode="In" />
+    <Parameter Name="SecondTripIncome" Type="decimal" Mode="In" />
+    <Parameter Name="ThirdTripIncome" Type="decimal" Mode="In" />
+    <Parameter Name="UnFirstTripIncome" Type="decimal" Mode="In" />
+    <Parameter Name="UnSecondTripIncome" Type="decimal" Mode="In" />
+    <Parameter Name="UnThirdTripIncome" Type="decimal" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="prSaveUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Id" Type="int" Mode="In" />
+    <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="NameInBangla" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="PresentAddress" Type="nvarchar" Mode="In" />
+    <Parameter Name="PermanentAddress" Type="nvarchar" Mode="In" />
+    <Parameter Name="RoleId" Type="int" Mode="In" />
+    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+    <Parameter Name="CorpJoinDate" Type="datetime" Mode="In" />
+    <Parameter Name="DepotJoinDate" Type="datetime" Mode="In" />
+    <Parameter Name="RetirementDate" Type="datetime" Mode="In" />
+    <Parameter Name="DateOfBirth" Type="datetime" Mode="In" />
+    <Parameter Name="Grade" Type="nvarchar" Mode="In" />
+    <Parameter Name="FatherName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prSaveVendorDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="VendorId" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactPerson" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Remark" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="ActivityType" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prSpecialActionOnCarLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserId" Type="int" Mode="In" />
+    <Parameter Name="CarLogId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prUpdateDailyCarLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="CarLogId" Type="int" Mode="In" />
+    <Parameter Name="AdditionalId" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prUpdatePaySlipDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PaySlipId" Type="int" Mode="In" />
+    <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="CarSystemModelStoreContainer">
+    <EntitySet Name="CarDetails" EntityType="Self.CarDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DailyCarHistories" EntityType="Self.DailyCarHistories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
