@@ -63,6 +63,7 @@ export class JobManagerComponent implements OnInit {
         this.carLogTableBind.tableName = this.LT == 'bn' ? this.fromDate + ' থেকে ' + this.toDate + ' তারিখের গাড়ীর জবের তালিকা' : 'Bus Log List from ' + this.fromDate + ' to ' + this.toDate;
         this.carLogList = data || [];
         this.carLogList.forEach((rec: any) => {
+          rec.JobDate=rec.JobDate.split("T")[0];
           rec.Details = true;
         });
         this.alertService.fnLoading(false);

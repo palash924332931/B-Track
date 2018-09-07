@@ -16,6 +16,7 @@ $topnav-background-color: #222;
     bottom: 0;
     overflow: auto;
     background: $topnav-background-color;
+    background-size: 100%;
     text-align: center;
     color: #fff;
     padding: 3em;
@@ -93,10 +94,23 @@ $topnav-background-color: #222;
     }
     .form-content {
         padding: 40px 0;
+        padding-bottom: 8px;
     }
     .user-avatar {
         -webkit-border-radius: 50%;
         border-radius: 50%;
         border: 2px solid #fff;
+    }
+    .marginZero {
+        margin: 2px;
+    }
+    .input-required {
+        input {
+            border-color: #d87e7e;
+        }
+    }
+    a.disabled {
+        pointer-events: none;
+        cursor: not-allowed;
     }
 }

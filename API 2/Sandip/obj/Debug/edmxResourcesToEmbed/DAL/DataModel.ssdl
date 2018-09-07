@@ -66,6 +66,24 @@
     <Property Name="TotalIncome" Type="decimal" Precision="10" Scale="2" />
     <Property Name="IsUnOfficialDay" Type="bit" />
   </EntityType>
+  <EntityType Name="POLUnitPrices">
+    <Key>
+      <PropertyRef Name="POLUnitPriceId" />
+    </Key>
+    <Property Name="POLUnitPriceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CNGUnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="DieselUnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="EngineOilUnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="PowerOilUnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="GearOilUnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="GreaseUnitPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Createdby" Type="int" />
+    <Property Name="Created" Type="date" />
+    <Property Name="Updated" Type="date" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="Id" />
@@ -98,10 +116,6 @@
     <Parameter Name="PaySlipId" Type="int" Mode="In" />
     <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="prDeletePOLRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="UserID" Type="int" Mode="In" />
-    <Parameter Name="POLId" Type="int" Mode="In" />
   </Function>
   <Function Name="prDeleteVendor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="VendorId" Type="int" Mode="In" />
@@ -153,6 +167,13 @@
     <Parameter Name="CarTypeId" Type="int" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="prGetDailyPOLLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
+    <Parameter Name="PolId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="prGetDashboardReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="date" Type="datetime" Mode="In" />
@@ -160,6 +181,12 @@
   <Function Name="prGetDriver" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="DriverId" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="prGetIncomeExpenseReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="FromDate" Type="date" Mode="In" />
+    <Parameter Name="ToDate" Type="date" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="prGetIncomeReportDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -467,10 +494,17 @@
     <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
     <Parameter Name="Type" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="prUpdatePolRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PolId" Type="int" Mode="In" />
+    <Parameter Name="PolIdString" Type="nvarchar" Mode="In" />
+    <Parameter Name="StatusChangeTo" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="CarSystemModelStoreContainer">
     <EntitySet Name="CarDetails" EntityType="Self.CarDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DailyCarHistories" EntityType="Self.DailyCarHistories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="POLUnitPrices" EntityType="Self.POLUnitPrices" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

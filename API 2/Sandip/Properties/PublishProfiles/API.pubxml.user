@@ -70,7 +70,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/27/2017 23:31:09</publishTime>
     </File>
     <File Include="bin/Sandip.dll">
-      <publishTime>05/21/2018 00:01:28</publishTime>
+      <publishTime>09/06/2018 09:34:43</publishTime>
     </File>
     <File Include="bin/SqlServerTypes/x64/msvcr120.dll">
       <publishTime>01/31/2018 00:24:48</publishTime>
@@ -133,7 +133,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/02/2017 14:36:07</publishTime>
     </File>
     <File Include="DAL/DataModel.edmx.diagram">
-      <publishTime>04/25/2018 01:36:56</publishTime>
+      <publishTime>09/01/2018 17:44:33</publishTime>
     </File>
     <File Include="DAL/DBModel.edmx.diagram">
       <publishTime>02/02/2018 20:12:06</publishTime>
@@ -226,7 +226,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/02/2017 14:36:07</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/21/2018 00:01:31</publishTime>
+      <publishTime>09/06/2018 09:34:49</publishTime>
     </File>
   </ItemGroup>
 </Project>

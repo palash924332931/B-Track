@@ -161,4 +161,35 @@ export class AdminService {
 
     // #endregion of Role
 
+
+    // #startregion POL Unit Price
+    fnGetUnitPrices(userId) {
+        var url = ConfigService.baseWebApiUrl + '/GetPolUnitPrices?userId='+userId;
+        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        return this.http.get(url, "")
+            .map((response: any) => <any[]>JSON.parse(response._body||[]));
+    } 
+
+    fnPostPolUnitPrice(data: any) {
+        var url = ConfigService.baseWebApiUrl + '/PostPolUnitPrice';
+        return this.http.post(url, data, "")
+            .map((response: Response) => <any>(response));
+    }  
+    
+    fnGetUnitPriceById(userId,polUnitPriceId) {
+        var url = ConfigService.baseWebApiUrl + '/GetPolUnitPriceById?userId='+userId+'&polUnitPriceId='+polUnitPriceId;
+        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        return this.http.get(url, "")
+            .map((response: any) => <any>JSON.parse(response._body||{}));
+    } 
+
+    fnDeletePolUnitPrice(polUnitPriceId: number,userId:number) {
+        var url = ConfigService.baseWebApiUrl + '/DeleteVendor?polUnitPriceId=' + polUnitPriceId+"&userId="+userId;
+        return this.http.get(url, "")
+            .map((response: Response) => <string>(response.json()));
+    }
+
+
+    //endregioni of POL Unit Prices
+
 }

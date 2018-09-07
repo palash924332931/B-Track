@@ -16,6 +16,7 @@ import { DailypaymentReportComponent } from './dailypayment-report/dailypayment-
 import { MonthlypaymentReportComponent } from './monthlypayment-report/monthlypayment-report.component';
 import { MonthlybuswiseRepotComponent } from './monthlybuswise-repot/monthlybuswise-repot.component';
 import { MonthlyIncomChartComponent } from './monthly-incom-chart/monthly-incom-chart.component';
+import { MonthlyIncomeExpenseReportComponent } from './monthly-income-expense-report/monthly-income-expense-report.component';
 
 const routes:Routes=[   
     {        
@@ -28,14 +29,14 @@ const routes:Routes=[
             { path: 'monthlyincomereport', component: MonthlypaymentReportComponent},
             { path: 'monthlybusreport', component: MonthlybuswiseRepotComponent},
             { path: 'monthlyreportchart', component: MonthlyIncomChartComponent},
-           // { path: 'installment', component: InstallmentComponent},
+            { path: 'incomeexpensereport', component: MonthlyIncomeExpenseReportComponent},
         ]
     } 
 ]
 
 @NgModule({
     imports: [CommonModule,ChartModule,FormsModule,ReactiveFormsModule,PTableModule,AlertModule,HttpModule,NgbModule.forRoot(), PageHeaderModule,RouterModule.forChild(routes)],
-    declarations: [ReportComponent, PayslipReportComponent, DailycarlogReportComponent, DailypaymentReportComponent, MonthlypaymentReportComponent, MonthlybuswiseRepotComponent, MonthlyIncomChartComponent],
+    declarations: [ReportComponent, PayslipReportComponent, DailycarlogReportComponent, DailypaymentReportComponent, MonthlypaymentReportComponent, MonthlybuswiseRepotComponent, MonthlyIncomChartComponent, MonthlyIncomeExpenseReportComponent],
     providers:[ConfigService,AccountsService,CarService,ReportService],
     exports: [RouterModule]
 })

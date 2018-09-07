@@ -40,6 +40,13 @@ export class ReportService {
             .map((response: any) => <any[]>JSON.parse(response._body || []));
     }
 
+    fnGetIncomeExpenseReport(UserId: number,FromDate:string,ToDate:string,Type:string) {
+        var url = ConfigService.baseWebApiUrl + '/GetMonthlyIncomeExpenseReport?UserId=' + UserId+'&FromDate='+FromDate+'&ToDate='+ToDate+'&Type='+Type;
+        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        return this.http.get(url, "")
+            .map((response: any) => <any[]>JSON.parse(response._body || []));
+    }
+
     fnGetIncomeReportRouteWiseDateRange(UserId: number,FromDate:string,ToDate:string,Type:string) {
         var url = ConfigService.baseWebApiUrl + '/GetMonthlyIncomeRouteWiseReport?UserId=' + UserId+'&FromDate='+FromDate+'&ToDate='+ToDate+'&Type='+Type;
         //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });

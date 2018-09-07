@@ -139,89 +139,80 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row required">
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রশিদ':'Pay Slip '}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Pay Slip')"></i></label>
-                        <div class="col-sm-4">
-                            <input type="text" disabled class="form-control" [(ngModel)]="dailyPaymentDetails.SlipNo">
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="text" disabled class="form-control" [(ngModel)]="dailyPaymentDetails.BookNo">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রশিদে টাকা':'Pay Slip Amount'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" [disabled]="!(dailyPaymentDetails.PaymentType == 'Partially' && IsEditItem!=true)" class="form-control" [(ngModel)]="dailyPaymentDetails.PaymentAmount">
-                            <div *ngIf="this.prevPaidAmount>0 && IsEditItem!=true">
-                                <span class="success" style="color:#28a745;font-weight:bold">{{LT=='bn'?prevPaidAmount+' টাকা গ্রহন করা হয়েছে।':prevPaidAmount+'  tk already paid.'}}</span>
+            <div class="payslip-section">
+                <div class="row required">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রশিদ':'Pay Slip '}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Pay Slip')"></i></label>
+                            <div class="col-sm-4">
+                                <input type="text" disabled class="form-control" [(ngModel)]="dailyPaymentDetails.SlipNo">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" disabled class="form-control" [(ngModel)]="dailyPaymentDetails.BookNo">
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-xl-6">
-                    <div class="row required">
-                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রহীতা':'Received By'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" [(ngModel)]="dailyPaymentDetails.ReceivedByName">
-                        </div>
-                    </div>
-                </div>
 
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রহনের তারিখ':'Received Date'}}</label>
-                        <div class="col-sm-8">
-                            <div class="input-group">
-                                <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="receivedDate" (ngModelChange)="onSelectReceivedByDate($event)">
-                                <div class="input-group-addon" (click)="id.toggle()">
-                                    <span class="fa fa-calendar"></span>
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রশিদে টাকা':'Pay Slip Amount'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" [disabled]="!(dailyPaymentDetails.PaymentType == 'Partially' && IsEditItem!=true)" class="form-control" [(ngModel)]="dailyPaymentDetails.PaymentAmount">
+                                <div *ngIf="this.prevPaidAmount>0 && IsEditItem!=true">
+                                    <span class="success" style="color:#28a745;font-weight:bold">{{LT=='bn'?prevPaidAmount+' টাকা গ্রহন করা হয়েছে।':prevPaidAmount+'  tk already paid.'}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <!-- <div class="form-group col-xl-6">
-                    <div class="row required">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}} </label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="status" [(ngModel)]="dailyPaymentDetails.Status">
-                          <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
-                          <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                           
-                      </select>
+                <div class="row">
+                    <div class="form-group col-xl-6">
+                        <div class="row required">
+                            <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রহীতা':'Received By'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" [(ngModel)]="dailyPaymentDetails.ReceivedByName">
+                            </div>
                         </div>
                     </div>
-                </div> -->
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পেমেন্টর ধরন':'Payment Type'}}</label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="status" [(ngModel)]="dailyPaymentDetails.PaymentType" (change)="fnChagePaymentType()">
+
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রহনের তারিখ':'Received Date'}}</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #id="ngbDatepicker" [(ngModel)]="receivedDate" (ngModelChange)="onSelectReceivedByDate($event)">
+                                    <div class="input-group-addon" (click)="id.toggle()">
+                                        <span class="fa fa-calendar"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পেমেন্টর ধরন':'Payment Type'}}</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="status" [(ngModel)]="dailyPaymentDetails.PaymentType" (change)="fnChagePaymentType()">
                                  <option selected value="Paid">{{LT=='bn'?'পরিশোধ':'Paid'}}</option> 
                                  <option selected value="Paid Route Income">{{LT=='bn'?'রুটের আয় পরিশোধ':'Paid Route Income'}}</option> 
                                  <option selected value="Paid Diff Route Income">{{LT=='bn'?'ভিন্ন রুটের আয় পরিশোধ':'Paid Diff Route Income'}}</option>       
                                 <option  value="Partially">{{LT=='bn'?'আংশিক পেমেন্ট':'Partially'}}</option>                                                       
                             </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মন্তব্য':'Notes'}}</label>
+                            <div class="col-sm-8">
+                                <textarea rows="4" cols="40" [(ngModel)]="dailyPaymentDetails.Notes" style="width:100%">   </textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মন্তব্য':'Notes'}}</label>
-                        <div class="col-sm-8">
-                            <textarea rows="4" cols="40" [(ngModel)]="dailyPaymentDetails.Notes" style="width:100%">   </textarea>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
             <div class="row" style="margin-bottom:30px">

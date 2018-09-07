@@ -10,8 +10,7 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard' },
             { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-            { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-            { path: 'forms', loadChildren: './form/form.module#FormModule' },           
+            { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },  
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'car', loadChildren: './car/car.module#CarModule' },

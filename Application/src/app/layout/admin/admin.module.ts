@@ -18,7 +18,9 @@ import { RootCostDetailsComponent } from './root-cost/root-cost-details/root-cos
 import { RolePermissionComponent } from './role-permission/role-permission.component';
 import { SpecialActivityComponent } from './special-activity/special-activity.component';
 import { VendorComponent } from './vendor/vendor.component';
-import { VendorDetailsComponent } from './vendor/vendor-details/vendor-details.component'
+import { VendorDetailsComponent } from './vendor/vendor-details/vendor-details.component';
+import { PolUnitPriceComponent } from './pol-unit-price/pol-unit-price.component';
+import { PolUnitPriceDetailsComponent } from './pol-unit-price/pol-unit-price-details/pol-unit-price-details.component'
 
 const routes:Routes=[
 
@@ -37,6 +39,8 @@ const routes:Routes=[
             { path: 'special-activity', component: SpecialActivityComponent},
             { path: 'vendor', component: VendorComponent},
             { path: 'vendor/:vendorId', component: VendorDetailsComponent},
+            { path: 'pol-unit', component: PolUnitPriceComponent},
+            { path: 'pol-unit/:polUnitPriceId', component: PolUnitPriceDetailsComponent},
             
         ]
     } 
@@ -44,7 +48,7 @@ const routes:Routes=[
 
 @NgModule({
     imports: [CommonModule, NgbModule.forRoot(),FormsModule,ReactiveFormsModule,PTableModule,AlertModule,HttpModule, PageHeaderModule,RouterModule.forChild(routes)],
-    declarations: [AdminComponent, EmployeeComponent,  RoleComponent, EmployeeDetailsComponent, RootComponent, RootCostComponent, RootDetailsComponent, RootCostDetailsComponent, RolePermissionComponent, SpecialActivityComponent, VendorComponent, VendorDetailsComponent],
+    declarations: [AdminComponent, EmployeeComponent,  RoleComponent, EmployeeDetailsComponent, RootComponent, RootCostComponent, RootDetailsComponent, RootCostDetailsComponent, RolePermissionComponent, SpecialActivityComponent, VendorComponent, VendorDetailsComponent, PolUnitPriceComponent, PolUnitPriceDetailsComponent],
     providers:[ConfigService,AdminService,CommonService,CarService],
     exports: [RouterModule]
 })

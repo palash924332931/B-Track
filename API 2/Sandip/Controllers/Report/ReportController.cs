@@ -230,5 +230,25 @@ namespace Sandip.Controllers.Report
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "System has failed to show information. Please try agian.");
             }
         }
+
+        [Route("api/GetMonthlyIncomeExpenseReport")]
+        [HttpGet]
+        public HttpResponseMessage GetMonthlyIncomeExpenseReport(int UserId, DateTime FromDate, DateTime ToDate, string Type)
+        {
+            try
+
+            {
+                using (CarSystemEntities db = new CarSystemEntities())
+                {
+                    var returnresult = db.prGetIncomeExpenseReport(UserId, FromDate, ToDate, Type).ToList(); ;
+                    return Request.CreateResponse(HttpStatusCode.OK, returnresult);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "System has failed to delete root cost information. Please try agian.");
+            }
+        }
     }
 }

@@ -28,6 +28,7 @@ export class JobDetailsComponent implements OnInit {
   public modalType: string;
   public closeResult: string;
   public configureableModalData: any[] = [];
+  public jobStatus='New Job';
   constructor(private adminService: AdminService, private configService: ConfigService, private alertService: AlertService, private router: Router, private route: ActivatedRoute, private storeService: StoreService, private customNgbDateParserFormatter: CustomNgbDateParserFormatter, private ngbDateParserFormatter: NgbDateParserFormatter, private modalService: NgbModal, public carService: CarService) { }
 
   ngOnInit() {
@@ -51,7 +52,9 @@ export class JobDetailsComponent implements OnInit {
     this.alertService.fnLoading(true);
     this.adminService.fnGetEmployee(this.userId, this.jobId).subscribe(
       (data: Job[]) => {
-        this.jobDetails = data[0];
+
+        console.log("job details: ",data);
+        //this.jobDetails = data[0];
         this.alertService.fnLoading(false);
       },
       (error: any) => {
@@ -72,19 +75,22 @@ export class JobDetailsComponent implements OnInit {
     //   return false;
     // }
 
+    this.jobDetails.Created = this.configService.getCurrentDate();  
+    this.jobDetails.CreatedBy=this.userId;
+
     this.alertService.fnLoading(true);
     this.storeService.fnPostJobInfo(this.jobDetails).subscribe(
       (success: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি পিওএল তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in POL list?'
+        this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি জবের তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in Job list?'
           , () => {
-            this.router.navigate(["./store/job"]);
+            this.router.navigate(["./store/jobs"]);
           }
           , function () { });
       },
       (error: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT=='bn'?' সিস্টেম পিওএল তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show POL list.');
+        this.alertService.alert(this.LT=='bn'?' সিস্টেম জবের তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show Job list.');
       }
     );
   }

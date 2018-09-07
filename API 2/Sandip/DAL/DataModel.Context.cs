@@ -31,6 +31,7 @@ namespace Sandip.DAL
         public virtual DbSet<CarDetail> CarDetails { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<DailyCarHistory> DailyCarHistories { get; set; }
+        public virtual DbSet<POLUnitPrice> POLUnitPrices { get; set; }
     
         public virtual ObjectResult<string> prSaveCarType(Nullable<int> carTypeId, string type, string description, Nullable<int> createdBy, Nullable<System.DateTime> updateTime)
         {
@@ -1331,7 +1332,74 @@ namespace Sandip.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetJobList_Result>("prGetJobList", userIdParameter, fromDateParameter, toDateParameter, jobIdParameter, typeParameter);
         }
     
-        public virtual ObjectResult<Nullable<int>> prSaveJobInfo(Nullable<int> jobId, Nullable<int> driverId, Nullable<System.DateTime> jobDate, Nullable<int> carId, string jobDescription, string status, Nullable<System.DateTime> jobCompletedDate, string busStatus, Nullable<int> assignedMechanic, string remark, Nullable<int> createdBy, Nullable<System.DateTime> created)
+        public virtual ObjectResult<prGetDailyPOLLog_Result1> prGetDailyPOLLog(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, Nullable<int> polId, string type)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var polIdParameter = polId.HasValue ?
+                new ObjectParameter("PolId", polId) :
+                new ObjectParameter("PolId", typeof(int));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetDailyPOLLog_Result1>("prGetDailyPOLLog", userIDParameter, fromDateParameter, toDateParameter, polIdParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<string> prUpdatePolRecord(Nullable<int> userID, Nullable<int> polId, string polIdString, string statusChangeTo)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var polIdParameter = polId.HasValue ?
+                new ObjectParameter("PolId", polId) :
+                new ObjectParameter("PolId", typeof(int));
+    
+            var polIdStringParameter = polIdString != null ?
+                new ObjectParameter("PolIdString", polIdString) :
+                new ObjectParameter("PolIdString", typeof(string));
+    
+            var statusChangeToParameter = statusChangeTo != null ?
+                new ObjectParameter("StatusChangeTo", statusChangeTo) :
+                new ObjectParameter("StatusChangeTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prUpdatePolRecord", userIDParameter, polIdParameter, polIdStringParameter, statusChangeToParameter);
+        }
+    
+        public virtual ObjectResult<prGetIncomeExpenseReport_Result> prGetIncomeExpenseReport(Nullable<int> userID, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string type)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var fromDateParameter = fromDate.HasValue ?
+                new ObjectParameter("FromDate", fromDate) :
+                new ObjectParameter("FromDate", typeof(System.DateTime));
+    
+            var toDateParameter = toDate.HasValue ?
+                new ObjectParameter("ToDate", toDate) :
+                new ObjectParameter("ToDate", typeof(System.DateTime));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetIncomeExpenseReport_Result>("prGetIncomeExpenseReport", userIDParameter, fromDateParameter, toDateParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<string> prSaveJobInfo(Nullable<int> jobId, Nullable<int> driverId, Nullable<System.DateTime> jobDate, Nullable<int> carId, string jobDescription, string status, Nullable<System.DateTime> jobCompletedDate, string busStatus, Nullable<int> assignedMechanic, string remark, Nullable<int> createdBy, Nullable<System.DateTime> created)
         {
             var jobIdParameter = jobId.HasValue ?
                 new ObjectParameter("JobId", jobId) :
@@ -1381,7 +1449,7 @@ namespace Sandip.DAL
                 new ObjectParameter("Created", created) :
                 new ObjectParameter("Created", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prSaveJobInfo", jobIdParameter, driverIdParameter, jobDateParameter, carIdParameter, jobDescriptionParameter, statusParameter, jobCompletedDateParameter, busStatusParameter, assignedMechanicParameter, remarkParameter, createdByParameter, createdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveJobInfo", jobIdParameter, driverIdParameter, jobDateParameter, carIdParameter, jobDescriptionParameter, statusParameter, jobCompletedDateParameter, busStatusParameter, assignedMechanicParameter, remarkParameter, createdByParameter, createdParameter);
         }
     }
 }

@@ -48,7 +48,7 @@
         <div class="col-sm-2" style="text-align:right">
             <div class="row">
                 <div class="col-sm-12" style="text-align:right">
-                    <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnGetDailyCarLogListSearchResult()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
+                    <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnGetDailyPOLLogListSearchResult()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
             </div>
         </div>
         <div class="col col-lg-12 zero-padding">
-            <app-p-table [pTableSetting]="carLogTableBind" [pTableMasterData]="carLogList" (checkboxCallbackFn)="fnCheckboxClick()"></app-p-table>
+            <app-p-table [pTableSetting]="carLogTableBind" [pTableMasterData]="polLogList" (checkboxCallbackFn)="fnCheckboxClick()"></app-p-table>
         </div>
     </div>
 </div>

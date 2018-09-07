@@ -48,7 +48,7 @@ export class PolDetailsComponent implements OnInit {
 
   fnGetPOLDetails() {
     this.alertService.fnLoading(true);
-    this.storeService.fnGetPOLLogList(this.userId,this.polId,null,null,"Single").subscribe(
+    this.storeService.fnGetPOLLogList(this.userId,this.polId,this.currentDate,this.currentDate,"Single").subscribe(
       (data: POL[]) => {
         this.polDetails = data[0];
         this.checkInDate = this.customNgbDateParserFormatter.parse(this.polDetails.CheckInDate || null);
@@ -63,7 +63,6 @@ export class PolDetailsComponent implements OnInit {
 
   fnSavePOLDetails() {
     //to check group name;
-    debugger
     if (this.polDetails.CarId == null || this.polDetails.RegistrationNo == "") {
       this.alertService.alert(this.LT=='bn'?'নিবন্ধন নম্বর প্রয়োজন। দয়া করে আবার এই ক্ষেত্রটি পর্যালোচনা করুন।':'Registration no. is required. Please review this field again.');
       return false;
@@ -82,6 +81,7 @@ export class PolDetailsComponent implements OnInit {
 
     } else {
       this.polDetails.POLId=0;
+      this.polDetails.Created = this.configService.getCurrentDate();
     }
     
     this.polDetails.CNG=Number(this.polDetails.CNG||0).toFixed(2).toString();
@@ -103,7 +103,7 @@ export class PolDetailsComponent implements OnInit {
         },
         (error: any) => {
           this.alertService.fnLoading(false);
-          this.alertService.alert(this.LT=='bn'?' সিস্টেম পিওএল তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show POL list.');
+          this.alertService.alert(this.LT=='bn'?' সিস্টেম পিওএলের তথ্য সংরক্ষণ করতে ব্যর্থ হয়েছে।':'System has failed to save POL information.');
         }
       );
   }

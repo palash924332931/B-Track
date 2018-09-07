@@ -45,6 +45,8 @@ namespace Sandip.Controllers.Store
                 {
                     using (CarSystemEntities db = new CarSystemEntities())
                     {
+                        var checkInDate = polDetails.CheckInDate == null ? (DateTime?)null : Convert.ToDateTime(polDetails.CheckInDate);
+
                         var returnData = db.prSavePOLDetails(polDetails.POLId, polDetails.CarId, polDetails.CheckInDate == null ? (DateTime?)null : Convert.ToDateTime(polDetails.CheckInDate), polDetails.DriverId, polDetails.IssuedById,
                             Convert.ToDecimal(polDetails.CNG), Convert.ToDecimal(polDetails.Diesel), Convert.ToDecimal(polDetails.EngineOil),
                            Convert.ToDecimal(polDetails.PowerOil), Convert.ToDecimal(polDetails.GearOil), Convert.ToDecimal(polDetails.Grease),
@@ -75,6 +77,32 @@ namespace Sandip.Controllers.Store
                     // var returnData = db.prGetVendorDetails(UserId, 0, "All").ToList();
                     var returnData = db.prDeletePOLRecord(UserId, POLId);
                     return Request.CreateResponse(HttpStatusCode.OK, "Successfully deleted.");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "System has failed to show employee list. Please contact with admin.");
+            }
+        }
+
+        [Route("api/POLStatusUpdate")]
+        [HttpGet]
+        public HttpResponseMessage POLStatusUpdate(int userId, string polIds, string statusChangeTo)
+        {
+           // string polIds = string.Join(",", polIdArray);
+            int polId = 0;
+            try
+
+            {
+                using (CarSystemEntities db = new CarSystemEntities())
+                {
+                    // var returnData = db.prGetVendorDetails(UserId, 0, "All").ToList();
+                    if (statusChangeTo=="Send for Approval") {
+                        polId = Convert.ToInt32(polIds);
+                    }
+                    var returnData = db.prUpdatePolRecord(userId, polId, polIds, statusChangeTo).FirstOrDefault();
+                    return Request.CreateResponse(HttpStatusCode.OK, returnData);
                 }
 
             }

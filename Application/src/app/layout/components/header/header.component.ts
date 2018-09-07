@@ -26,8 +26,8 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.IsSelectedLanguageBangla = this.UserInfo[0].Language == 'en' ? false : true;
-        console.log("UserInfo", this.UserInfo);
-        console.log("UserInfo", this.UserInfo[0].Name);
+        // console.log("UserInfo", this.UserInfo);
+        // console.log("UserInfo", this.UserInfo[0].Name);
     }
 
     isToggled(): boolean {

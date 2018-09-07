@@ -938,7 +938,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="prSavePOLDetails" FunctionName="CarSystemModel.Store.prSavePOLDetails" />
-    <FunctionImportMapping FunctionImportName="prDeletePOLRecord" FunctionName="CarSystemModel.Store.prDeletePOLRecord" />
     <FunctionImportMapping FunctionImportName="prGetJobList" FunctionName="CarSystemModel.Store.prGetJobList">
       <ResultMapping>
         <ComplexTypeMapping TypeName="CarSystemModel.prGetJobList_Result">
@@ -967,6 +966,80 @@
           <ScalarProperty Name="AssignedMechanicName" ColumnName="AssignedMechanicName" />
           <ScalarProperty Name="AssignedMechanicNameBangla" ColumnName="AssignedMechanicNameBangla" />
           <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="POLUnitPrices">
+      <EntityTypeMapping TypeName="CarSystemModel.POLUnitPrice">
+        <MappingFragment StoreEntitySet="POLUnitPrices">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="GreaseUnitPrice" ColumnName="GreaseUnitPrice" />
+          <ScalarProperty Name="GearOilUnitPrice" ColumnName="GearOilUnitPrice" />
+          <ScalarProperty Name="PowerOilUnitPrice" ColumnName="PowerOilUnitPrice" />
+          <ScalarProperty Name="EngineOilUnitPrice" ColumnName="EngineOilUnitPrice" />
+          <ScalarProperty Name="DieselUnitPrice" ColumnName="DieselUnitPrice" />
+          <ScalarProperty Name="CNGUnitPrice" ColumnName="CNGUnitPrice" />
+          <ScalarProperty Name="POLUnitPriceId" ColumnName="POLUnitPriceId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="prGetDailyPOLLog" FunctionName="CarSystemModel.Store.prGetDailyPOLLog">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetDailyPOLLog_Result1">
+          <ScalarProperty Name="POLId" ColumnName="POLId" />
+          <ScalarProperty Name="CarId" ColumnName="CarId" />
+          <ScalarProperty Name="RegistrationNo" ColumnName="RegistrationNo" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="DriverId" ColumnName="DriverId" />
+          <ScalarProperty Name="DriverName" ColumnName="DriverName" />
+          <ScalarProperty Name="DriverNameBangla" ColumnName="DriverNameBangla" />
+          <ScalarProperty Name="IssuedById" ColumnName="IssuedById" />
+          <ScalarProperty Name="IssuedByName" ColumnName="IssuedByName" />
+          <ScalarProperty Name="IssuedByNameBangla" ColumnName="IssuedByNameBangla" />
+          <ScalarProperty Name="CNG" ColumnName="CNG" />
+          <ScalarProperty Name="Diesel" ColumnName="Diesel" />
+          <ScalarProperty Name="EngineOil" ColumnName="EngineOil" />
+          <ScalarProperty Name="PowerOil" ColumnName="PowerOil" />
+          <ScalarProperty Name="GearOil" ColumnName="GearOil" />
+          <ScalarProperty Name="Grease" ColumnName="Grease" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="Created" ColumnName="Created" />
+          <ScalarProperty Name="Updated" ColumnName="Updated" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="AprrovedBy" ColumnName="AprrovedBy" />
+          <ScalarProperty Name="ApprovedByName" ColumnName="ApprovedByName" />
+          <ScalarProperty Name="POLAmountId" ColumnName="POLAmountId" />
+          <ScalarProperty Name="CNGCost" ColumnName="CNGCost" />
+          <ScalarProperty Name="DieselCost" ColumnName="DieselCost" />
+          <ScalarProperty Name="EngineOilCost" ColumnName="EngineOilCost" />
+          <ScalarProperty Name="PowerOilCost" ColumnName="PowerOilCost" />
+          <ScalarProperty Name="GearOilCost" ColumnName="GearOilCost" />
+          <ScalarProperty Name="GreaseCost" ColumnName="GreaseCost" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="prUpdatePolRecord" FunctionName="CarSystemModel.Store.prUpdatePolRecord" />
+    <FunctionImportMapping FunctionImportName="prGetIncomeExpenseReport" FunctionName="CarSystemModel.Store.prGetIncomeExpenseReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CarSystemModel.prGetIncomeExpenseReport_Result">
+          <ScalarProperty Name="NumberOfBus" ColumnName="NumberOfBus" />
+          <ScalarProperty Name="CheckInDate" ColumnName="CheckInDate" />
+          <ScalarProperty Name="TotalDistance" ColumnName="TotalDistance" />
+          <ScalarProperty Name="OnRouteIncome" ColumnName="OnRouteIncome" />
+          <ScalarProperty Name="DifferentRouteIncome" ColumnName="DifferentRouteIncome" />
+          <ScalarProperty Name="ReserveIncome" ColumnName="ReserveIncome" />
+          <ScalarProperty Name="StaffBusIncome" ColumnName="StaffBusIncome" />
+          <ScalarProperty Name="ReceivedAmount" ColumnName="ReceivedAmount" />
+          <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+          <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+          <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+          <ScalarProperty Name="POLCost" ColumnName="POLCost" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

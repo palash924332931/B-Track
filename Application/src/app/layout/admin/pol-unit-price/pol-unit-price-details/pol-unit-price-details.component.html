@@ -1,0 +1,121 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?IsEditItem==true?'পিওএল আইটেমের একক মুল্যের তথ্য আপডেট করুন':'পিওএল আইটেমের একক মুল্যের নিবন্ধন':IsEditItem==true?'Update POL Unit Price Information':'POL Unit Price Registration'" [icon]="'fa-table'"></app-page-header>
+    <div class="col-sm-12">
+        <form #polUnitPrice="ngForm" (submit)="fnSavePolUnitPrice()">
+            <div class="row">
+                <div class="form-group col-xl-6" [class.has-error]="cngUnit.touched && cngUnit.invalid">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'সিএনজির একক মুল্য':'CNG Unit Price'}} </label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" #cngUnit="ngModel" pattern="^[0-9]\d{1,7}(\.\d{1,3})*(,\d+)?$" required name="cngUnit" [(ngModel)]="polUnitPriceDetails.CNGUnitPrice">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6" [class.has-error]="DieselUnitPrice.touched && DieselUnitPrice.invalid">
+                    <div class="row required">
+                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ডিজেলের একক মুল্য (টাকা/লিঃ)':'Diesel Unit Price (TK/Ltr)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" required #DieselUnitPrice="ngModel" name="DieselUnitPrice" class="form-control" [(ngModel)]="polUnitPriceDetails.DieselUnitPrice" pattern="^[0-9]\d{1,7}(\.\d{1,3})*(,\d+)?$">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-xl-6" [class.has-error]="EngineOilUnitPrice.touched && EngineOilUnitPrice.invalid">
+                    <div class="row required">
+                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ইঞ্জিন ওয়েলের একক মুল্য (টাকা/লিঃ)':'Engine Oil Unit Price'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" required #EngineOilUnitPrice="ngModel" name="EngineOilUnitPrice" class="form-control" [(ngModel)]="polUnitPriceDetails.EngineOilUnitPrice" pattern="^[0-9]\d{1,7}(\.\d{1,3})*(,\d+)?$">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6" [class.has-error]="PowerOilUnitPrice.touched && PowerOilUnitPrice.invalid">
+                    <div class="row required">
+                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পাওয়ার ওয়েলের একক মুল্য (টাকা/লিঃ)':'Power Oil Unit Price'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" required #PowerOilUnitPrice="ngModel" name="PowerOilUnitPrice" [(ngModel)]="polUnitPriceDetails.PowerOilUnitPrice" pattern="^[0-9]\d{1,7}(\.\d{1,3})*(,\d+)?$">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6" [class.has-error]="GearOilUnitPrice.touched && GearOilUnitPrice.invalid">
+                    <div class="row required">
+                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গিয়ার ওয়েলের একক মুল্য (টাকা/লিঃ)':'Gear Oil Unit Price'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" required #GearOilUnitPrice="ngModel" name="GearOilUnitPrice" [(ngModel)]="polUnitPriceDetails.GearOilUnitPrice" pattern="^[0-9]\d{1,7}(\.\d{1,3})*(,\d+)?$">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xl-6" [class.has-error]="GreaseUnitPrice.touched && GreaseUnitPrice.invalid">
+                    <div class="row required">
+                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রীসের একক মুল্য (টাকা/লিঃ)':'Grease Unit Price'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" required #GreaseUnitPrice="ngModel" name="GreaseUnitPrice" [(ngModel)]="polUnitPriceDetails.GreaseUnitPrice" pattern="^[0-9]\d{1,7}(\.\d{1,3})*(,\d+)?$">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মন্তব্য':'Notes'}}</label>
+                        <div class="col-sm-8">
+                            <textarea cols="40" rows="4" class="form-control" name="Notes" [(ngModel)]="polUnitPriceDetails.Notes" style="width:100%"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row">
+                        <label for="status" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অবস্থা':'Status'}}</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="status" [(ngModel)]="polUnitPriceDetails.Status">
+                          <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
+                          <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
+                      </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xl-6" style="margin-bottom:0px" style="background-color:#e9ecef;margin-bottom:0px">
+                    <div class="row pull-right" style="background-color:#e9ecef">
+                        <button *ngIf="IsEditItem" type="button " class="btn btn-outline-success" (click)="fnCreateNewRecord()" style="margin-right:5px;">{{LT=='bn'?'নতুন তথ্য যোগ করুন':'Add New POL Price'}}</button>
+                        <button type="submit " [disabled]="polUnitPrice.invalid" class="btn btn-outline-success">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ করুন':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update Information':'Save Information'}}</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>

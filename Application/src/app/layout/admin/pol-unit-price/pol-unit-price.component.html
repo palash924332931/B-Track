@@ -1,0 +1,14 @@
+<div [@routerTransition]>
+    <alert></alert>
+    <app-page-header [heading]="LT=='bn'?'পিওএল আইটেমের একক মুল্যের তালিকা':'Unit Price of POL Items'" [icon]="'fa-table'"></app-page-header>
+
+    <div class="row">
+        <div class="col-sm-12" style="text-align:right">
+            <!-- <a [router-link]="['./product/0']">People</a> -->
+            <button type="button" class="btn btn-outline-success" (click)="fnNew()"><i class="fa fa-plus" style="font-size:18px"></i>{{LT=='bn'?' নতুন পিওএল আইটেমের মুল্য যোগ করুন':' Add New POL Unit Price'}}</button>
+        </div>
+        <div class="col col-lg-12 zero-padding">
+            <app-p-table [pTableSetting]="rootCostListTableBind" [pTableMasterData]="polUnitPrices" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+        </div>
+    </div>
+</div>

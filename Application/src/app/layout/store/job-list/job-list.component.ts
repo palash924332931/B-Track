@@ -35,6 +35,7 @@ export class JobListComponent implements OnInit {
           // } else {
           //   rec.CheckApprovalBtn = 'true';
           // }
+          rec.JobDate=rec.JobDate.split("T")[0];
           rec.CheckApprovalBtn = 'true';
         });
         this.alertService.fnLoading(false);
@@ -57,26 +58,26 @@ export class JobListComponent implements OnInit {
   fnPtableCallBack(event: any) {
     let data = event.record;
     if (event.action == "delete-item") {
-      this.alertService.confirm(this.LT == 'bn' ? 'আপনি কি <b>' + data.RegistrationNo + '</b> বাসের তথ্য মুছে ফেলতে চান? ' : 'Do you want to delete bus which registration no <b>' + data.RegistrationNo + "</b>?",
+      this.alertService.confirm(this.LT == 'bn' ? 'আপনি কি <b>' + data.RegistrationNo + '</b> বাসের জবের তথ্য মুছে ফেলতে চান? ' : 'Do you want to delete bus which registration no <b>' + data.RegistrationNo + "</b>?",
         () => {
           this.alertService.fnLoading(true);
-          this.carService.fnDeleteBus(data.CarId).subscribe(
-            (success: any) => {
-              this.alertService.fnLoading(false);
-              this.fnGetJobList();
-              //this.alertService.alertResponeCode(success);               
-            },
-            (error: any) => {
-              this.alertService.fnLoading(false);
-              this.alertService.alert(this.LT == 'bn' ? 'সিস্টেম কর্মচারী তথ্য মুছে ফেলতে ব্যর্থ হয়েছে। অনুগ্রহপূর্বক আবার চেষ্টা করুন.' : 'System has failed to delete employee information. Please try again.');
-            }
-          );
+          // this.carService.fnDeleteBus(data.CarId).subscribe(
+          //   (success: any) => {
+          //     this.alertService.fnLoading(false);
+          //     this.fnGetJobList();
+          //     //this.alertService.alertResponeCode(success);               
+          //   },
+          //   (error: any) => {
+          //     this.alertService.fnLoading(false);
+          //     this.alertService.alert(this.LT == 'bn' ? 'সিস্টেম কর্মচারী তথ্য মুছে ফেলতে ব্যর্থ হয়েছে। অনুগ্রহপূর্বক আবার চেষ্টা করুন.' : 'System has failed to delete employee information. Please try again.');
+          //   }
+          // );
         }
         , function () { })
     } else if (event.action == "edit-item") {
-      this.alertService.confirm(this.LT == 'bn' ? 'আপনি কি <b>' + data.RegistrationNo + '</b> বাস সম্পাদনা করতে চান?' : 'Do you want to edit information of bus <b>' + data.RegistrationNo + "</b>?",
+      this.alertService.confirm(this.LT == 'bn' ? 'আপনি কি <b>' + data.RegistrationNo + '</b> বাসের জবের তথ্য সম্পাদনা করতে চান?' : 'Do you want to edit information of bus <b>' + data.RegistrationNo + "</b>?",
         () => {
-          this.router.navigate(["./store/jobs/" + data.CarId]);
+          this.router.navigate(["./store/jobs/" + data.JobId]);
         }
         , function () { })
     }

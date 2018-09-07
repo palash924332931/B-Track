@@ -378,7 +378,27 @@
       <Parameter Name="JobId" Mode="In" Type="Int32" />
       <Parameter Name="Type" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="prSaveJobInfo" ReturnType="Collection(Int32)">
+    <EntitySet Name="POLUnitPrices" EntityType="CarSystemModel.POLUnitPrice" />
+    <FunctionImport Name="prGetDailyPOLLog" ReturnType="Collection(CarSystemModel.prGetDailyPOLLog_Result1)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="PolId" Mode="In" Type="Int32" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prUpdatePolRecord" ReturnType="Collection(String)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="PolId" Mode="In" Type="Int32" />
+      <Parameter Name="PolIdString" Mode="In" Type="String" />
+      <Parameter Name="StatusChangeTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prGetIncomeExpenseReport" ReturnType="Collection(CarSystemModel.prGetIncomeExpenseReport_Result)">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="FromDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ToDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="prSaveJobInfo" ReturnType="Collection(String)">
       <Parameter Name="JobId" Mode="In" Type="Int32" />
       <Parameter Name="DriverId" Mode="In" Type="Int32" />
       <Parameter Name="JobDate" Mode="In" Type="DateTime" />
@@ -1210,5 +1230,101 @@
     <Property Type="String" Name="AssignedMechanicName" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="AssignedMechanicNameBangla" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+  </ComplexType>
+  <EntityType Name="POLUnitPrice">
+    <Key>
+      <PropertyRef Name="POLUnitPriceId" />
+    </Key>
+    <Property Name="POLUnitPriceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CNGUnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="DieselUnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="EngineOilUnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="PowerOilUnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="GearOilUnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="GreaseUnitPrice" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Createdby" Type="Int32" />
+    <Property Name="Created" Type="DateTime" Precision="0" />
+    <Property Name="Updated" Type="DateTime" Precision="0" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <ComplexType Name="prGetDailyPOLLog_Result">
+    <Property Type="Int32" Name="POLId" Nullable="false" />
+    <Property Type="Int32" Name="CarId" Nullable="true" />
+    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
+    <Property Type="DateTime" Name="CheckInDate" Nullable="true" />
+    <Property Type="Int32" Name="DriverId" Nullable="true" />
+    <Property Type="String" Name="DriverName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DriverNameBangla" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="IssuedById" Nullable="true" />
+    <Property Type="String" Name="IssuedByName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="IssuedByNameBangla" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="CNG" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="Diesel" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="EngineOil" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="PowerOil" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="GearOil" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="Grease" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Createdby" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="true" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" />
+    <Property Type="Int32" Name="CompanyId" Nullable="true" />
+    <Property Type="Int32" Name="AprrovedBy" Nullable="true" />
+    <Property Type="String" Name="ApprovedByName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="POLAmountId" Nullable="true" />
+    <Property Type="Decimal" Name="CNGCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="DieselCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="EngineOilCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="PowerOilCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="GearOilCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="GreaseCost" Nullable="true" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="prGetDailyPOLLog_Result1">
+    <Property Type="Int32" Name="POLId" Nullable="false" />
+    <Property Type="Int32" Name="CarId" Nullable="true" />
+    <Property Type="String" Name="RegistrationNo" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="CheckInDate" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="DriverId" Nullable="true" />
+    <Property Type="String" Name="DriverName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="DriverNameBangla" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="IssuedById" Nullable="true" />
+    <Property Type="String" Name="IssuedByName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="IssuedByNameBangla" Nullable="true" MaxLength="200" />
+    <Property Type="Decimal" Name="CNG" Nullable="false" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="Diesel" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="EngineOil" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="PowerOil" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="GearOil" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="Grease" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Createdby" Nullable="true" />
+    <Property Type="DateTime" Name="Created" Nullable="true" />
+    <Property Type="DateTime" Name="Updated" Nullable="true" />
+    <Property Type="Int32" Name="CompanyId" Nullable="true" />
+    <Property Type="Int32" Name="AprrovedBy" Nullable="true" />
+    <Property Type="String" Name="ApprovedByName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="POLAmountId" Nullable="true" />
+    <Property Type="Decimal" Name="CNGCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="DieselCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="EngineOilCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="PowerOilCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="GearOilCost" Nullable="true" Precision="10" Scale="2" />
+    <Property Type="Decimal" Name="GreaseCost" Nullable="true" Precision="10" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="prGetIncomeExpenseReport_Result">
+    <Property Type="Int32" Name="NumberOfBus" Nullable="true" />
+    <Property Type="String" Name="CheckInDate" Nullable="true" MaxLength="10" />
+    <Property Type="Decimal" Name="TotalDistance" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="OnRouteIncome" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="DifferentRouteIncome" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="ReserveIncome" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="StaffBusIncome" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="ReceivedAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="DueAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TotalIncome" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Int32" Name="CompanyId" Nullable="true" />
+    <Property Type="Decimal" Name="POLCost" Nullable="false" Precision="38" Scale="2" />
   </ComplexType>
 </Schema>

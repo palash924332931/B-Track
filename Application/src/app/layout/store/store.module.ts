@@ -19,6 +19,7 @@ import { DemandListComponent } from './demand-list/demand-list.component';
 import { DemandDetailsComponent } from './demand-list/demand-details/demand-details.component';
 import { PolComponent } from './pol/pol.component';
 import { PolDetailsComponent } from './pol/pol-details/pol-details.component';
+import { PartsAllocationComponent } from './parts-allocation/parts-allocation.component';
 
 const routes:Routes=[   
     {        
@@ -32,14 +33,15 @@ const routes:Routes=[
             { path: 'demand', component: DemandListComponent},
             { path: 'demand/:demandId', component: DemandDetailsComponent},
             { path: 'pol', component: PolComponent},   
-            { path: 'pol/:polId', component: PolDetailsComponent},          
+            { path: 'pol/:polId', component: PolDetailsComponent},  
+            { path: 'partsallocation', component: PartsAllocationComponent},           
         ]
     } 
 ]
 
 @NgModule({
     imports: [CommonModule,FormsModule,ReactiveFormsModule,PTableModule,AlertModule,HttpModule,NgbModule.forRoot(), PageHeaderModule,RouterModule.forChild(routes)],
-    declarations: [JobListComponent, JobDetailsComponent,ItemDetailsComponent,ItemListComponent, DemandListComponent, DemandDetailsComponent, PolComponent, PolDetailsComponent],
+    declarations: [JobListComponent, JobDetailsComponent,ItemDetailsComponent,ItemListComponent, DemandListComponent, DemandDetailsComponent, PolComponent, PolDetailsComponent, PartsAllocationComponent],
     providers:[ConfigService,AccountsService,CarService,AdminService,StoreService,{provide: NgbDateParserFormatter, useFactory: () => new CustomNgbDateParserFormatter()}],
     exports: [RouterModule]
 })

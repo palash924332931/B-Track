@@ -11,5 +11,9 @@ export class PageHeaderComponent implements OnInit {
     @Input() icon: string;
     constructor() {}
 
-    ngOnInit() {}
+    public UserInfo: any = JSON.parse(localStorage.getItem("car-system-user-info-option-b"));
+    
+    ngOnInit() {
+        
+    }
 }

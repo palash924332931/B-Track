@@ -85,5 +85,13 @@ export class StoreService {
             .map((response: Response) => <any>(response));
     }
 
+    fnUpdatePOLRecordStatus(userId:number, polIdArray:any[],statusChangeTo:string){
+        debugger;
+        let polIds=polIdArray.join(",");
+        var url = ConfigService.baseWebApiUrl + '/POLStatusUpdate?userId=' + userId+'&polIds='+polIds+'&statusChangeTo='+statusChangeTo;
+        return this.http.get(url, "")
+            .map((response: Response) => <any>(response));
+    }
+
     //#endregion of POL
 }

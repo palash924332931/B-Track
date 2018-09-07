@@ -33,7 +33,7 @@
                 <div class="form-group col-sm-2">
                     <div class="row">
                         <div class="col-sm-12" style="text-align:right">
-                            <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnGetPOLLogList()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
+                            <button type="button" class="btn btn-outline-success btn-align" styel="padding-right:5px;" (click)="fnGetPOLDetails()"><i class="fa fa-search" style="font-size:18px"></i> {{LT=='bn'?' অনুসন্ধান করুন':' Search'}}</button>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
     </div>
     <div class="row">
         <div class="col col-lg-12">
-            <app-p-table [pTableSetting]="carLogTableBind" [pTableMasterData]="carLogList" (cellClickCallbackFn)="fnSendForRequest($event)" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
+            <app-p-table [pTableSetting]="carLogTableBind" [pTableMasterData]="polLogList" (cellClickCallbackFn)="fnSendForRequest($event)" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
         </div>
     </div>
 </div>

@@ -81,7 +81,8 @@ export class SidebarComponent implements OnInit {
                 this.alertService.fnLoading(false);
             },
             (err: any) => {
-                this.alertService.fnLoading(true);
+                this.alertService.fnLoading(false);
+                this.router.navigate(["./login"]);
             }
         )
     }
