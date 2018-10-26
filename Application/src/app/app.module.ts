@@ -12,7 +12,7 @@ import { AuthGuard } from './shared';
         CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
-        AppRoutingModule
+        AppRoutingModule        
     ],
     declarations: [AppComponent],
     providers: [AuthGuard],

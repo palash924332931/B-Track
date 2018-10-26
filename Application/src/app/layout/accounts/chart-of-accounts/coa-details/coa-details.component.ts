@@ -18,7 +18,7 @@ import { NgbModal, NgbModalRef, ModalDismissReasons, NgbTimeStruct } from '@ng-b
 export class CoaDetailsComponent implements OnInit {
   public userId = 1;
   public LT: string = ConfigService.languageType;
-  public paymentId: number;
+  public coaId: number;
   public IsEditItem: boolean = false;
   public dailyPaymentDetails = new DailyPayment();
   public coa = new COA();
@@ -36,7 +36,7 @@ export class CoaDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.UserInfo[0].Id;
-    this.paymentId = this.route.snapshot.params["paymentId"];
+    this.coaId = this.route.snapshot.params["coaId"];
     var displayDate = new Date().toLocaleDateString();
     //let date2 = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let date2 = this.configService.getCurrentDate();
@@ -49,7 +49,7 @@ export class CoaDetailsComponent implements OnInit {
     this.toDateSelected = this.customNgbDateParserFormatter.parse(this.toDate || null);
     console.log("from date", this.fromDate, 'Todate', this.toDate);
 
-    if (this.paymentId > 0) {
+    if (this.coaId > 0) {
       this.IsEditItem = true;
     } else {
       this.IsEditItem = false;

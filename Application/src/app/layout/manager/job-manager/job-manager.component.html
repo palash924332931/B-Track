@@ -64,7 +64,22 @@
             </div>
         </div>
         <div class="col col-lg-12 zero-padding">
-            <app-p-table [pTableSetting]="carLogTableBind" [pTableMasterData]="carLogList" (checkboxCallbackFn)="fnCheckboxClick()"></app-p-table>
+            <app-p-table [pTableSetting]="carLogTableBind" [pTableMasterData]="carLogList" (checkboxCallbackFn)="fnCheckboxClick()" (cellClickCallbackFn)="fnPtableCallBack($event)"></app-p-table>
         </div>
     </div>
 </div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header" style="padding-bottom: 0px;padding-top:0px">
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+    </div>
+    <div class="modal-body" style="padding:0px">
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>
+    </div>
+</ng-template>

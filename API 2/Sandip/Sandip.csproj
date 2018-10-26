@@ -183,6 +183,7 @@
     <Compile Include="Controllers\Manager\POLManagerController.cs" />
     <Compile Include="Controllers\Report\ReportController.cs" />
     <Compile Include="Controllers\Store\JobController.cs" />
+    <Compile Include="Controllers\Store\PartsCollectionController.cs" />
     <Compile Include="Controllers\Store\POLController.cs" />
     <Compile Include="Controllers\Store\StoreController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -210,6 +211,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DAL\PartsDetail.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\POLUnitPrice.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
@@ -217,6 +221,9 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\prGetCarDetails_Result.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\prGetCarDetails_Result1.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\prGetCarTypes_Result.cs">
@@ -282,10 +289,16 @@
     <Compile Include="DAL\prGetPartsDetails_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\prGetPartsDetails_Result1.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\prGetPaySlipBook_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\prGetPaySlipDetails_Result.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\prGetPaySlip_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\prGetPol_Result.cs">
@@ -309,7 +322,16 @@
     <Compile Include="DAL\prGetVendorDetails_Result.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\StoreInfo.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\User.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Vendor.cs">
+      <DependentUpon>DataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\VWStoreInfo.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -318,10 +340,18 @@
     <Compile Include="JsonModel\ResponseJson.cs" />
     <Compile Include="JsonModel\ResponseListJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PartsRepositories\PartsDetailsRepository.cs" />
+    <Compile Include="Repositories\PartsRepositories\PartsUnitOfWork.cs" />
+    <Compile Include="Repositories\PartsRepositories\StoreInfoRepository.cs" />
     <Compile Include="Repositories\PolRepositories\PolUnitPriceRepository.cs" />
+    <Compile Include="Services\Accounts\ChartOfAccountsService.cs" />
+    <Compile Include="Services\Accounts\IChartOfAccounts.cs" />
     <Compile Include="Services\Admin\PolUnitPricesService.cs" />
     <Compile Include="Services\CommonService.cs" />
+    <Compile Include="Services\Parts\PartsService.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="ViewModel\Payment\MultiPayment.cs" />
+    <Compile Include="ViewModel\Store\PartsDetailsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

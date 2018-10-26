@@ -122,6 +122,12 @@ export class AccountsService {
             .map((response: Response) => <any>(response));
     }
 
+    fnPostMultiPayment(data: any,userId:number) {
+        var url = ConfigService.baseWebApiUrl + '/PostMultiPayment?userId='+userId;
+        return this.http.post(url, data, "")
+            .map((response: Response) => <any>(response));
+    }
+
 
     fnDeletePayment(PaymentId: number) {
         var url = ConfigService.baseWebApiUrl + '/DeletePayment?Id=' + PaymentId;

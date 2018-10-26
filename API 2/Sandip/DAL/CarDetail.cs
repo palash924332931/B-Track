@@ -28,5 +28,6 @@ namespace Sandip.DAL
         public string Notes { get; set; }
         public string NoOfSeat { get; set; }
         public Nullable<System.DateTime> Creation { get; set; }
+        public string RegistrationNoBangla { get; set; }
     }
 }

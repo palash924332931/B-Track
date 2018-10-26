@@ -193,7 +193,8 @@ export class MonthlyIncomeExpenseReportComponent implements OnInit {
   fnPtableCellClick(event: any) {
     this.alertService.fnLoading(true);
     let record = event.record;
-    if (event.cellName == 'NoOfCar') {
+    console.log(event);
+    if (event.cellName == 'NumberOfBus') {
       this.carService.fnGetBusesOnType(this.UserId, event.record.CarTypeId).then((data: any) => {
         console.log("data", data);
         this.alertService.fnLoading(false)
@@ -422,6 +423,7 @@ export class MonthlyIncomeExpenseReportComponent implements OnInit {
   }
 
   fnPtableCellClickForRouteWiseData(event: any) {
+    console.log('route wise',event);
     this.alertService.fnLoading(true);
     let record = event.record;
     if (event.cellName == 'TotalIncome') {

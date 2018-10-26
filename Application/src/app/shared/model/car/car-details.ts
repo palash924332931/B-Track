@@ -1,6 +1,7 @@
 export class CarDetails{
     CarId :number;
     RegistrationNo :string;
+    RegistrationNoBangla :string;
     RegistrationDate:string;
     CarTypeId :number;
     Type:string;

@@ -11,6 +11,11 @@ export class AlertService {
         this.setConfirmation(message, siFn, noFn, type);
     }
 
+    confirmAlert(message: string, siFn: () => void,  type: string = 'confirmAlert') {
+        let noFn: () => void
+        this.setConfirmation(message, siFn, noFn, type);
+    }
+
     alertAutoTerminated(message: string, siFn: () => void = this.closeFn, noFn: () => void = this.closeFn, type: string = 'alert-terminated') {
         this.setConfirmation(message, siFn, noFn, type);
     }

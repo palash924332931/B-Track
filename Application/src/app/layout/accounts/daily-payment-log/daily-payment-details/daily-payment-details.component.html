@@ -3,143 +3,167 @@
     <app-page-header [heading]="LT=='bn'?IsEditItem==true?'দৈনিক আদায়ের হালনাগাদ করুন':'দৈনিক আদায় প্রস্তুত করুন ':IsEditItem==true?'Update Daily Collection':'Add Collection '" [icon]="'fa-table'"></app-page-header>
     <div class="row">
         <div class="col-sm-12">
-            <div class="row required">
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ীর লগ':'Bus Log'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Bus Log')"></i></label>
-                        <div class="col-sm-8">
-                            <input type="text" disabled class="form-control" id="userId" [(ngModel)]="dailyPaymentDetails.RegistrationNo">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ীর ধরন':'Bus Type'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" disabled class="form-control" id="userName" [(ngModel)]="dailyPaymentDetails.CarType">
-                        </div>
-                    </div>
+            <div class="col-sm-12 pull-right">
+                <div class="form-check pull-right" style="font-weight: bold;">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" [checked]="isMultiReceived" [(ngModel)]="isMultiReceived">
+                    <label class="form-check-label" style="padding-left: 0.20rem;" for="exampleCheck1">{{LT=='bn'?'এক সাথে অনেক পেমেন্ট নিতে চান?':'Do you want to receive multi payment?'}}</label>
                 </div>
             </div>
-            <div class="row ">
-                <div class="form-group col-xl-6">
-                    <div class="row required">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুটের নাম':'Route Name'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyPaymentDetails.RootName">
+            <div *ngIf="!isMultiReceived" class="card card-body" style="margin-bottom:10px;padding-bottom: 0px;">
+                <div class="row required">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ীর লগ':'Bus Log'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Bus Log')"></i></label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="userId" [(ngModel)]="dailyPaymentDetails.RegistrationNo">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ীর ধরন':'Bus Type'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="userName" [(ngModel)]="dailyPaymentDetails.CarType">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group col-xl-6">
-                    <div class="row required">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের নাম':'Driver Name'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyPaymentDetails.DriverName">
+                <div class="row ">
+                    <div class="form-group col-xl-6">
+                        <div class="row required">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুটের নাম':'Route Name'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyPaymentDetails.RootName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xl-6">
+                        <div class="row required">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চালকের নাম':'Driver Name'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="userNamebangla" [(ngModel)]="dailyPaymentDetails.DriverName">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুটের দূরত্ব (কি,মি)':'Route Distance (km)'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="" [(ngModel)]="dailyPaymentDetails.Distance">
+                            </div>
+                        </div>
+                    </div>
 
-
-            <div class="row">
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুটের দূরত্ব (কি,মি)':'Route Distance (km)'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" disabled class="form-control" id="" [(ngModel)]="dailyPaymentDetails.Distance">
+                    <div class="form-group col-xl-6">
+                        <div class="row required">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রবেশের তারিখ':'CheckIn Date'}}</label>
+                            <div class="col-sm-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" disabled [(ngModel)]="dailyPaymentDetails.CheckInDate">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="row ">
+                    <div class="form-group col-xl-6">
+                        <div class="row required">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ট্রিপ সংখ্যা':'No of Trip'}} </label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="userNamebangla" (keyup)="fnChangeTotalDistance()" [(ngModel)]="dailyPaymentDetails.TripNo">
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="form-group col-xl-6">
-                    <div class="row required">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্রবেশের তারিখ':'CheckIn Date'}}</label>
-                        <div class="col-sm-8">
-                            <div class="input-group">
-                                <input type="text" class="form-control" disabled [(ngModel)]="dailyPaymentDetails.CheckInDate">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মোট দূরত্ব (কি,মি)':'Total Distance (km)'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="password" [(ngModel)]="dailyPaymentDetails.TotalDistance">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ট্রিপের ধরন':' Trip Type'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.TripType ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xl-6 ">
+                        <div class="row ">
+                            <label for="password " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'মোট আয়':'Total Income'}}</label>
+                            <div class="col-sm-8 ">
+                                <input type="text " [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.TotalIncome ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুটে আয়':' On Route Amount'}}</label>
+                            <div class="col-sm-8">
+                                <input type="text" [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.OnRouteIncome ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xl-6 ">
+                        <div class="row ">
+                            <label for="password " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'ভিন্ন রুটে আয়':'Different Route Amount'}}</label>
+                            <div class="col-sm-8 ">
+                                <input type="text " [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.DifferentRouteIncome ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-xl-6">
+                        <div class="row required">
+                            <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অযাচিত কারনে ফিরে আসছে':'Is Unwanted Back'}} </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" disabled name="status" [(ngModel)]="dailyPaymentDetails.IsUnwantedReturn">
+                          <option selected value="false">{{LT=='bn'?'না':'No'}}</option>
+                          <option value="true">{{LT=='bn'?'হ্যাঁ':'Yes'}}</option>                           
+                      </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ফিরে আসার কারন':'Resons for back'}}</label>
+                            <div class="col-sm-8">
+                                <textarea rows="4" disabled cols="40" [(ngModel)]="dailyPaymentDetails.ReasonForReturn" style="width:100%">   </textarea>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row ">
-                <div class="form-group col-xl-6">
-                    <div class="row required">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ট্রিপ সংখ্যা':'No of Trip'}} </label>
-                        <div class="col-sm-8">
-                            <input type="text" disabled class="form-control" id="userNamebangla" (keyup)="fnChangeTotalDistance()" [(ngModel)]="dailyPaymentDetails.TripNo">
+            <div *ngIf="isMultiReceived" class="card card-body" style="margin-bottom:10px;padding-bottom: 0px;">
+                <div class="row required">
+                    <div class="form-group col-xl-6">
+                        <div class="row">
+                            <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গাড়ীর লগ':'Bus Log'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Bus Log')"></i></label>
+                            <div class="col-sm-8">
+                                <input type="text" disabled class="form-control" id="userId" [(ngModel)]="dailyPaymentDetails.RegistrationNo">
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'মোট দূরত্ব (কি,মি)':'Total Distance (km)'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" disabled class="form-control" id="password" [(ngModel)]="dailyPaymentDetails.TotalDistance">
-                        </div>
+                    <div class="form-group col-xl-6">
                     </div>
+                </div>
+                <div class="col col-sm-12">
+                    <app-p-table [pTableSetting]="multiPaymentTableSetting" [pTableMasterData]="multiPaymentData" (checkboxButtonCallbackFn)="fnPtableCheckboxCallBack($event)" (customActivityOnRecord)="fnPtableCallBackMultiPaymentTable($event)"></app-p-table>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ট্রিপের ধরন':' Trip Type'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.TripType ">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-xl-6 ">
-                    <div class="row ">
-                        <label for="password " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'মোট আয়':'Total Income'}}</label>
-                        <div class="col-sm-8 ">
-                            <input type="text " [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.TotalIncome ">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="password" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'রুটে আয়':' On Route Amount'}}</label>
-                        <div class="col-sm-8">
-                            <input type="text" [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.OnRouteIncome ">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-xl-6 ">
-                    <div class="row ">
-                        <label for="password " class="col-sm-4 col-form-label font-weight-bold ">{{LT=='bn'?'ভিন্ন রুটে আয়':'Different Route Amount'}}</label>
-                        <div class="col-sm-8 ">
-                            <input type="text " [disabled]="true" class="form-control " id="text " [(ngModel)]="dailyPaymentDetails.DifferentRouteIncome ">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-xl-6">
-                    <div class="row required">
-                        <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অযাচিত কারনে ফিরে আসছে':'Is Unwanted Back'}} </label>
-                        <div class="col-sm-8">
-                            <select class="form-control" disabled name="status" [(ngModel)]="dailyPaymentDetails.IsUnwantedReturn">
-                          <option selected value="false">{{LT=='bn'?'না':'No'}}</option>
-                          <option value="true">{{LT=='bn'?'হ্যাঁ':'Yes'}}</option>                           
-                      </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group col-xl-6">
-                    <div class="row">
-                        <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'ফিরে আসার কারন':'Resons for back'}}</label>
-                        <div class="col-sm-8">
-                            <textarea rows="4" disabled cols="40" [(ngModel)]="dailyPaymentDetails.ReasonForReturn" style="width:100%">   </textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="payslip-section">
+            <div class="payslip-section card card-body">
                 <div class="row required">
                     <div class="form-group col-xl-6">
                         <div class="row">
@@ -176,7 +200,7 @@
                     </div>
 
                     <div class="form-group col-xl-6">
-                        <div class="row">
+                        <div class="row required">
                             <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'গ্রহনের তারিখ':'Received Date'}}</label>
                             <div class="col-sm-8">
                                 <div class="input-group">
@@ -194,7 +218,7 @@
                         <div class="row">
                             <label for="userName" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'পেমেন্টর ধরন':'Payment Type'}}</label>
                             <div class="col-sm-8">
-                                <select class="form-control" name="status" [(ngModel)]="dailyPaymentDetails.PaymentType" (change)="fnChagePaymentType()">
+                                <select class="form-control" name="status" [(ngModel)]="dailyPaymentDetails.PaymentType" (change)="fnChagePaymentType()" [disabled]="isMultiReceived">
                                  <option selected value="Paid">{{LT=='bn'?'পরিশোধ':'Paid'}}</option> 
                                  <option selected value="Paid Route Income">{{LT=='bn'?'রুটের আয় পরিশোধ':'Paid Route Income'}}</option> 
                                  <option selected value="Paid Diff Route Income">{{LT=='bn'?'ভিন্ন রুটের আয় পরিশোধ':'Paid Diff Route Income'}}</option>       
@@ -219,7 +243,7 @@
                 <div class="form-group col-xl-12" style="margin-bottom:0px;background-color:#e9ecef;">
                     <div class="row pull-right" style="background-color:#e9ecef; padding-right:15px">
                         <button *ngIf="IsEditItem" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewItem()">{{LT=='bn'?'নতুন আদায় তৈরী করুন':'Create New Product'}}</button>
-                        <button *ngIf="!((dailyPaymentDetails.PaymentStatus=='Paid'||dailyPaymentDetails.PaymentStatus=='Partially Paid') && IsEditItem==true)" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnSaveDailyPayment()">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update Information':'Save Information'}}</button>
+                        <button *ngIf="!((dailyPaymentDetails.PaymentStatus=='Paid'||dailyPaymentDetails.PaymentStatus=='Partially Paid') && IsEditItem==true)" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnSavePaymentInfo()">{{LT=='bn'?IsEditItem==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEditItem==true?'Update Information':'Save Information'}}</button>
                         <button type="button " class="btn btn-outline-success" [disabled]="IsEditItem!=true" (click)="fnPrintCarLog()"><i class="fa fa-print" style="font-size:18px"></i>{{LT=='bn'?' ছাপান':' Print'}}</button>
                     </div>
                 </div>
@@ -271,7 +295,7 @@
                 </div>
             </div>
         </div>
-        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)"></app-p-table>
+        <app-p-table [pTableSetting]="configureableModalTable" [pTableMasterData]="configureableModalData" (radioButtonCallbackFn)="fnPtableModalCallBack($event)" (checkboxCallbackFn)="fnPtableModalCheckboxCallBack($event)"></app-p-table>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="c('Close click')">{{LT=='bn'?'বন্ধ করুন':'Close'}}</button>

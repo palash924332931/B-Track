@@ -18,6 +18,7 @@
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
     <Property Name="NoOfSeat" Type="nvarchar" MaxLength="100" />
     <Property Name="Creation" Type="datetime" />
+    <Property Name="RegistrationNoBangla" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="CarTypes">
     <Key>
@@ -66,6 +67,28 @@
     <Property Name="TotalIncome" Type="decimal" Precision="10" Scale="2" />
     <Property Name="IsUnOfficialDay" Type="bit" />
   </EntityType>
+  <EntityType Name="PartsDetails">
+    <Key>
+      <PropertyRef Name="PartsId" />
+    </Key>
+    <Property Name="PartsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartsCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="PartsName" Type="nvarchar" MaxLength="100" />
+    <Property Name="PartsDescription" Type="nvarchar" MaxLength="300" />
+    <Property Name="PartsSize" Type="nvarchar" MaxLength="300" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="300" />
+    <Property Name="VendorId" Type="int" />
+    <Property Name="CarTypeId" Type="int" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Units" Type="nvarchar" MaxLength="100" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="Created" Type="date" />
+    <Property Name="Updated" Type="date" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="RackNo" Type="nvarchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="POLUnitPrices">
     <Key>
       <PropertyRef Name="POLUnitPriceId" />
@@ -83,6 +106,26 @@
     <Property Name="Updated" Type="date" />
     <Property Name="CompanyId" Type="int" />
     <Property Name="Notes" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="StoreInfo">
+    <Key>
+      <PropertyRef Name="StoreInfoId" />
+    </Key>
+    <Property Name="StoreInfoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PartsId" Type="int" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="QuantityIn" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="QuantityOut" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="PurchaseDate" Type="date" />
+    <Property Name="PurchaseRef" Type="nvarchar" MaxLength="300" />
+    <Property Name="RequisitionRef" Type="nvarchar" MaxLength="300" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="JobIdRef" Type="int" />
+    <Property Name="VendorId" Type="int" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="300" />
+    <Property Name="Created" Type="date" />
+    <Property Name="CreatedBy" Type="int" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -111,6 +154,103 @@
     <Property Name="Grade" Type="nvarchar" MaxLength="200" />
     <Property Name="Creation" Type="datetime" />
   </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="VendorId" />
+    </Key>
+    <Property Name="VendorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Remark" Type="nvarchar(max)" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="ActivityType" Type="nvarchar" MaxLength="200" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'kpalasha_CarSystem101.dbo.vwStoreInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vwStoreInfo">
+    <Key>
+      <PropertyRef Name="StoreInfoId" />
+    </Key>
+    <Property Name="StoreInfoId" Type="int" Nullable="false" />
+    <Property Name="PartsId" Type="int" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="QuantityIn" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="QuantityOut" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" />
+    <Property Name="PurchaseDate" Type="date" />
+    <Property Name="PurchaseRef" Type="nvarchar" MaxLength="300" />
+    <Property Name="RequisitionRef" Type="nvarchar" MaxLength="300" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="JobIdRef" Type="int" />
+    <Property Name="VendorId" Type="int" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="300" />
+    <Property Name="PartsCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="PartsName" Type="nvarchar" MaxLength="100" />
+    <Property Name="PartsDescription" Type="nvarchar" MaxLength="300" />
+    <Property Name="PartsSize" Type="nvarchar" MaxLength="300" />
+    <Property Name="Brand" Type="nvarchar" MaxLength="300" />
+    <Property Name="RackNo" Type="nvarchar" MaxLength="100" />
+    <Property Name="VendorName" Type="nvarchar" MaxLength="50" />
+    <Property Name="JobDescription" Type="nvarchar" MaxLength="500" />
+    <Property Name="JobDate" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <Association Name="FK_PartsDetails_CarTypes">
+    <End Role="CarTypes" Type="Self.CarTypes" Multiplicity="0..1" />
+    <End Role="PartsDetails" Type="Self.PartsDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CarTypes">
+        <PropertyRef Name="CarTypeId" />
+      </Principal>
+      <Dependent Role="PartsDetails">
+        <PropertyRef Name="CarTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartsDetails_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="PartsDetails" Type="Self.PartsDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartsDetails">
+        <PropertyRef Name="CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StoreInfo_PartsDetails">
+    <End Role="PartsDetails" Type="Self.PartsDetails" Multiplicity="0..1" />
+    <End Role="StoreInfo" Type="Self.StoreInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PartsDetails">
+        <PropertyRef Name="PartsId" />
+      </Principal>
+      <Dependent Role="StoreInfo">
+        <PropertyRef Name="PartsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StoreInfo_Vendor">
+    <End Role="Vendor" Type="Self.Vendor" Multiplicity="0..1" />
+    <End Role="StoreInfo" Type="Self.StoreInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="VendorId" />
+      </Principal>
+      <Dependent Role="StoreInfo">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="prCheckAmountValidationForMultiPayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="CarLogIdList" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserId" Type="int" Mode="In" />
+  </Function>
   <Function Name="prDeletePaySlip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
     <Parameter Name="PaySlipId" Type="int" Mode="In" />
@@ -238,6 +378,12 @@
   <Function Name="prGetPartsDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserId" Type="int" Mode="In" />
   </Function>
+  <Function Name="prGetPaySlip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="PaySlipId" Type="int" Mode="In" />
+    <Parameter Name="BookNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="prGetPaySlipBook" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="UserID" Type="int" Mode="In" />
   </Function>
@@ -288,6 +434,7 @@
   <Function Name="prSaveCarDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CarId" Type="int" Mode="In" />
     <Parameter Name="RegistrationNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RegistrationNoBangla" Type="nvarchar" Mode="In" />
     <Parameter Name="RegistrationDate" Type="datetime" Mode="In" />
     <Parameter Name="CarTypeId" Type="int" Mode="In" />
     <Parameter Name="Status" Type="nvarchar" Mode="In" />
@@ -385,6 +532,22 @@
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
     <Parameter Name="Created" Type="date" Mode="In" />
   </Function>
+  <Function Name="prSaveMultiPayment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentId" Type="int" Mode="In" />
+    <Parameter Name="CarLogId" Type="int" Mode="In" />
+    <Parameter Name="PaymentAmount" Type="decimal" Mode="In" />
+    <Parameter Name="SystemAmount" Type="decimal" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+    <Parameter Name="PaySlipId" Type="int" Mode="In" />
+    <Parameter Name="PaymentStatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="ReceivedBy" Type="int" Mode="In" />
+    <Parameter Name="ReceivedByName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ReceivedDate" Type="datetime" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Update" Type="datetime" Mode="In" />
+    <Parameter Name="PaymentType" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="prSavePaySlip" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PaySlipId" Type="int" Mode="In" />
     <Parameter Name="SlipNo" Type="nvarchar" Mode="In" />
@@ -446,6 +609,15 @@
     <Parameter Name="CreatedBy" Type="int" Mode="In" />
     <Parameter Name="Update" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="prSaveStoreOut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="StoreInfoId" Type="int" Mode="In" />
+    <Parameter Name="JobId" Type="int" Mode="In" />
+    <Parameter Name="PartsId" Type="int" Mode="In" />
+    <Parameter Name="QuantityOut" Type="decimal" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="Created" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="prSaveUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Id" Type="int" Mode="In" />
     <Parameter Name="EmployeeId" Type="nvarchar" Mode="In" />
@@ -504,7 +676,52 @@
     <EntitySet Name="CarDetails" EntityType="Self.CarDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CarTypes" EntityType="Self.CarTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DailyCarHistories" EntityType="Self.DailyCarHistories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartsDetails" EntityType="Self.PartsDetails" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="POLUnitPrices" EntityType="Self.POLUnitPrices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StoreInfo" EntityType="Self.StoreInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vwStoreInfo" EntityType="Self.vwStoreInfo" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vwStoreInfo].[StoreInfoId] AS [StoreInfoId], 
+    [vwStoreInfo].[PartsId] AS [PartsId], 
+    [vwStoreInfo].[UnitPrice] AS [UnitPrice], 
+    [vwStoreInfo].[QuantityIn] AS [QuantityIn], 
+    [vwStoreInfo].[QuantityOut] AS [QuantityOut], 
+    [vwStoreInfo].[Status] AS [Status], 
+    [vwStoreInfo].[PurchaseDate] AS [PurchaseDate], 
+    [vwStoreInfo].[PurchaseRef] AS [PurchaseRef], 
+    [vwStoreInfo].[RequisitionRef] AS [RequisitionRef], 
+    [vwStoreInfo].[CompanyId] AS [CompanyId], 
+    [vwStoreInfo].[JobIdRef] AS [JobIdRef], 
+    [vwStoreInfo].[VendorId] AS [VendorId], 
+    [vwStoreInfo].[Remark] AS [Remark], 
+    [vwStoreInfo].[PartsCode] AS [PartsCode], 
+    [vwStoreInfo].[PartsName] AS [PartsName], 
+    [vwStoreInfo].[PartsDescription] AS [PartsDescription], 
+    [vwStoreInfo].[PartsSize] AS [PartsSize], 
+    [vwStoreInfo].[Brand] AS [Brand], 
+    [vwStoreInfo].[RackNo] AS [RackNo], 
+    [vwStoreInfo].[VendorName] AS [VendorName], 
+    [vwStoreInfo].[JobDescription] AS [JobDescription], 
+    [vwStoreInfo].[JobDate] AS [JobDate]
+    FROM [dbo].[vwStoreInfo] AS [vwStoreInfo]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_PartsDetails_CarTypes" Association="Self.FK_PartsDetails_CarTypes">
+      <End Role="CarTypes" EntitySet="CarTypes" />
+      <End Role="PartsDetails" EntitySet="PartsDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PartsDetails_Users" Association="Self.FK_PartsDetails_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="PartsDetails" EntitySet="PartsDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StoreInfo_PartsDetails" Association="Self.FK_StoreInfo_PartsDetails">
+      <End Role="PartsDetails" EntitySet="PartsDetails" />
+      <End Role="StoreInfo" EntitySet="StoreInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StoreInfo_Vendor" Association="Self.FK_StoreInfo_Vendor">
+      <End Role="Vendor" EntitySet="Vendor" />
+      <End Role="StoreInfo" EntitySet="StoreInfo" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

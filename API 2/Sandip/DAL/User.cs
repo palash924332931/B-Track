@@ -14,6 +14,12 @@ namespace Sandip.DAL
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.PartsDetails = new HashSet<PartsDetail>();
+        }
+    
         public int Id { get; set; }
         public string UserId { get; set; }
         public string Password { get; set; }
@@ -36,5 +42,8 @@ namespace Sandip.DAL
         public string Grade { get; set; }
         public string FatherName { get; set; }
         public Nullable<System.DateTime> Creation { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PartsDetail> PartsDetails { get; set; }
     }
 }

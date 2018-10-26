@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, HttpModule, ResponseContentType } from '@angular/http';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import "rxjs/Rx";
+import 'rxjs/Rx';
 import { ConfigService } from './config';
-import { CarType } from '../model/car/car-type'
-import { AlertService } from '../../shared/modules/alert/alert.service'
+import { CarType } from '../model/car/car-type';
+import { AlertService } from '../../shared/modules/alert/alert.service';
 import { saveAs } from 'file-saver';
 
 @Injectable()
@@ -23,16 +23,15 @@ export class CarService {
             .catch((ex: any) => {
                 this.alertService.fnLoading(false);
                 this.alertService.alert(response);
-                Observable.throw("");
+                Observable.throw('');
             });
 
-        console.log("response", response);
         return JSON.parse(response._body || []);
     }
 
     fnPostsCarType(data: CarType) {
         var url = ConfigService.baseWebApiUrl + '/PostCarType';
-        return this.http.post(url, data, "")
+        return this.http.post(url, data, '')
             .map((response: Response) => (response));
     }
 
@@ -47,35 +46,35 @@ export class CarService {
     //#region Bus
     async fnGetBuses(UserId) {
         var url = ConfigService.baseWebApiUrl + '/GetBuses?UserId=' + UserId;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        // let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         var response: any;
         await this.http.get(url, '')
             .toPromise().then(result => response = result)
             .catch((ex: any) => {
                 this.alertService.fnLoading(false);
                 this.alertService.alert(response);
-                Observable.throw("");
+                Observable.throw('');
             });
         return JSON.parse(response._body || []);
     }
 
     async fnGetBusesOnType(UserId, CarTypeId, Type = 'CarType') {
         var url = ConfigService.baseWebApiUrl + '/GetBusesOnType?UserId=' + UserId + '&Id=' + CarTypeId + '&Type=' + Type;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        // let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         var response: any;
         await this.http.get(url, '')
             .toPromise().then(result => response = result)
             .catch((ex: any) => {
                 this.alertService.fnLoading(false);
                 this.alertService.alert(response);
-                Observable.throw("");
+                Observable.throw('');
             });
         return JSON.parse(response._body || []);
     }
 
     async fnGetDailyPaymentReportSection(UserId, SelectedDate, CarTypeId, Type) {
         var url = ConfigService.baseWebApiUrl + '/GetDailyPaymentReportSection?UserId=' + UserId + '&SelectedDate=' + SelectedDate + '&CarTypeId=' + CarTypeId + '&Type=' + Type;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        // let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         var response: any;
         await this.http.get(url, '')
             .toPromise().then(result => response = result)
@@ -89,14 +88,14 @@ export class CarService {
 
     async fnGetIncomeReportSectionDateRange(UserId, FromDate,ToDate, CarTypeId, Type) {
         var url = ConfigService.baseWebApiUrl + '/GetIncomeReportDateRange?UserId=' + UserId + '&FromDate=' + FromDate+'&ToDate=' + ToDate + '&CarTypeId=' + CarTypeId + '&Type=' + Type;
-        //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
+        // let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         var response: any;
         await this.http.get(url, '')
             .toPromise().then(result => response = result)
             .catch((ex: any) => {
                 this.alertService.fnLoading(false);
                 this.alertService.alert(response);
-                Observable.throw("");
+                Observable.throw('');
             });
         return JSON.parse(response._body || []);
     }
@@ -390,7 +389,7 @@ export class CarService {
 
     fnPostDailyCarLog(data: any) {
         var url = ConfigService.baseWebApiUrl + '/PostDailyCarLog';
-        return this.http.post(url, data, "")
+        return this.http.post(url, data, '')
             .map((response: Response) => <any>(response));
     }
 

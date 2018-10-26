@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { routerTransition } from '../../../router.animations';
 import { AlertService } from '../../../shared/modules/alert/alert.service'
 import { AccountsService, CommonService, ConfigService, CarService, CustomNgbDateParserFormatter, StoreService } from '../../../shared/services'
@@ -6,6 +6,7 @@ import { DailyCarHistory } from '../../../shared/model/car'
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, ModalDismissReasons, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 declare var jQuery: any;
 
 @Component({
@@ -16,7 +17,7 @@ declare var jQuery: any;
   providers: [CustomNgbDateParserFormatter]
 })
 export class JobManagerComponent implements OnInit {
-
+  @ViewChild('content') public childModal: any;
   public carLogList: DailyCarHistory[] = [];
   public userId = 1;
   public UserInfo = JSON.parse(localStorage.getItem("car-system-user-info-option-b"));
@@ -27,7 +28,11 @@ export class JobManagerComponent implements OnInit {
   public toDate: string = null;
   public status = 'All'
   public enabledApprovedBtn: boolean = false;
-  constructor(private alertService: AlertService, private accountsService: AccountsService, private storeService: StoreService, private carService: CarService, private router: Router, private customNgbDateParserFormatter: CustomNgbDateParserFormatter, private ngbDateParserFormatter: NgbDateParserFormatter, private configService: ConfigService) { }
+  public configureableModalData: any[] = [];
+  private modalRef: NgbModalRef;
+  public modalType: string;
+  public closeResult: string;
+  constructor(private alertService: AlertService, private accountsService: AccountsService, private storeService: StoreService, private carService: CarService, private router: Router, private customNgbDateParserFormatter: CustomNgbDateParserFormatter, private ngbDateParserFormatter: NgbDateParserFormatter, private configService: ConfigService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.userId = this.UserInfo[0].Id;
@@ -63,7 +68,7 @@ export class JobManagerComponent implements OnInit {
         this.carLogTableBind.tableName = this.LT == 'bn' ? this.fromDate + ' থেকে ' + this.toDate + ' তারিখের গাড়ীর জবের তালিকা' : 'Bus Log List from ' + this.fromDate + ' to ' + this.toDate;
         this.carLogList = data || [];
         this.carLogList.forEach((rec: any) => {
-          rec.JobDate=rec.JobDate.split("T")[0];
+          rec.JobDate = rec.JobDate.split("T")[0];
           rec.Details = true;
         });
         this.alertService.fnLoading(false);
@@ -180,6 +185,44 @@ export class JobManagerComponent implements OnInit {
     }
   }
 
+  fnPtableCallBack(event: any) {
+    if (event.cellName == "Details") {
+      let record = event.record;
+      this.fnGetStoreInfoById(record.JobId || 0,record);
+    }
+    console.log(event);
+  }
+
+  fnGetStoreInfoById(JobId: number,record:any) {
+    this.configureableModalTable.tableName = this.LT == 'bn' ?record.RegistrationNo+ 'গাড়ির জবের বিবরন ' : 'Job history of Car'+record.RegistrationNo;
+    this.configureableModalTable.tableColDef = [
+      { headerName: this.LT == 'bn' ? 'জব নম্বর' : 'Job No ', width: '10%', internalName: 'JobId', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'জবের তারিখ' : 'Job Date ', width: '10%', internalName: 'JobDate', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'জবের বিবরন' : 'Job Description', width: '20%', internalName: 'JobDescription', sort: false, type: "" },
+      { headerName: this.LT == 'bn' ? 'যন্ত্রাংশের নাম' : 'Parts Name', width: '20%', internalName: 'PartsName', sort: false, type: "" },
+      { headerName: this.LT == 'bn' ? 'যন্ত্রাংশের কোড' : 'Parts Code', width: '20%', internalName: 'PartsCode', sort: false, type: "" },
+      { headerName: this.LT == 'bn' ? 'যন্ত্রাংশের একক মুল্য' : 'Unit Price', width: '10%', internalName: 'UnitPrice', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'সরবরাহকারী' : 'Vendor', width: '10%', internalName: 'VendorName', sort: false, type: "" },
+      { headerName: this.LT == 'bn' ? 'যন্ত্রাংশের পরিমাণ' : 'Quantity ', width: '10%', internalName: 'QuantityOut', sort: true, type: "" },
+      //{ headerName: this.LT == 'bn' ? 'জবের অবস্থা' : 'Status', width: '15%', internalName: 'Status', sort: true, type: "" }
+    ]
+    this.alertService.fnLoading(true);
+    this.storeService.fnGetStoreInfoById(this.userId, JobId).subscribe((data: any) => {
+      console.log("data", data);
+      this.configureableModalData = data || [];
+      this.alertService.fnLoading(false);
+      this.modalRef = this.modalService.open(this.childModal, { size: 'lg', backdrop: 'static' });
+      this.modalRef.result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    },
+      (error: any) => {
+        this.alertService.fnLoading(false);
+      });
+  }
+
   public carLogTableBind = {
     tableID: "car-log-table",
     tableClass: "table table-border ",
@@ -206,12 +249,32 @@ export class JobManagerComponent implements OnInit {
     pageSize: 15,
     enabledPagination: true,
     enabledEditBtn: false,
-    enabledCellClick: false,
+    enabledCellClick: true,
     enabledColumnFilter: true,
     enabledReflow: true,
     checkboxCallbackFn: true,
     enabledTotal: false,
     totalTitle: this.LT == 'bn' ? 'মোট' : 'Total',
+  };
+
+  public configureableModalTable = {
+    tableID: "messtage-history-table",
+    tableClass: "table table-border ",
+    tableName: this.LT == 'bn' ? 'কর্মচারীর পদবি নির্বাচন করুন' : 'Select Employee Role',
+    tableRowIDInternalName: "ID",
+    tableColDef: [
+
+    ],
+    enabledSearch: true,
+    pageSize: 10,
+    enabledPagination: false,
+    enabledRadioBtn: true,
+    enabledAutoScrolled: true,
+    enabledCellClick: true,
+    pTableStyle: {
+      tableOverflowY: true,
+      overflowContentHeight: '460px'
+    }
   };
 
 }

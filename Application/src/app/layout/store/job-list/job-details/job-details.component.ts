@@ -28,7 +28,7 @@ export class JobDetailsComponent implements OnInit {
   public modalType: string;
   public closeResult: string;
   public configureableModalData: any[] = [];
-  public jobStatus='New Job';
+  public jobStatus = 'New Job';
   constructor(private adminService: AdminService, private configService: ConfigService, private alertService: AlertService, private router: Router, private route: ActivatedRoute, private storeService: StoreService, private customNgbDateParserFormatter: CustomNgbDateParserFormatter, private ngbDateParserFormatter: NgbDateParserFormatter, private modalService: NgbModal, public carService: CarService) { }
 
   ngOnInit() {
@@ -41,7 +41,6 @@ export class JobDetailsComponent implements OnInit {
       this.IsEdit = true;
       this.fnGetJobDetails();
     } else {
-      // this.JobDate = this.customNgbDateParserFormatter.parse(this.dailyLogDetails.CheckInDate || null);
       this.jobDetails.JobDate = this.ngbDateParserFormatter.format(this.JobDate);
       //this.jobDetails.JobCompletedDate = this.ngbDateParserFormatter.format(this.JobDate);
       this.IsEdit = false;
@@ -50,11 +49,14 @@ export class JobDetailsComponent implements OnInit {
 
   fnGetJobDetails() {
     this.alertService.fnLoading(true);
-    this.adminService.fnGetEmployee(this.userId, this.jobId).subscribe(
+    this.storeService.fnGetJobList(this.userId, '10-10-1990', '10-10-2020', this.jobId, 'Single').subscribe(
       (data: Job[]) => {
 
-        console.log("job details: ",data);
-        //this.jobDetails = data[0];
+        console.log("job details: ", data);
+        debugger;
+        this.jobDetails = data[0];
+        this.JobDate = this.customNgbDateParserFormatter.parse(this.jobDetails.JobDate || null);
+        this.JobCompletedDate= this.customNgbDateParserFormatter.parse(this.jobDetails.JobCompletedDate || null);
         this.alertService.fnLoading(false);
       },
       (error: any) => {
@@ -65,24 +67,20 @@ export class JobDetailsComponent implements OnInit {
   }
 
   fnSaveJobDetails() {
-    //to check group name;
-    // if (this.jobDetails.Name == null || this.jobDetails.Name == "") {
-    //   this.alertService.alert(this.LT=='bn'?'কর্মকর্তার নাম এবং কর্মচারী আইডি খালি রাখতে পারেন না।':'Employee name and employee ID can not be left blank.');
-    //   return false;
-    // }
-    // if (this.jobDetails.EmployeeId == null || this.jobDetails.EmployeeId == "") {
-    //   this.alertService.alert(this.LT=='bn'?'কর্মকর্তার নাম এবং কর্মচারী আইডি খালি রাখতে পারেন না।':'Employee name and employee ID can not be left blank.');
-    //   return false;
-    // }
-
-    this.jobDetails.Created = this.configService.getCurrentDate();  
-    this.jobDetails.CreatedBy=this.userId;
+    this.jobDetails.Created = this.configService.getCurrentDate();
+    this.jobDetails.CreatedBy = this.userId;
 
     this.alertService.fnLoading(true);
     this.storeService.fnPostJobInfo(this.jobDetails).subscribe(
       (success: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি জবের তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in Job list?'
+        let mgs = "";
+        if ((success._body).indexOf("|") > -1) {
+          mgs = success._body.split("|")[1];
+          this.jobDetails.JobId = success._body.split("|")[0];
+          this.IsEdit = true;
+        }
+        this.alertService.confirm(this.LT == 'bn' ? mgs.replace(/"/g, "") + ' আপনি কি জবের তালিকায় ফিরে যেতে চান?' : success._body.replace(/"/g, "") + ' Do you want to back in Job list?'
           , () => {
             this.router.navigate(["./store/jobs"]);
           }
@@ -90,7 +88,7 @@ export class JobDetailsComponent implements OnInit {
       },
       (error: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT=='bn'?' সিস্টেম জবের তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show Job list.');
+        this.alertService.alert(this.LT == 'bn' ? ' সিস্টেম জবের তালিকা দেখাতে ব্যর্থ হয়েছে।' : 'System has failed to show Job list.');
       }
     );
   }
@@ -186,7 +184,7 @@ export class JobDetailsComponent implements OnInit {
         this.alertService.fnLoading(false)
         this.configureableModalData = data || [];
 
-        this.modalRef = this.modalService.open(content,{size:'lg'});
+        this.modalRef = this.modalService.open(content, { size: 'lg' });
         this.modalRef.result.then((result) => {
           this.closeResult = `Closed with: ${result}`;
         }, (reason) => {
@@ -284,8 +282,8 @@ export class JobDetailsComponent implements OnInit {
       this.jobDetails.DriverId = event.record.DriverId;
       this.jobDetails.DriverName = event.record.Name;
     } else if (this.modalType == "Select Assigned Mechanic") {
-      this.jobDetails.AssignedMacanic = event.record.Id;
-      this.jobDetails.AssignedMacanicName = event.record.Name;
+      this.jobDetails.AssignedMechanic = event.record.Id;
+      this.jobDetails.AssignedMechanicName = event.record.Name;
     } else if (this.modalType == "Select Parts") {
       this.partsId = event.record.PartsId;
       this.partsName = event.record.PartsName;
@@ -337,5 +335,164 @@ export class JobDetailsComponent implements OnInit {
       overflowContentHeight: '460px'
     }
   };
+
+  fnPrintJobLog() {
+    let printContents, popupWin;
+    /*
+    <tr> <td colspan="2" align="center">জোয়ারসাহারা বাস ডিপো </td> </tr>
+          <tr> <td colspan="2" align="center">খিলক্ষেত, ঢাকা।</td> </tr>
+    */
+    printContents = `<table style="width:100%">
+    <tr>
+        <td colspan="2" align="center" style="font-size: 28px; font-weight: 600;">বাংলাদেশ সড়ক পরিবহন কর্পোরেশন </td>
+    </tr>
+    <tr> 
+     <td colspan="2" align="center">
+         রিকুইজিশন স্লিপ (শাখা অফিস সমূহের জন্য) ক্রমিক নং ........................তাং <b>  ${this.jobDetails.JobDate} </b> নং <b>  ${this.jobDetails.JobId} </b>
+     </td>
+    </tr>
+    <tr>
+        <td align="center" colspan="2">
+        শাখা............................................সেকশন...................................................................................                 
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            জব নং  <b>${this.jobDetails.JobId} </b> গাড়ীর নং  <b> ${this.jobDetails.RegistrationNo}</b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+           <table border="1px solid black" style="border-collapse:collapse;width:100%">
+                <tr>
+                    <td rowspan="2">ক্রমিক নং</td>
+                    <td rowspan="2">নাম ও বিবরণ</td>
+                    <td rowspan="2">পার্ট নং কোড নং</td>
+                    <td rowspan="2">একক</td>
+                    <td colspan="2">পরিমাণ</td>
+                    <td rowspan="2" colspan="2">একক মূল্য</td>
+                    <td rowspan="2" colspan="2">মোট মূল্য</td>
+                    <td rowspan="2">বিলির পর মজুত</td>
+                    <td rowspan="2">মন্তব্য</td>
+                </tr>
+               <tr>
+                   <td>(চাহিদা</td>
+                   <td>বিলি</td>
+               </tr>
+                <tr>
+                    <td>১</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>২</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>৩</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>৪</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>৫</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>৬</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>৭</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+    </tr>
+</table>
+      `;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+        <html>
+          <head>
+            <title>জবের বিবরন (system generated:B-Track)</title>
+            <style>
+            //........Customized style.......
+            </style>
+          </head>
+      <body onload="window.print();window.close()">${printContents}</body>
+        </html>`);
+    popupWin.document.close();
+  }
 }
 

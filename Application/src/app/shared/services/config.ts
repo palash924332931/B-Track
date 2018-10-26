@@ -4,12 +4,12 @@ import { Injectable } from '@angular/core';
 export class ConfigService {
 
 
-    //http://api.sandhi.co
+    // http://api.sandhi.co
     //public static readonly webApiHost: string = "option-b.com/API2";//'palas.a2hosted.com/API';
-    public static readonly webApiHost: string = 'localhost:6023';
+     public static readonly webApiHost: string = 'localhost:6023';
     public static readonly baseWebApiUrl: string = 'http://' + ConfigService.webApiHost + '/api';
-    //public static readonly baseWebApiUrl: string = 'http://' + ConfigService.webApiHost +':'+ConfigService.webApiPort+ '/api';
-    //public static readonly WebApiTokenPath: string = 'http://' + ConfigService.webApiHost + ':' + ConfigService.webApiPort + '/SITWebApi121/token';  
+    // public static readonly baseWebApiUrl: string = 'http://' + ConfigService.webApiHost +':'+ConfigService.webApiPort+ '/api';
+    // public static readonly WebApiTokenPath: string = 'http://' + ConfigService.webApiHost + ':' + ConfigService.webApiPort + '/SITWebApi121/token';  
 
     public static getApiUrl(path: string) {
         return `${ConfigService.baseWebApiUrl}/${path}`;

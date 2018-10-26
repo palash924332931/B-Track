@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sandip.DAL;
+using Sandip.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace Sandip.Controllers.Car
 {
     public class DailyCarLogController : ApiController
     {
+        private CommonService _commonService = new CommonService();
         [Route("api/GetDilyCarLogList")]
         [HttpGet]
         public HttpResponseMessage GetDilyCarLogList(int UserId)
@@ -148,10 +150,11 @@ namespace Sandip.Controllers.Car
         {
             if (request != null)
             {
+                User user = _commonService.GetUserById(Convert.ToInt32(UserId));
                 var DCarLog = JsonConvert.DeserializeObject<DailyCarHistory[]>(request.ToString());
                 try
                 {
-                    //DateTime checkIn = null;
+                    // DateTime checkIn = null;
                     // DCarLog.CheckInDate==null?null: Datetime.Parse(DCarLog.CheckOutDate);
                     //  var dat2 = Convert.ToDateTime(DCarLog.CheckOutDate);
                     using (CarSystemEntities db = new CarSystemEntities())
@@ -162,7 +165,7 @@ namespace Sandip.Controllers.Car
                             //returnData = db.prSavePaySlip(pSlip.PaySlipId, pSlip.SlipNo, pSlip.BookNo, pSlip.Amount, pSlip.Status, Int32.Parse(pSlip.CreatedBy), pSlip.Update).FirstOrDefault();
                             db.Database.ExecuteSqlCommand("Update DailyCarHistories set Status='Approved', ApprovedBy=" + UserId + " Where CarLogId=" + dCarLog.CarLogId);
                         }
-                        return Request.CreateResponse(HttpStatusCode.OK, "Your request executed successfully.");
+                        return Request.CreateResponse(HttpStatusCode.OK, user.Language=="bn"?"নির্বাচিত গাড়ি গুলো অনুমোদন দেওয়া হয়েছে।": "Your request executed successfully.");
                     }
                 }
                 catch (Exception ex)

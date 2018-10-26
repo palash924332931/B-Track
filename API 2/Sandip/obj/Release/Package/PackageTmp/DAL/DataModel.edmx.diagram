@@ -10,6 +10,14 @@
         <EntityTypeShape EntityType="CarSystemModel.User" Width="1.5" PointX="5.375" PointY="0.75" />
         <EntityTypeShape EntityType="CarSystemModel.DailyCarHistory" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="CarSystemModel.POLUnitPrice" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CarSystemModel.PartsDetail" Width="1.5" PointX="5.375" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSystemModel.StoreInfo" Width="1.5" PointX="7.625" PointY="7.375" />
+        <AssociationConnector Association="CarSystemModel.FK_StoreInfo_PartsDetails" />
+        <AssociationConnector Association="CarSystemModel.FK_PartsDetails_CarTypes" />
+        <AssociationConnector Association="CarSystemModel.FK_PartsDetails_Users" />
+        <EntityTypeShape EntityType="CarSystemModel.Vendor" Width="1.5" PointX="7.375" PointY="1" />
+        <AssociationConnector Association="CarSystemModel.FK_StoreInfo_Vendor" />
+        <EntityTypeShape EntityType="CarSystemModel.VWStoreInfo" Width="1.5" PointX="9.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

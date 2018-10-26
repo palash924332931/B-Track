@@ -13,8 +13,8 @@ export class StoreService {
     constructor(private http: Http, private config: ConfigService) { }
 
     //#region Job
-    fnGetJobList(UserId: number,FromDate:string,ToDate:string,JobId:number,Type:string) {
-        var url = ConfigService.baseWebApiUrl + '/GetJobList?UserId=' + UserId+'&FromDate='+FromDate+'&ToDate='+ToDate+'&JobId='+JobId+"&Type="+Type;
+    fnGetJobList(UserId: number, FromDate: string, ToDate: string, JobId: number, Type: string) {
+        var url = ConfigService.baseWebApiUrl + '/GetJobList?UserId=' + UserId + '&FromDate=' + FromDate + '&ToDate=' + ToDate + '&JobId=' + JobId + "&Type=" + Type;
         //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));
@@ -25,13 +25,13 @@ export class StoreService {
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));
     }
-        
+
     fnPostJobInfo(data: any) {
         var url = ConfigService.baseWebApiUrl + '/postJobInfo';
         return this.http.post(url, data, "")
             .map((response: Response) => <any>(response));
     }
-   
+
 
     //#endregion of Job
 
@@ -42,8 +42,8 @@ export class StoreService {
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));
     }
-    
 
+    //#endregion of Job
     fnPostPayment(data: any) {
         var url = ConfigService.baseWebApiUrl + '/PostPayment';
         return this.http.post(url, data, "")
@@ -59,9 +59,9 @@ export class StoreService {
     //#endregion of Payment
 
 
-     //#region POL
-     fnGetPOLLogList(UserId: number,POLId:number,FromDate:string,ToDate:string,Type:string) {
-        var url = ConfigService.baseWebApiUrl + '/GetPOLList?UserId=' + UserId+'&POLId='+POLId+'&FromDate='+FromDate+'&ToDate='+ToDate+'&Type='+Type;
+    //#region POL
+    fnGetPOLLogList(UserId: number, POLId: number, FromDate: string, ToDate: string, Type: string) {
+        var url = ConfigService.baseWebApiUrl + '/GetPOLList?UserId=' + UserId + '&POLId=' + POLId + '&FromDate=' + FromDate + '&ToDate=' + ToDate + '&Type=' + Type;
         //let options = new RequestOptions({ headers: this.getHeaders(), method: "get" });
         return this.http.get(url, "")
             .map((response: any) => <any[]>JSON.parse(response._body || []));
@@ -74,8 +74,8 @@ export class StoreService {
     }
 
 
-    fnDeletePOLLog(UserID:number,POLId: number) {
-        var url = ConfigService.baseWebApiUrl + '/DeletePOL?POLId=' + POLId+'&UserID='+UserID;
+    fnDeletePOLLog(UserID: number, POLId: number) {
+        var url = ConfigService.baseWebApiUrl + '/DeletePOL?POLId=' + POLId + '&UserID=' + UserID;
         return this.http.get(url, "")
             .map((response: Response) => <any>(response));
     }
@@ -85,13 +85,32 @@ export class StoreService {
             .map((response: Response) => <any>(response));
     }
 
-    fnUpdatePOLRecordStatus(userId:number, polIdArray:any[],statusChangeTo:string){
-        debugger;
-        let polIds=polIdArray.join(",");
-        var url = ConfigService.baseWebApiUrl + '/POLStatusUpdate?userId=' + userId+'&polIds='+polIds+'&statusChangeTo='+statusChangeTo;
+    fnUpdatePOLRecordStatus(userId: number, polIdArray: any[], statusChangeTo: string) {
+        let polIds = polIdArray.join(",");
+        var url = ConfigService.baseWebApiUrl + '/POLStatusUpdate?userId=' + userId + '&polIds=' + polIds + '&statusChangeTo=' + statusChangeTo;
         return this.http.get(url, "")
             .map((response: Response) => <any>(response));
     }
 
     //#endregion of POL
+
+    //#region Parts
+    fnPostPartsDetails(data: any) {
+        var url = ConfigService.baseWebApiUrl + '/store/PostStoreParts';
+        return this.http.post(url, data, "")
+            .map((response: Response) => <any>(response));
+    }
+
+    fnGetStoreInfoById(userId:number, jobId:number){        
+        var url = ConfigService.baseWebApiUrl + '/GetStoreInfoById?userId=' + userId + '&jobId=' + jobId;
+        return this.http.get(url, "")
+        .map((response: any) => <any[]>JSON.parse(response._body || []));
+    }
+
+    fnPostStoreOut(data: any) {
+        var url = ConfigService.baseWebApiUrl + '/store/PostStoreInfoOut';
+        return this.http.post(url, data, "")
+            .map((response: Response) => <any>(response));
+    }
+    //#endregion
 }

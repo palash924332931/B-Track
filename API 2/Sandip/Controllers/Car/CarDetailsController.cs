@@ -83,7 +83,7 @@ namespace Sandip.Controllers.Car
                 {
                     using (CarSystemEntities db = new CarSystemEntities())
                     {
-                         var returnData = db.prSaveCarDetails(CarDetails.CarId, CarDetails.RegistrationNo, CarDetails.RegistrationDate, CarDetails.CarTypeId, CarDetails.Status, CarDetails.ReasonForStop, CarDetails.NoOfSeat, CarDetails.OnRootDate, CarDetails.TotalDistance, CarDetails.Notes, CarDetails.CreatedBy, CarDetails.Update).FirstOrDefault();
+                         var returnData = db.prSaveCarDetails(CarDetails.CarId, CarDetails.RegistrationNo, CarDetails.RegistrationNoBangla, CarDetails.RegistrationDate, CarDetails.CarTypeId, CarDetails.Status, CarDetails.ReasonForStop, CarDetails.NoOfSeat, CarDetails.OnRootDate, CarDetails.TotalDistance, CarDetails.Notes, CarDetails.CreatedBy, CarDetails.Update).FirstOrDefault();
                          return Request.CreateResponse(HttpStatusCode.OK, returnData.ToString());
                     }
                 }

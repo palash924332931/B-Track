@@ -3,10 +3,10 @@ import { routerTransition } from '../../../router.animations';
 import { AlertService } from '../../../shared/modules/alert/alert.service'
 import { AdminService, CommonService, ConfigService, AccountsService } from '../../../shared/services'
 import { DatePipe } from '@angular/common';
-import { Role } from '../../../shared/model/admin/role'
-import { COA } from '../../../shared/model/accounts'
+import { Role } from '../../../shared/model/admin/role';
+import { COA } from '../../../shared/model/accounts';
 import { Router, ActivatedRoute } from '@angular/router';
-import { } from '../../../shared/model/accounts'
+import { } from '../../../shared/model/accounts';
 
 @Component({
   selector: 'app-chart-of-accounts',
@@ -16,14 +16,14 @@ import { } from '../../../shared/model/accounts'
 })
 export class ChartOfAccountsComponent implements OnInit {
 
-  public UserInfo = JSON.parse(localStorage.getItem("car-system-user-info-option-b"));
+  public UserInfo = JSON.parse(localStorage.getItem('car-system-user-info-option-b'));
   public IsEditItem: boolean = false;
 
   public LT: string = ConfigService.languageType;
   public UserId = 1;
   public roleList: any[];
   public selectedRoleId: number;
-  public selectedRoleName: string = "";
+  public selectedRoleName: string = '';
   public roleDetails = new Role();
   public menu = [];
   public CompanyId: number;
@@ -38,7 +38,7 @@ export class ChartOfAccountsComponent implements OnInit {
   }
 
   fnNewAccount() {
-    this.router.navigate(["./accounts/coa/0"]);
+    this.router.navigate(['./accounts/coa/0']);
   }
 
 

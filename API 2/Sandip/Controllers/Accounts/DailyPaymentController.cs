@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Sandip.DAL;
+using Sandip.Services;
+using Sandip.ViewModel.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace Sandip.Controllers.Accounts
 {
     public class DailyPaymentController : ApiController
     {
+        private CommonService _commonService = new CommonService();
         [Route("api/GetDailyPaymentList")]
         [HttpGet]
         public HttpResponseMessage GetDailyPaymentList(int UserId)
@@ -68,6 +71,56 @@ namespace Sandip.Controllers.Accounts
                     using (CarSystemEntities db = new CarSystemEntities())
                     {
                         var returnData = db.prSaveDailyPayment(DCarLog.PaymentId, DCarLog.CarLogId, DCarLog.PaymentAmount, DCarLog.SystemAmount, DCarLog.Notes, DCarLog.PaySlipId, DCarLog.PaymentStatus, DCarLog.ReceivedBy, DCarLog.ReceivedByName, DCarLog.ReceivedDate, DCarLog.Status, Int32.Parse( DCarLog.CreatedBy), DCarLog.Update, DCarLog.PaymentType).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.OK, returnData.ToString());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, "System had filed to save payment information. Please try agian.");
+                }
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Please correct your information and try again.");
+            }
+
+        }
+
+        [AllowAnonymous]
+        [Route("api/PostMultiPayment")]
+        [HttpPost]
+        public HttpResponseMessage PostMultiPayment([FromBody] JObject request, int userId)
+        {
+            if (request != null)
+            {
+                var DCarLog = JsonConvert.DeserializeObject<MultiPayment>(request.ToString());
+                List<prGetIncomeReportDateRangeBusWiseSection_Result> carList = new List<prGetIncomeReportDateRangeBusWiseSection_Result>();
+                prGetDailyPaymentLog_Result paymentLog = new prGetDailyPaymentLog_Result();
+                carList = DCarLog.CarList;
+                paymentLog = DCarLog.PaymentLog;
+
+                User user= _commonService.GetUserById(Convert.ToInt32(userId));
+
+                try
+                {                    
+                    using (CarSystemEntities db = new CarSystemEntities())
+                    {
+                        string returnData = "";
+                        var carIdList =string.Join(",",carList.Select(x=>x.CarLogId));
+                        var balance = db.prCheckAmountValidationForMultiPayment(paymentLog.PaymentAmount, carIdList.ToString(), userId).FirstOrDefault();
+                        if (balance== paymentLog.PaymentAmount) {
+                            foreach (prGetIncomeReportDateRangeBusWiseSection_Result car in carList)
+                            {
+                                var amount = car.TotalIncome - (car.PaymentAmount == null ? 0 : car.PaymentAmount);
+                                returnData = db.prSaveMultiPayment(0, car.CarLogId, amount, amount, paymentLog.Notes, paymentLog.PaySlipId, "Paid", paymentLog.ReceivedBy, paymentLog.ReceivedByName, paymentLog.ReceivedDate, paymentLog.Status, Int32.Parse(paymentLog.CreatedBy), paymentLog.Update, paymentLog.PaymentType).FirstOrDefault();
+                            }
+                        }
+                        else
+                        {
+                            returnData = user.Language == "bn" ? "আপনার দেওয়া টাকা এবং সিস্টেমের টাকা সমান নয়, অনুগ্রহ করে পর্যালোচনা করে দেখুন।" : "Your amount does not match with system amount, please verify your amount again.";
+                        }
+                       
+                        
                         return Request.CreateResponse(HttpStatusCode.OK, returnData.ToString());
                     }
                 }

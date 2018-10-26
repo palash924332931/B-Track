@@ -93,7 +93,7 @@ export class ItemListComponent implements OnInit {
     enabledSerialNo: true,
     pageSize: 15,
     enabledPagination: true,
-    enabledEditBtn: true,
+    enabledEditBtn: false,
     enabledCellClick: true,
     enabledColumnFilter: true,
   };

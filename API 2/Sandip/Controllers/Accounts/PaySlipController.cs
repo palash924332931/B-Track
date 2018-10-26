@@ -21,7 +21,8 @@ namespace Sandip.Controllers.Accounts
             {
                 using (CarSystemEntities db = new CarSystemEntities())
                 {
-                    var returnData = db.prGetPaySlipDetails(UserId, 0,"", "All").ToList();
+                    // var returnData = db.prGetPaySlipDetails(UserId, 0,"", "All").ToList();
+                    var returnData = db.prGetPaySlip(UserId, 0, "", "All").ToList();
                     return Request.CreateResponse(HttpStatusCode.OK, returnData);
                 }
 
@@ -79,7 +80,8 @@ namespace Sandip.Controllers.Accounts
             {
                 using (CarSystemEntities db = new CarSystemEntities())
                 {
-                    var returnData = db.prGetPaySlipDetails(UserId, 0, BookNo, "Book").ToList();
+                    //var returnData = db.prGetPaySlipDetails(UserId, 0, BookNo, "Book").ToList();
+                    var returnData = db.prGetPaySlip(UserId, 0, BookNo, "Book").ToList();
                     return Request.CreateResponse(HttpStatusCode.OK, returnData);
                 }
 
@@ -98,7 +100,8 @@ namespace Sandip.Controllers.Accounts
             {
                 using (CarSystemEntities db = new CarSystemEntities())
                 {
-                    var returnData = db.prGetPaySlipDetails(UserId, 0, BookNo, Type).ToList();
+                    //var returnData = db.prGetPaySlipDetails(UserId, 0, BookNo, Type).ToList();
+                    var returnData = db.prGetPaySlip(UserId, 0, BookNo, Type).ToList();
                     return Request.CreateResponse(HttpStatusCode.OK, returnData);
                 }
 

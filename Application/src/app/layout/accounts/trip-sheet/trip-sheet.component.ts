@@ -168,13 +168,13 @@ export class TripSheetComponent implements OnInit {
       { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Driver Name ', width: '8%', internalName: this.LT=='bn'?'DriverNameBangla':'DriverName', sort: true, type: "" },
       //{ headerName: this.LT=='bn'?'যাত্রা শুরুর স্থান':'Start Point', width: '15%', internalName: 'StartPoint', sort: true, type: "" },
       //{ headerName: this.LT=='bn'?'রুটের দূরত্ব':'Route Distance', width: '10%', internalName: 'Distance', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'ট্রিপের সংখ্যা' : 'No. of Trip', width: '5%', internalName: 'TripNo', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'মোট দূরত্ব' : 'Total Distance', width: '8%', internalName: 'TotalDistance', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'ট্রিপের সংখ্যা' : 'No. of Trip', width: '5%', internalName: 'TripNo', sort: true, type: "",showTotal:true  },
+      { headerName: this.LT == 'bn' ? 'মোট দূরত্ব' : 'Total Distance', width: '8%', internalName: 'TotalDistance', sort: true, type: "",showTotal:true },
       //{ headerName: this.LT=='bn'?'বহির্গমনের সময়':'Departure Time', width: '10%', internalName: 'CheckInTime', sort: true, type: "" },
       //{ headerName: this.LT=='bn'?'প্রবেশের সময়':'Arrival Time', width: '10%', internalName: 'CheckOutTime', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'রুটের আয়' : 'On Route Amount', width: '8%', internalName: 'OnRouteIncome', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'ভিন্ন রুটে আয়' : 'Diff. Route Amount', width: '10%', internalName: 'DifferentRouteIncome', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'রাজস্বের পরিমান' : 'Total Amount', width: '10%', internalName: 'TotalIncome', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'রুটের আয়' : 'On Route Amount', width: '8%', internalName: 'OnRouteIncome', sort: true, type: "",showTotal:true  },
+      { headerName: this.LT == 'bn' ? 'ভিন্ন রুটে আয়' : 'Diff. Route Amount', width: '10%', internalName: 'DifferentRouteIncome', sort: true, type: "",showTotal:true  },
+      { headerName: this.LT == 'bn' ? 'রাজস্বের পরিমান' : 'Total Amount', width: '10%', internalName: 'TotalIncome', sort: true, type: "" ,showTotal:true },
       { headerName: this.LT == 'bn' ? 'ট্রিপের ধরন' : 'Trip Type', width: '10%', internalName: 'TripType', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'অবস্থা' : 'Payment Status', width: '10%', internalName: 'Status', sort: true, type: "" },
       //{ headerName: this.LT=='bn'?'প্রস্থানকারকের নাম':'Departure By', width: '15%', internalName: 'CheckInByName', sort: true, type: "" },
@@ -191,6 +191,8 @@ export class TripSheetComponent implements OnInit {
     enabledColumnFilter: true,
     enabledReflow: true,
     checkboxCallbackFn:false,
+    enabledTotal:true,
+    totalTitle: this.LT == 'bn' ? 'মোট' : 'Total',
   };
 
 }

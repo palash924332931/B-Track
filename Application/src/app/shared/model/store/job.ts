@@ -20,8 +20,8 @@ export class Job{
     CreatedBy:number;
     CompanyId:string;
     Status:string;
-    AssignedMacanic:number;
-    AssignedMacanicName:string;
+    AssignedMechanic:number;
+    AssignedMechanicName:string;
     Parts?:JobDetails[];
 }
 

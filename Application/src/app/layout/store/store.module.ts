@@ -4,7 +4,7 @@ import {Routes,RouterModule,Route} from '@angular/router'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpModule} from '@angular/http'
 import { PageHeaderModule } from './../../shared';
-import { PTableModule,AlertModule } from './../../shared';
+import { PTableModule} from './../../shared';
 import { ConfigService, AccountsService,CarService,AdminService,StoreService } from './../../shared/services';
 import { NgbModule,NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { CustomNgbDateParserFormatter } from './../../shared/services/custom-date-formater'
@@ -40,7 +40,7 @@ const routes:Routes=[
 ]
 
 @NgModule({
-    imports: [CommonModule,FormsModule,ReactiveFormsModule,PTableModule,AlertModule,HttpModule,NgbModule.forRoot(), PageHeaderModule,RouterModule.forChild(routes)],
+    imports: [CommonModule,FormsModule,ReactiveFormsModule,PTableModule,HttpModule,NgbModule.forRoot(), PageHeaderModule,RouterModule.forChild(routes)],
     declarations: [JobListComponent, JobDetailsComponent,ItemDetailsComponent,ItemListComponent, DemandListComponent, DemandDetailsComponent, PolComponent, PolDetailsComponent, PartsAllocationComponent],
     providers:[ConfigService,AccountsService,CarService,AdminService,StoreService,{provide: NgbDateParserFormatter, useFactory: () => new CustomNgbDateParserFormatter()}],
     exports: [RouterModule]

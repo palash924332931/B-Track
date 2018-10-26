@@ -1,5 +1,5 @@
 <div [@routerTransition]>
-    <alert></alert>
+    <!-- <alert></alert> -->
     <app-page-header [heading]="LT=='bn'?IsEdit==true?'জব হালনাগাদ':'জব নিবন্ধন':IsEdit==true?'Job Update':'Job Registration'" [icon]="'fa-table'"></app-page-header>
     <div class="row">
         <div class="col-sm-12">
@@ -64,7 +64,7 @@
                     <div class="row">
                         <label for="extent" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'কারিগরের নাম':'Assigned Mechanic'}} <i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Assigned Mechanic')"></i></label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" disabled id="RoleName" [(ngModel)]="jobDetails.AssignedMacanicName">
+                            <input type="text" class="form-control" disabled id="RoleName" [(ngModel)]="jobDetails.AssignedMechanicName">
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,8 @@
                             <select class="form-control" disabled name="status" [(ngModel)]="jobDetails.Status">
                                 <option selected value="In Progress">{{LT=='bn'?'কাজ চলছে':'In Progress'}}</option>
                                 <option selected value="Active">{{LT=='bn'?'সক্রিয়':'Active'}}</option>
-                                <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>                          
+                                <option value="Inactive">{{LT=='bn'?'নিষ্ক্রিয়':'Inactive'}}</option>   
+                                <option value="Completed">{{LT=='bn'?'সম্পর্ন হয়েছে':'Completed'}}</option>                           
                             </select>
                         </div>
                     </div>
@@ -153,9 +154,9 @@
             <div class="row" style="margin-bottom:0px">
                 <div class="form-group col-xl-12" style="margin-bottom:0px;background-color:#e9ecef; padding-right: 24px;">
                     <div class="row pull-right" style="background-color:#e9ecef">
-                        <button *ngIf="IsEdit" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewProduct()">{{LT=='bn'?'নতুন পার্টি যোগ করুন':'Add New JOb'}}</button>
-                        <button type="button " style="margin-right:5px" class="btn btn-outline-success" (click)="fnSaveJobDetails()">{{LT=='bn'?IsEdit==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEdit==true?'Update Information':'Save Information'}}</button>
-                        <button type="button " class="btn btn-outline-success " (click)="fnPrintCarLog() " [disabled]="!(IsEditItem==true||isSavedNewRecord==true)"><i class="fa fa-print " style="font-size:24px "></i> {{LT=='bn'?'ছাপান':'Print'}}</button>
+                        <button *ngIf="IsEdit" type="button " class="btn btn-outline-success" style="margin-right:5px" (click)="fnCreateNewProduct()">{{LT=='bn'?'নতুন জব যোগ করুন':'Add New Job'}}</button>
+                        <button type="button " style="margin-right:5px" class="btn btn-outline-success" (click)="fnSaveJobDetails()" [disabled]="jobDetails.Status=='Completed'">{{LT=='bn'?IsEdit==true?'তথ্য হালনাগাদ':'তথ্য সংরক্ষণ করুন':IsEdit==true?'Update Information':'Save Information'}}</button>
+                        <button type="button " class="btn btn-outline-success " (click)="fnPrintJobLog() " [disabled]="!(IsEdit==true)"><i class="fa fa-print " style="font-size:24px "></i> {{LT=='bn'?'ছাপান':'Print'}}</button>
                     </div>
                 </div>
             </div>

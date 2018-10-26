@@ -14,6 +14,12 @@ namespace Sandip.DAL
     
     public partial class CarType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CarType()
+        {
+            this.PartsDetails = new HashSet<PartsDetail>();
+        }
+    
         public int CarTypeId { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
@@ -22,5 +28,8 @@ namespace Sandip.DAL
         public Nullable<System.DateTime> UpdatedTime { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> Creation { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PartsDetail> PartsDetails { get; set; }
     }
 }

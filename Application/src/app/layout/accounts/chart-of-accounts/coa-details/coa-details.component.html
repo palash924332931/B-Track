@@ -6,7 +6,7 @@
             <div class="row required">
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="AccountCode" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অ্যাকাউন্ট কোড':'Account Code'}}</label>
+                        <label for="AccountCode" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'অ্যাকাউন্ট কোড':'Account Code'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select chart of account')"></i></label>
                         <div class="col-sm-8">
                             <input type="text" class="form-control" id="AccountCode" [(ngModel)]="coa.AccountCode">
                         </div>
@@ -60,7 +60,7 @@
 
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="ParentID" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্যারেন্ট অ্যাকাউন্ট আইডি':'Parent ID'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select Pay Slip')"></i></label>
+                        <label for="ParentID" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'প্যারেন্ট অ্যাকাউন্ট আইডি':'Parent ID'}}<i class="fa fa-pencil-square-o custom-icon-modal-call" aria-hidden="true" (click)="fnGenerateModal(content,'Select group account')"></i></label>
                         <div class="col-sm-8">
                             <input disabled type="text" class="form-control" id="ParentID" [(ngModel)]="coa.ParentID">
                         </div>
@@ -118,9 +118,9 @@
 
                 <div class="form-group col-xl-6">
                     <div class="row">
-                        <label for="TrackDemandId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চাহিদা ট্র্যাকিং আইডি':'Track Demand Id'}}</label>
+                        <label for="TrackDemandId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'চাহিদা ট্র্যাকিং':'Track Demand'}}</label>
                         <div class="col-sm-8">
-                            <input type="checkbox" [(ngModel)]="coa.TrackDemandId" />
+                            <input type="checkbox" [(ngModel)]="coa.TrackDemand" />
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../../../router.animations';
 import { AlertService } from '../../../../shared/modules/alert/alert.service'
 import { AdminService, CarService, CommonService, ConfigService, CustomNgbDateParserFormatter, StoreService } from '../../../../shared/services'
-import { Job } from '../../../../shared/model/store'
+import { PartsDetails, StoreInfo, Job } from '../../../../shared/model/store'
 import { DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
@@ -17,13 +17,12 @@ import { NgbModal, NgbModalRef, ModalDismissReasons, NgbTimeStruct } from '@ng-b
 })
 export class ItemDetailsComponent implements OnInit {
   public LT: string = ConfigService.languageType;
-  public jobId: number;
   public IsEdit: boolean = false;
-  public jobDetails = new Job();
   public UserInfo = JSON.parse(localStorage.getItem("car-system-user-info-option-b"));
   public userId = 1;
-  public JobDate = null;
-  public JobCompletedDate = null;
+  public purchasDate = null;
+  public itemDetails: PartsDetails = new PartsDetails();
+  public StoreInfo = new StoreInfo();
   private modalRef: NgbModalRef;
   public modalType: string;
   public closeResult: string;
@@ -32,84 +31,57 @@ export class ItemDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.userId = this.UserInfo[0].Id;
-    this.jobId = this.route.snapshot.params["jobId"];
     let date2 = this.configService.getCurrentDate();
     let dateTime = new Date();
-    this.JobDate = this.customNgbDateParserFormatter.parse(date2 || null);
-    if (this.jobId > 0) {
+    this.purchasDate = this.customNgbDateParserFormatter.parse(date2 || null);
+    let partsId=0;
+    if (partsId > 0) {
       this.IsEdit = true;
-      this.fnGetJobDetails();
     } else {
-      // this.JobDate = this.customNgbDateParserFormatter.parse(this.dailyLogDetails.CheckInDate || null);
-      this.jobDetails.JobDate = this.ngbDateParserFormatter.format(this.JobDate);
-      //this.jobDetails.JobCompletedDate = this.ngbDateParserFormatter.format(this.JobDate);
+      this.StoreInfo.PurchaseDate = this.ngbDateParserFormatter.format(this.purchasDate);
       this.IsEdit = false;
     }
   }
 
-  fnGetJobDetails() {
+  fnSaveitemDetails() {
+    this.itemDetails.Created= this.configService.getCurrentDate();  
+    this.itemDetails.CreatedBy=this.userId;
+    this.itemDetails.Status="Active";
+    this.StoreInfo.Status="Active";
+    this.itemDetails.StoreInfoes = [this.StoreInfo]||null;
     this.alertService.fnLoading(true);
-    this.adminService.fnGetEmployee(this.userId, this.jobId).subscribe(
-      (data: Job[]) => {
-        this.jobDetails = data[0];
-        this.alertService.fnLoading(false);
-      },
-      (error: any) => {
-        this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT == 'bn' ? ' সিস্টেম কর্মচারী দেখাতে ব্যর্থ হয়েছে।' : 'System has failed to show employee because of network problem.');
-      }
-    );
-  }
-
-  fnSaveJobDetails() {
-    //to check group name;
-    // if (this.jobDetails.Name == null || this.jobDetails.Name == "") {
-    //   this.alertService.alert(this.LT=='bn'?'কর্মকর্তার নাম এবং কর্মচারী আইডি খালি রাখতে পারেন না।':'Employee name and employee ID can not be left blank.');
-    //   return false;
-    // }
-    // if (this.jobDetails.EmployeeId == null || this.jobDetails.EmployeeId == "") {
-    //   this.alertService.alert(this.LT=='bn'?'কর্মকর্তার নাম এবং কর্মচারী আইডি খালি রাখতে পারেন না।':'Employee name and employee ID can not be left blank.');
-    //   return false;
-    // }
-
-    this.alertService.fnLoading(true);
-    this.storeService.fnPostJobInfo(this.jobDetails).subscribe(
+    this.storeService.fnPostPartsDetails(this.itemDetails).subscribe(
       (success: any) => {
         this.alertService.fnLoading(false);
-        this.alertService.confirm(this.LT=='bn'?success._body.replace(/"/g,"") + ' আপনি কি পিওএল তালিকায় ফিরে যেতে চান?':success._body.replace(/"/g,"")  +' Do you want to back in POL list?'
+        this.alertService.confirm(this.LT == 'bn' ? success._body.replace(/"/g, "") + ' আপনি কি যন্ত্রাংশের তালিকায় ফিরে যেতে চান?' : success._body.replace(/"/g, "") + ' Do you want to back in Parts list?'
           , () => {
-            this.router.navigate(["./store/job"]);
+            this.router.navigate(["./store/items"]);
           }
           , function () { });
       },
       (error: any) => {
+        debugger;
         this.alertService.fnLoading(false);
-        this.alertService.alert(this.LT=='bn'?' সিস্টেম পিওএল তালিকা দেখাতে ব্যর্থ হয়েছে।':'System has failed to show POL list.');
+        this.alertService.alert(error._body);
       }
     );
   }
 
-  fnCreateNewJob() {
+  fnCreateNewItem() {
     this.IsEdit = false;
-    this.jobDetails = new Job();
-    this.jobId = 0;
+    this.itemDetails = new PartsDetails();
+    this.itemDetails.PartsId = 0;
+    this.StoreInfo=new StoreInfo();
   }
 
-  onSelectJobDate(date: any) {
+  onSelectPurchaseDate(date: any) {
     if (date != null) {
-      this.jobDetails.JobDate = this.ngbDateParserFormatter.format(date);
+      this.StoreInfo.PurchaseDate = this.ngbDateParserFormatter.format(date);
     } else {
-      this.jobDetails.JobDate = null;
+      this.StoreInfo.PurchaseDate = null;
     }
   }
-
-  onSelectJobCompletedDate(date: any) {
-    if (date != null) {
-      this.jobDetails.JobCompletedDate = this.ngbDateParserFormatter.format(date);
-    } else {
-      this.jobDetails.JobCompletedDate = null;
-    }
-  }
+ 
 
   fnPtableCallBack(event: any) {
     let data = event.record;
@@ -166,28 +138,6 @@ export class ItemDetailsComponent implements OnInit {
         });
       });
     }
-    else if (this.modalType == "Select Driver") {
-      this.configureableModalTable.tableName = this.LT == 'bn' ? 'চালক নির্বাচন করুন' : 'Select Driver from list.';
-      this.configureableModalTable.tableColDef = [
-        { headerName: this.LT == 'bn' ? 'কর্মচারীর আইডি' : 'Employee Id ', width: '25%', internalName: 'EmployeeId', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'চালকের নাম' : 'Name ', width: '25%', internalName: this.LT == 'bn' ? 'NameInBangla' : 'Name', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'মোবাইল নম্বর' : 'Phone Number', width: '25%', internalName: 'PhoneNo', sort: true, type: "" },
-        { headerName: this.LT == 'bn' ? 'ড্রাইভিং লাইসেন্স' : 'Driving LI', width: '25%', internalName: 'Status', sort: true, type: "" },
-      ]
-
-      this.carService.fnGetDrivers(this.userId).then((data: any) => {
-        console.log("data", data);
-        this.alertService.fnLoading(false)
-        this.configureableModalData = data || [];
-
-        this.modalRef = this.modalService.open(content,{size:'lg'});
-        this.modalRef.result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-          //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-      });
-    }
     else if (this.modalType == "Select Parts") {
       this.configureableModalTable.tableName = this.LT == 'bn' ? 'যন্ত্রাংশের তালিকা' : 'Parts List.';
       this.configureableModalTable.tableColDef = [
@@ -236,6 +186,53 @@ export class ItemDetailsComponent implements OnInit {
       }, (error: any) => {
         this.alertService.fnLoading(false);
       });
+    } else if (this.modalType == "Select Car Type") {
+      this.configureableModalTable.tableName = this.LT == 'bn' ? 'গাড়ির প্রকার নির্বাচন করুন' : 'Select Bus Type',
+        this.configureableModalTable.tableColDef = [
+          { headerName: this.LT == 'bn' ? 'গাড়ির ধরন' : 'Car Type', width: '40%', internalName: 'Type', sort: true, type: "" },
+          { headerName: this.LT == 'bn' ? 'বিবরণ' : 'Description', width: '45%', internalName: 'Description', sort: true, type: "" },
+        ]
+
+      this.carService.fnGetCarTypes(this.userId).then((data: any) => {
+        console.log("data", data);
+        this.alertService.fnLoading(false)
+        this.configureableModalData = data || [];
+
+        this.modalRef = this.modalService.open(content);
+        this.modalRef.result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      }, (error: any) => {
+        this.alertService.fnLoading(false);
+      });
+    } else if (this.modalType == "Select Vendor Information") {
+      this.configureableModalTable.tableName = this.LT == 'bn' ? 'গাড়ির প্রকার নির্বাচন করুন' : 'Select Bus Type',
+        this.configureableModalTable.tableColDef = [
+          { headerName: this.LT == 'bn' ? 'প্রতিষ্ঠানের নাম' : 'Name ', width: '10%', internalName: 'Name', sort: true, type: "" },
+          { headerName: this.LT == 'bn' ? 'প্রতিষ্ঠানের ঠিকানা' : 'Address ', width: '15%', internalName: 'Address', sort: true, type: "" },
+          { headerName: this.LT == 'bn' ? 'প্রতিনিধির নাম' : 'Contact Person', width: '15%', internalName: 'ContactPerson', sort: true, type: "" },
+          { headerName: this.LT == 'bn' ? 'প্রতিনিধির ফোন নং' : 'Contact No', width: '15%', internalName: 'ContactNo', sort: false, type: "" },
+          { headerName: this.LT == 'bn' ? 'মন্তব্য' : 'Remark', width: '15%', internalName: 'Remark', sort: true, type: "" },
+          { headerName: this.LT == 'bn' ? 'সরবরাহকৃত মালের ধরন' : 'Product Category', width: '10%', internalName: 'ActivityType', sort: true, type: "" },
+          { headerName: this.LT == 'bn' ? 'অবস্থা' : 'Status', width: '10%', internalName: 'Status', sort: true, type: "" }
+        ]
+
+      this.adminService.fnGetVendor(this.userId, 0,"All").subscribe((data: any) => {
+        console.log("data", data);
+        this.alertService.fnLoading(false)
+        this.configureableModalData = data || [];
+
+        this.modalRef = this.modalService.open(content,{ size: 'lg' });
+        this.modalRef.result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      }, (error: any) => {
+        this.alertService.fnLoading(false);
+      });
     }
   }
 
@@ -246,46 +243,17 @@ export class ItemDetailsComponent implements OnInit {
   public currentPartsList = [];
   public jobPartsList = [];
 
-  fnAddNewParts() {
-    if (this.partsId == 0 || this.partsId == null) {
-      this.alertService.alert("Please select the parts from the parts list.");
-      return false;
-    }
-    if (this.numberOfParts == 0 || this.numberOfParts == null) {
-      this.alertService.alert("Please imput the number of parts which you want to take.");
-      return false;
-    }
-
-    this.currentPartsList.forEach(element => {
-      if (element.PartsId == this.partsId) {
-        this.jobPartsList.push({
-          Id: 0, JobId: this.jobId, PartsId: this.partsId, PartsName: element.PartsName, PartsSize: element.PartsSize, UnitPrice: element.UnitPrice, Quantity: this.numberOfParts
-          , VendorId: 0, VendorName: "", Status: 'Availale', Balance: Number(element.Balance) - this.numberOfParts
-        });
-      }
-    });
-
-
-
-  }
-
   fnPtableModalCallBack(event: any) {
     console.log("event", event);
-    if (this.modalType == "bus-list") {
-      this.jobDetails.CarId = event.record.CarId;
-      this.jobDetails.RegistrationNo = event.record.RegistrationNo;
-    } else if (this.modalType == "Select Driver") {
-      this.jobDetails.DriverId = event.record.DriverId;
-      this.jobDetails.DriverName = event.record.Name;
-    } else if (this.modalType == "Select Assigned Mechanic") {
-      this.jobDetails.AssignedMacanic = event.record.Id;
-      this.jobDetails.AssignedMacanicName = event.record.Name;
-    } else if (this.modalType == "Select Parts") {
-      this.partsId = event.record.PartsId;
-      this.partsName = event.record.PartsName;
-      this.numberOfParts = 0;
+    if (this.modalType == "Select Parts") {
+      this.itemDetails = event.record;
+    } else if (this.modalType == "Select Car Type") {
+      this.itemDetails.CarTypeId = event.record.CarTypeId;
+      this.itemDetails.CarTypeName = event.record.Type;
+    } else if(this.modalType == "Select Vendor Information"){
+      this.StoreInfo.VendorId = event.record.VendorId;
+      this.StoreInfo.VendorName = event.record.Name;
     }
-
     this.modalRef.close();
   }
 

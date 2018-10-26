@@ -8,9 +8,13 @@ export class COA{
     AccountType:string;
     TrackVendor:boolean;
     TrackBank:boolean;
+    TrackCustomer:boolean;
     TrackBill:boolean;
     TrackEmployee:boolean;
     TrackDemand:boolean;
+    TrackAssetItem:boolean;
+    CompanyId:number;
     CreatedBy:number;
     CreatedByName:number;
+    Status:string;
 }

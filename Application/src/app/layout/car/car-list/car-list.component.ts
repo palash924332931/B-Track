@@ -83,12 +83,13 @@ export class CarListComponent implements OnInit {
     tableRowIDInternalName: "CarId",
     tableColDef: [
       { headerName: this.LT == 'bn' ? 'নিবন্ধন নম্বর' : 'Reg No ', width: '10%', internalName: 'RegistrationNo', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'নিবন্ধন নম্বর (বাংলায়)' : 'Reg No (Bangla) ', width: '10%', internalName: 'RegistrationNoBangla', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'নিবন্ধনের তারিখ' : 'Reg. Date ', width: '15%', internalName: 'RegistrationDate', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'গাড়ির প্রকার' : 'Car Type', width: '20%', internalName: 'Type', sort: true, type: "" },
+      { headerName: this.LT == 'bn' ? 'গাড়ির প্রকার' : 'Car Type', width: '15%', internalName: 'Type', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'প্রথম রুটের তারিখ' : 'On Root Date', width: '10%', internalName: 'OnRootDate', sort: false, type: "" },
       { headerName: this.LT == 'bn' ? 'সিটের সংখ্যা' : 'No. of Seat ', width: '10%', internalName: 'NoOfSeat', sort: true, type: "" },
       { headerName: this.LT == 'bn' ? 'নিষ্ক্রিয় হওয়ার কারণ' : 'Reason For Inactive', width: '20%', internalName: 'ReasonForStop', sort: true, type: "" },
-      { headerName: this.LT == 'bn' ? 'অবস্থা' : 'Status', width: '15%', internalName: 'Status', sort: true, type: "" }
+      { headerName: this.LT == 'bn' ? 'অবস্থা' : 'Status', width: '10%', internalName: 'Status', sort: true, type: "" }
     ],
     enabledSearch: true,
     enabledSerialNo: true,

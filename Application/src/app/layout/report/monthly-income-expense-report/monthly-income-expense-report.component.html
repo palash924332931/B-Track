@@ -56,9 +56,9 @@
         <div class="col col-lg-12 zero-padding" *ngIf="status=='Date Wise'">
             <app-p-table [pTableSetting]="monthlyIncomeReport" [pTableMasterData]="monthlyReportData" (cellClickCallbackFn)="fnPtableCellClick($event)" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
         </div>
-        <div class="col col-lg-12 zero-padding" *ngIf="status=='Route Wise'">
+        <!-- <div class="col col-lg-12 zero-padding" *ngIf="status=='Route Wise'">
             <app-p-table [pTableSetting]="monthlyIncomeReportRouteWise" [pTableMasterData]="monthlyReportDataRouteWise" (cellClickCallbackFn)="fnPtableCellClickForRouteWiseData($event)" (customActivityOnRecord)="fnPtableCallBack($event)"></app-p-table>
-        </div>
+        </div> -->
     </div>
 </div>
 

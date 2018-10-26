@@ -13,6 +13,16 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="form-group col-xl-6">
+                    <div class="row required">
+                        <label for="userId" class="col-sm-4 col-form-label font-weight-bold">{{LT=='bn'?'নিবন্ধন নম্বর (বাংলায়)':'Registration No (Bangla)'}}</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="userId" [(ngModel)]="carDetails.RegistrationNoBangla">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="form-group col-xl-6">

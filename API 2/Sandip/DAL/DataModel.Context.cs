@@ -32,6 +32,10 @@ namespace Sandip.DAL
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<DailyCarHistory> DailyCarHistories { get; set; }
         public virtual DbSet<POLUnitPrice> POLUnitPrices { get; set; }
+        public virtual DbSet<PartsDetail> PartsDetails { get; set; }
+        public virtual DbSet<StoreInfo> StoreInfoes { get; set; }
+        public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<VWStoreInfo> VWStoreInfoes { get; set; }
     
         public virtual ObjectResult<string> prSaveCarType(Nullable<int> carTypeId, string type, string description, Nullable<int> createdBy, Nullable<System.DateTime> updateTime)
         {
@@ -121,24 +125,7 @@ namespace Sandip.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSavePaySlip", paySlipIdParameter, slipNoParameter, bookNoParameter, amountParameter, statusParameter, createdByParameter, updateParameter);
         }
     
-        public virtual ObjectResult<prGetCarDetails_Result> prGetCarDetails(Nullable<int> userID, Nullable<int> carId, string type)
-        {
-            var userIDParameter = userID.HasValue ?
-                new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
-    
-            var carIdParameter = carId.HasValue ?
-                new ObjectParameter("CarId", carId) :
-                new ObjectParameter("CarId", typeof(int));
-    
-            var typeParameter = type != null ?
-                new ObjectParameter("Type", type) :
-                new ObjectParameter("Type", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetCarDetails_Result>("prGetCarDetails", userIDParameter, carIdParameter, typeParameter);
-        }
-    
-        public virtual ObjectResult<string> prSaveCarDetails(Nullable<int> carId, string registrationNo, Nullable<System.DateTime> registrationDate, Nullable<int> carTypeId, string status, string reasonForStop, string noOfSeat, Nullable<System.DateTime> onRootDate, Nullable<decimal> totalDistance, string notes, Nullable<int> createdBy, Nullable<System.DateTime> update)
+        public virtual ObjectResult<string> prSaveCarDetails(Nullable<int> carId, string registrationNo, string registrationNoBangla, Nullable<System.DateTime> registrationDate, Nullable<int> carTypeId, string status, string reasonForStop, string noOfSeat, Nullable<System.DateTime> onRootDate, Nullable<decimal> totalDistance, string notes, Nullable<int> createdBy, Nullable<System.DateTime> update)
         {
             var carIdParameter = carId.HasValue ?
                 new ObjectParameter("CarId", carId) :
@@ -147,6 +134,10 @@ namespace Sandip.DAL
             var registrationNoParameter = registrationNo != null ?
                 new ObjectParameter("RegistrationNo", registrationNo) :
                 new ObjectParameter("RegistrationNo", typeof(string));
+    
+            var registrationNoBanglaParameter = registrationNoBangla != null ?
+                new ObjectParameter("RegistrationNoBangla", registrationNoBangla) :
+                new ObjectParameter("RegistrationNoBangla", typeof(string));
     
             var registrationDateParameter = registrationDate.HasValue ?
                 new ObjectParameter("RegistrationDate", registrationDate) :
@@ -188,7 +179,7 @@ namespace Sandip.DAL
                 new ObjectParameter("Update", update) :
                 new ObjectParameter("Update", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveCarDetails", carIdParameter, registrationNoParameter, registrationDateParameter, carTypeIdParameter, statusParameter, reasonForStopParameter, noOfSeatParameter, onRootDateParameter, totalDistanceParameter, notesParameter, createdByParameter, updateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveCarDetails", carIdParameter, registrationNoParameter, registrationNoBanglaParameter, registrationDateParameter, carTypeIdParameter, statusParameter, reasonForStopParameter, noOfSeatParameter, onRootDateParameter, totalDistanceParameter, notesParameter, createdByParameter, updateParameter);
         }
     
         public virtual ObjectResult<prGetCarTypes_Result> prGetCarTypes(Nullable<int> userID)
@@ -1195,15 +1186,6 @@ namespace Sandip.DAL
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveVendorDetails", vendorIdParameter, nameParameter, contactPersonParameter, contactNoParameter, remarkParameter, statusParameter, activityTypeParameter, userIdParameter, addressParameter);
         }
     
-        public virtual ObjectResult<prGetPartsDetails_Result> prGetPartsDetails(Nullable<int> userId)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetPartsDetails_Result>("prGetPartsDetails", userIdParameter);
-        }
-    
         public virtual ObjectResult<prGetPol_Result> prGetPol(Nullable<int> userId, Nullable<int> pOLId, Nullable<System.DateTime> fromDate, Nullable<System.DateTime> toDate, string type)
         {
             var userIdParameter = userId.HasValue ?
@@ -1450,6 +1432,164 @@ namespace Sandip.DAL
                 new ObjectParameter("Created", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveJobInfo", jobIdParameter, driverIdParameter, jobDateParameter, carIdParameter, jobDescriptionParameter, statusParameter, jobCompletedDateParameter, busStatusParameter, assignedMechanicParameter, remarkParameter, createdByParameter, createdParameter);
+        }
+    
+        public virtual ObjectResult<prGetPartsDetails_Result1> prGetPartsDetails(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetPartsDetails_Result1>("prGetPartsDetails", userIdParameter);
+        }
+    
+        public virtual ObjectResult<string> prSaveStoreOut(Nullable<int> storeInfoId, Nullable<int> jobId, Nullable<int> partsId, Nullable<decimal> quantityOut, string status, Nullable<int> createdBy, Nullable<System.DateTime> created)
+        {
+            var storeInfoIdParameter = storeInfoId.HasValue ?
+                new ObjectParameter("StoreInfoId", storeInfoId) :
+                new ObjectParameter("StoreInfoId", typeof(int));
+    
+            var jobIdParameter = jobId.HasValue ?
+                new ObjectParameter("JobId", jobId) :
+                new ObjectParameter("JobId", typeof(int));
+    
+            var partsIdParameter = partsId.HasValue ?
+                new ObjectParameter("PartsId", partsId) :
+                new ObjectParameter("PartsId", typeof(int));
+    
+            var quantityOutParameter = quantityOut.HasValue ?
+                new ObjectParameter("QuantityOut", quantityOut) :
+                new ObjectParameter("QuantityOut", typeof(decimal));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var createdParameter = created.HasValue ?
+                new ObjectParameter("Created", created) :
+                new ObjectParameter("Created", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveStoreOut", storeInfoIdParameter, jobIdParameter, partsIdParameter, quantityOutParameter, statusParameter, createdByParameter, createdParameter);
+        }
+    
+        public virtual ObjectResult<string> prSaveMultiPayment(Nullable<int> paymentId, Nullable<int> carLogId, Nullable<decimal> paymentAmount, Nullable<decimal> systemAmount, string notes, Nullable<int> paySlipId, string paymentStatus, Nullable<int> receivedBy, string receivedByName, Nullable<System.DateTime> receivedDate, string status, Nullable<int> createdBy, Nullable<System.DateTime> update, string paymentType)
+        {
+            var paymentIdParameter = paymentId.HasValue ?
+                new ObjectParameter("PaymentId", paymentId) :
+                new ObjectParameter("PaymentId", typeof(int));
+    
+            var carLogIdParameter = carLogId.HasValue ?
+                new ObjectParameter("CarLogId", carLogId) :
+                new ObjectParameter("CarLogId", typeof(int));
+    
+            var paymentAmountParameter = paymentAmount.HasValue ?
+                new ObjectParameter("PaymentAmount", paymentAmount) :
+                new ObjectParameter("PaymentAmount", typeof(decimal));
+    
+            var systemAmountParameter = systemAmount.HasValue ?
+                new ObjectParameter("SystemAmount", systemAmount) :
+                new ObjectParameter("SystemAmount", typeof(decimal));
+    
+            var notesParameter = notes != null ?
+                new ObjectParameter("Notes", notes) :
+                new ObjectParameter("Notes", typeof(string));
+    
+            var paySlipIdParameter = paySlipId.HasValue ?
+                new ObjectParameter("PaySlipId", paySlipId) :
+                new ObjectParameter("PaySlipId", typeof(int));
+    
+            var paymentStatusParameter = paymentStatus != null ?
+                new ObjectParameter("PaymentStatus", paymentStatus) :
+                new ObjectParameter("PaymentStatus", typeof(string));
+    
+            var receivedByParameter = receivedBy.HasValue ?
+                new ObjectParameter("ReceivedBy", receivedBy) :
+                new ObjectParameter("ReceivedBy", typeof(int));
+    
+            var receivedByNameParameter = receivedByName != null ?
+                new ObjectParameter("ReceivedByName", receivedByName) :
+                new ObjectParameter("ReceivedByName", typeof(string));
+    
+            var receivedDateParameter = receivedDate.HasValue ?
+                new ObjectParameter("ReceivedDate", receivedDate) :
+                new ObjectParameter("ReceivedDate", typeof(System.DateTime));
+    
+            var statusParameter = status != null ?
+                new ObjectParameter("Status", status) :
+                new ObjectParameter("Status", typeof(string));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            var updateParameter = update.HasValue ?
+                new ObjectParameter("Update", update) :
+                new ObjectParameter("Update", typeof(System.DateTime));
+    
+            var paymentTypeParameter = paymentType != null ?
+                new ObjectParameter("PaymentType", paymentType) :
+                new ObjectParameter("PaymentType", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prSaveMultiPayment", paymentIdParameter, carLogIdParameter, paymentAmountParameter, systemAmountParameter, notesParameter, paySlipIdParameter, paymentStatusParameter, receivedByParameter, receivedByNameParameter, receivedDateParameter, statusParameter, createdByParameter, updateParameter, paymentTypeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<decimal>> prCheckAmountValidationForMultiPayment(Nullable<decimal> amount, string carLogIdList, Nullable<int> userId)
+        {
+            var amountParameter = amount.HasValue ?
+                new ObjectParameter("Amount", amount) :
+                new ObjectParameter("Amount", typeof(decimal));
+    
+            var carLogIdListParameter = carLogIdList != null ?
+                new ObjectParameter("CarLogIdList", carLogIdList) :
+                new ObjectParameter("CarLogIdList", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("prCheckAmountValidationForMultiPayment", amountParameter, carLogIdListParameter, userIdParameter);
+        }
+    
+        public virtual ObjectResult<prGetPaySlip_Result> prGetPaySlip(Nullable<int> userID, Nullable<int> paySlipId, string bookNo, string type)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var paySlipIdParameter = paySlipId.HasValue ?
+                new ObjectParameter("PaySlipId", paySlipId) :
+                new ObjectParameter("PaySlipId", typeof(int));
+    
+            var bookNoParameter = bookNo != null ?
+                new ObjectParameter("BookNo", bookNo) :
+                new ObjectParameter("BookNo", typeof(string));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetPaySlip_Result>("prGetPaySlip", userIDParameter, paySlipIdParameter, bookNoParameter, typeParameter);
+        }
+    
+        public virtual ObjectResult<prGetCarDetails_Result1> prGetCarDetails(Nullable<int> userID, Nullable<int> carId, string type)
+        {
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var carIdParameter = carId.HasValue ?
+                new ObjectParameter("CarId", carId) :
+                new ObjectParameter("CarId", typeof(int));
+    
+            var typeParameter = type != null ?
+                new ObjectParameter("Type", type) :
+                new ObjectParameter("Type", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prGetCarDetails_Result1>("prGetCarDetails", userIDParameter, carIdParameter, typeParameter);
         }
     }
 }

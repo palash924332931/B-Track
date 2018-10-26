@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
     public userName: string;
     public password: string;
     public errorMessage: string;
-    public imageFile: number = 2;
-    public companyId:number=0;
+    public imageFile= 2;
+    public companyId = 0;
     public backgroundImageUrl = '../assets/images/1.jpg';
     ngOnInit() {
         localStorage.removeItem('car-system-user-info-option-b');
@@ -25,14 +25,14 @@ export class LoginComponent implements OnInit {
         this.startTimer();
     }
 
-    private onKeyPress(event:any){
-        if (event.which == 13 || event.keyCode == 13) { //Check if "Enter" key pressed
+    private onKeyPress(event: any){
+        if (event.which == 13 || event.keyCode == 13) { // Check if "Enter" key pressed
             this.onLoggedin();
         }
     }
 
     private startTimer() {
-        let timer = Observable.timer(1, 15000);
+        const timer = Observable.timer(1, 15000);
         let sub = timer.subscribe(
             t => {
                 if (this.imageFile < 4) {
